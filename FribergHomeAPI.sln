@@ -1,9 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FribergHomeAPI", "FribergHomeAPI\FribergHomeAPI.csproj", "{D78D93E7-7CB0-4E48-B2DE-E81A09941C61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{A1EE62F5-8DFD-48FB-B882-EBEEFA41E493}"
+	ProjectSection(SolutionItems) = preProject
+		agents.md = agents.md
+		ClientRequirements.md = ClientRequirements.md
+		Components.md = Components.md
+		Github.md = Github.md
+		Models.md = Models.md
+		Test.md = Test.md
+		UserStories.md = UserStories.md
+		whywhatwhenwhere.md = whywhatwhenwhere.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
