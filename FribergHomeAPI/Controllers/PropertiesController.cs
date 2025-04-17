@@ -51,11 +51,12 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
-		public async Task<IActionResult> Post(PropertyDTO property)
+		public async Task<IActionResult> Post(1PropertyDTO property)
 		{
 			try
 			{
 				var pro = _mapper.Map<Property>(property);
+				pro.RealEstateAgentId = 1; // TODO: FIX THIS SHIT (Emelie tm)
 				var newProp = await _propertyRepo.AddAsync(pro);
 				if (newProp != null)
 				{
@@ -72,8 +73,25 @@ namespace FribergHome_API.Controllers
 
 		// PUT api/<PropertiesController>/5
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO property)
 		{
+			if(!ModelState.IsValid)
+			{
+                // Log all model errors
+                foreach (var error in ModelState)
+                {
+                    Console.WriteLine($"Key: {error.Key}");
+
+                    foreach (var subError in error.Value.Errors)
+                    {
+                        Console.WriteLine($"  Error: {subError.ErrorMessage}");
+                    }
+                }
+            }
+			Console.WriteLine("I GOT IT!");
+			Console.WriteLine(property);
+
+			return Accepted();
 		}
 
 		// DELETE api/<PropertiesController>/5

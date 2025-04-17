@@ -31,7 +31,7 @@ namespace FribergHomeAPI.DTOs
 		public string PostalCode { get; set; }
 		public int MuncipalityId { get; set; }
 
-		public string ImageUrls { get; set; }
+		public string? ImageUrls { get; set; }
 
     }
 }
