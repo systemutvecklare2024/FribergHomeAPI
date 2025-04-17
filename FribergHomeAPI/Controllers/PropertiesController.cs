@@ -51,7 +51,7 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
-		public async Task<IActionResult> Post(1PropertyDTO property)
+		public async Task<IActionResult> Post([FromBody] PropertyDTO property)
 		{
 			try
 			{
