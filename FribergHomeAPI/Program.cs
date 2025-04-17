@@ -22,7 +22,8 @@ builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddCors();
+builder.Services.AddCors( options => options.AddPolicy("AllowAll",
+    x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
 
@@ -33,7 +34,7 @@ using (var scope = app.Services.CreateScope())
     SeedData.SeedAsync(ctx).Wait();
 }
 //Cors middleware
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

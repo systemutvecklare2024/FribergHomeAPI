@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -50,8 +51,23 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
-		public void Post([FromBody] string value)
+		public async Task<IActionResult> Post(PropertyDTO property)
 		{
+			try
+			{
+				var pro = _mapper.Map<Property>(property);
+				var newProp = await _propertyRepo.AddAsync(pro);
+				if (newProp != null)
+				{
+					return Accepted();
+				}
+
+				return BadRequest(ModelState);
+
+			} catch (Exception)
+			{
+				return Problem("aaaaaaaaa");
+			}
 		}
 
 		// PUT api/<PropertiesController>/5

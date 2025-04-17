@@ -42,6 +42,6 @@ namespace FribergHomeAPI.Models
 
         public int AddressId { get; set; }
         public int MuncipalityId { get; set; }
-        public int RealEstateAgentId { get; set; }
+        public int RealEstateAgentId { get; set; } = 1;
     }
 }
