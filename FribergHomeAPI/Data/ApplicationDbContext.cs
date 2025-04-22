@@ -1,10 +1,11 @@
 ﻿using FribergHomeAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FribergHomeAPI.Data
 {
     // Author: Christoffer
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApiUser>
     {
         public DbSet<Property> Properties { get; set; }
         public DbSet<RealEstateAgency> Agencies {get;set;}

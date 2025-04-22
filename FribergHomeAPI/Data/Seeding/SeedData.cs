@@ -2,14 +2,17 @@
 using FribergHomeAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.PropertyTypes;
+using Microsoft.AspNetCore.Identity;
 
 namespace FribergHomeAPI.Data.Seeding
 {
 	public class SeedData
 	{
 		// Author: Christoffer
-		public static async Task SeedAsync(ApplicationDbContext ctx)
+		public static async Task SeedAsync(ApplicationDbContext ctx, RoleManager<IdentityRole> roleManager, UserManager<ApiUser> userManager)
 		{
+			await IdentitySeeder.SeedAsync(ctx, roleManager, userManager);
+
 			// Order matters!
 			if (!ctx.Agencies.Any())
 			{
