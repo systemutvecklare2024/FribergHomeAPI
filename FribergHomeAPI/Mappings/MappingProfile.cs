@@ -14,6 +14,9 @@ namespace FribergHomeAPI.Mappings
 				.ForMember(d => d.City, opt => opt.MapFrom(src => src.Address.City))
 				.ForMember(d => d.MuncipalityId, opt => opt.MapFrom(src => src.MuncipalityId))
 				.ReverseMap();
+
+			CreateMap<RealEstateAgency, RealEstateAgencyDTO>()
+				.ReverseMap();
 		}
 	} 
 }
