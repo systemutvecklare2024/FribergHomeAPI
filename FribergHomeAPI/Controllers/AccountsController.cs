@@ -6,6 +6,10 @@ using FribergHomeAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace FribergHomeAPI.Controllers
 {
@@ -17,12 +21,18 @@ namespace FribergHomeAPI.Controllers
         private readonly IMapper mapper;
         private readonly UserManager<ApiUser> userManager;
         private readonly IRealEstateAgentRepository agentRepository;
+        private readonly IConfiguration configuration;
 
-        public AccountsController(IMapper mapper, UserManager<ApiUser> userManager, IRealEstateAgentRepository agentRepository)
+        public AccountsController(
+            IMapper mapper, 
+            UserManager<ApiUser> userManager, 
+            IRealEstateAgentRepository agentRepository,
+            IConfiguration configuration)
         {
             this.mapper = mapper;
             this.userManager = userManager;
             this.agentRepository = agentRepository;
+            this.configuration = configuration;
         }
 
         [HttpPost]
@@ -70,8 +80,58 @@ namespace FribergHomeAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login()
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginDTO loginDto)
         {
+            var user = await userManager.FindByEmailAsync(loginDto.Email);
+            var validPassword = await userManager.CheckPasswordAsync(user, loginDto.Password);
+
+            if(user == null || !validPassword)
+            {
+                 return Unauthorized();
+            }
+
+            //Generate JWT Token
+
+            string token = await GenerateToken(user);
+            var response = new AuthResponse
+            {
+                Email = loginDto.Email,
+                UserId = user.Id,
+                Token = token
+            };
+
+            return Ok(response);
+        }
+
+        private async Task<string> GenerateToken(ApiUser apiUser)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var roles =  await userManager.GetRolesAsync(apiUser);
+            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
+            var userClaims = await userManager.GetClaimsAsync(apiUser);
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, apiUser.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, apiUser.Email),
+                new Claim(CustomClaimTypes.Uid, apiUser.Id)
+            }.Union(roleClaims).Union(userClaims);
+
+            var token = new JwtSecurityToken(
+                issuer: configuration["JwtSettings:Issuer"],
+                audience: configuration["JwtSettings:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration["JwtSettings:Duration"])),
+                signingCredentials: credentials
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+
+
 
         }
     }
