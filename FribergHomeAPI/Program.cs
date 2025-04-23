@@ -29,6 +29,8 @@ builder.Services.AddIdentityCore<ApiUser>()
 
 // Injected Services 
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+builder.Services.AddScoped<IRealEstateAgencyRepository, RealEstateAgencyRepository>();
+builder.Services.AddScoped<IRealEstateAgentRepository, RealEstateAgentRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

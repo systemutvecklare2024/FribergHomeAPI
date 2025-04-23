@@ -21,8 +21,6 @@
 ### POST /Account/Login
 - Email, Password
 
-### GET /Account/Register
-- List of Agencies
 ### POST /Account/Register
 - {FirstName, LastName, Email, Phone, ProfileImage, Agency}
 
@@ -39,6 +37,9 @@
 
 
 ## AgenciesController
+
+### GET /Agencies
+- List of Agencies
 
 ### GET /Agencies/my
 - {Name, Presentation, LogoUrl}
