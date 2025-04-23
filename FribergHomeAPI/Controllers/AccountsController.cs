@@ -3,7 +3,6 @@ using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -106,7 +105,7 @@ namespace FribergHomeAPI.Controllers
 
         private async Task<string> GenerateToken(ApiUser apiUser)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[Settings.Key]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var roles =  await userManager.GetRolesAsync(apiUser);
             var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
@@ -121,18 +120,14 @@ namespace FribergHomeAPI.Controllers
             }.Union(roleClaims).Union(userClaims);
 
             var token = new JwtSecurityToken(
-                issuer: configuration["JwtSettings:Issuer"],
-                audience: configuration["JwtSettings:Audience"],
+                issuer: configuration[Settings.Issuer],
+                audience: configuration[Settings.Audience],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration["JwtSettings:Duration"])),
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration[Settings.Duration])),
                 signingCredentials: credentials
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-
-
-
-
         }
     }
 }
