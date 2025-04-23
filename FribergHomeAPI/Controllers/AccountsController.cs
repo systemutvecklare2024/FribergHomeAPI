@@ -106,7 +106,7 @@ namespace FribergHomeAPI.Controllers
 
         private async Task<string> GenerateToken(ApiUser apiUser)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var roles =  await userManager.GetRolesAsync(apiUser);
             var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
