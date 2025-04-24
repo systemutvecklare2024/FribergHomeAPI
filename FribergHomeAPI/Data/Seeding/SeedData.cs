@@ -419,7 +419,7 @@ namespace FribergHomeAPI.Data.Seeding
 					City = "Olsfors",
 				},
 				Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Bollebygd"),
-				RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Ture")
+				RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Berit")
 
 			}};
 			ctx.Properties.AddRange(list);
