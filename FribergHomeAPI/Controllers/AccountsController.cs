@@ -34,6 +34,7 @@ namespace FribergHomeAPI.Controllers
             this.configuration = configuration;
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Register(AccountDTO accountDTO)
         {
