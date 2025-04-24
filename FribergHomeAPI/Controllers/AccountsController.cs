@@ -35,12 +35,10 @@ namespace FribergHomeAPI.Controllers
             this.configuration = configuration;
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(AccountDTO accountDTO)
         {
-            Console.WriteLine("Inne i API");
             //Begin Transaction
             var user = new ApiUser
             {
@@ -79,7 +77,7 @@ namespace FribergHomeAPI.Controllers
             await agentRepository.AddAsync(agent);
             //End Transaction
 
-            return Created();
+            return Created(uri: $"/api/agents/{agent.Id}", agent);
         }
 
         [HttpPost]
