@@ -32,7 +32,7 @@ namespace FribergHomeAPI.Data.Repositories
             return await DbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<T>?> GetAllAsync()
+        public virtual async Task<IEnumerable<T>?> GetAllAsync()
         {
             return await DbContext.Set<T>().ToListAsync();
         }
