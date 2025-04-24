@@ -1,3 +1,4 @@
+using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.Data.Seeding;
@@ -51,10 +52,28 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero,
-        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        ValidIssuer = builder.Configuration[Settings.Issuer],
+        ValidAudience = builder.Configuration[Settings.Audience],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            builder.Configuration["JwtSettings:Key"]))
+            builder.Configuration[Settings.Key]))
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            Console.WriteLine("Token validated.");
+            var claims = context.Principal?.Claims;
+            foreach (var claim in claims)
+            {
+                Console.WriteLine($"Claim: {claim.Type} = {claim.Value}");
+            }
+            return Task.CompletedTask;
+        }
     };
 });
 
@@ -80,10 +99,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// Order is hard, keep it straight
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

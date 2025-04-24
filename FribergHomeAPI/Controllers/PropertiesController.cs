@@ -2,6 +2,7 @@
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,6 +23,7 @@ namespace FribergHome_API.Controllers
 		}
 
 		// GET: api/<PropertiesController>
+		
 		[HttpGet]
 		public async Task<ActionResult> Get()
 		{
