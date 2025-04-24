@@ -3,6 +3,7 @@ using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -34,9 +35,12 @@ namespace FribergHomeAPI.Controllers
             this.configuration = configuration;
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("register")]
+        [Route("register")]
         public async Task<IActionResult> Register(AccountDTO accountDTO)
         {
+            Console.WriteLine("Inne i API");
             //Begin Transaction
             var user = new ApiUser
             {
