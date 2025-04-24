@@ -3,6 +3,7 @@ using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ namespace FribergHomeAPI.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
         public async Task<IActionResult> Register(AccountDTO accountDTO)
         {
             //Begin Transaction
@@ -75,7 +77,7 @@ namespace FribergHomeAPI.Controllers
             await agentRepository.AddAsync(agent);
             //End Transaction
 
-            return Created();
+            return Created(uri: $"/api/agents/{agent.Id}", agent);
         }
 
         [HttpPost]
@@ -89,8 +91,6 @@ namespace FribergHomeAPI.Controllers
             {
                  return Unauthorized();
             }
-
-            //Generate JWT Token
 
             string token = await GenerateToken(user);
             var response = new AuthResponse
