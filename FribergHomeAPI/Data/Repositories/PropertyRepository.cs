@@ -20,5 +20,15 @@ namespace FribergHomeAPI.Data.Repositories
         {
             return await DbContext.Set<Property>().Include(p => p.Address).FirstOrDefaultAsync(e => e.Id == id);
         }
+
+        public override async Task<IEnumerable<Property>?> GetAllAsync()
+        {
+            return await DbContext.Set<Property>()
+                        .Include(p => p.Address)
+                        .Include(p=>p.Images)
+                        .Include(p=>p.RealEstateAgent)
+                        .OrderBy(p=>p.Id)
+                        .ToListAsync();
+        }
     }
 }
