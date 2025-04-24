@@ -92,8 +92,6 @@ namespace FribergHomeAPI.Controllers
                  return Unauthorized();
             }
 
-            //Generate JWT Token
-
             string token = await GenerateToken(user);
             var response = new AuthResponse
             {
