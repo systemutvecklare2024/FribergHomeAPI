@@ -23,7 +23,7 @@ namespace FribergHome_API.Controllers
 		}
 
 		// GET: api/<PropertiesController>
-		[Authorize]
+		
 		[HttpGet]
 		public async Task<ActionResult> Get()
 		{
