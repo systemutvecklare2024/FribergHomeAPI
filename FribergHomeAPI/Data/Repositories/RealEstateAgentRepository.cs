@@ -16,6 +16,7 @@ namespace FribergHomeAPI.Data.Repositories
         {
             return await dbContext.Agents
                 .Include(a => a.Agency)
+                .Include(p => p.Properties)
                 .ToListAsync();
         }
     }
