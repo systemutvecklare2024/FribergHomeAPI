@@ -26,7 +26,7 @@ namespace FribergHomeAPI.Controllers
             var dto = mapper.Map<List<RealEstateAgentDTO>>(agents);
             return Ok(dto);
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdWithAgency(int id)
         {
             var agent = await agentRepository.GetByIdWithAgencyAsync(id);
