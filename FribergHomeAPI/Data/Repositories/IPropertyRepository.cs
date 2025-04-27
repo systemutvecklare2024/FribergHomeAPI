@@ -1,4 +1,5 @@
-﻿using FribergHomeAPI.Models;
+﻿using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 
 namespace FribergHomeAPI.Data.Repositories
 {
@@ -7,5 +8,7 @@ namespace FribergHomeAPI.Data.Repositories
     {
         Task<ICollection<Property>?> FindPropertyInMuncipality(Muncipality muncipality);
         Task<Property?> GetWithAddressAsync(int id);
+        //Fredrik
+        Task<bool> UpdateAsync(int id, PropertyDTO dto);
     }
 }

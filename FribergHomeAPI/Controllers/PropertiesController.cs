@@ -75,7 +75,7 @@ namespace FribergHome_API.Controllers
 
 		// PUT api/<PropertiesController>/5
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO property)
+		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
 			if(!ModelState.IsValid)
 			{
@@ -89,12 +89,20 @@ namespace FribergHome_API.Controllers
                         Console.WriteLine($"  Error: {subError.ErrorMessage}");
                     }
                 }
+				// Fredrik
+				return BadRequest(ModelState);
             }
-			Console.WriteLine("I GOT IT!");
-			Console.WriteLine(property);
+			var existingProperty = await _propertyRepo.GetWithAddressAsync(id);
+			if (existingProperty == null) return NotFound();
 
-			return Accepted();
-		}
+			dto.Id = id;
+			_mapper.Map(dto, existingProperty);
+
+            await _propertyRepo.UpdateAsync(existingProperty);
+            
+			var updatedProperty = _mapper.Map<PropertyDTO>(existingProperty);
+            return Ok();
+        }
 
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]

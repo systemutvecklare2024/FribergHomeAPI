@@ -16,7 +16,7 @@ namespace FribergHomeAPI.Mappings
 				.ForMember(d=>d.ImageUrls, opt => opt.MapFrom(src=>src.Images))
 				.ReverseMap();
 
-			CreateMap<RealEstateAgency, RealEstateAgencyDTO>()
+            CreateMap<RealEstateAgency, RealEstateAgencyDTO>()
 				.ReverseMap();
 			
 			CreateMap<RealEstateAgent, RealEstateAgentDTO>()
