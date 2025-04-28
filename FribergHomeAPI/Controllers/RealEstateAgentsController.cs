@@ -33,6 +33,16 @@ namespace FribergHomeAPI.Controllers
             var dto = mapper.Map<RealEstateAgentDTO>(agent);
             return Ok(dto);
         }
+        
+        //To Do: Get id from logged in agent.
+        [HttpGet("My")]
+        public async Task<IActionResult> GetMyIdWithAgency()
+        {
+            int agentId = 1;
+            var agent = await agentRepository.GetByIdWithAgencyAsync(agentId);
+            var dto = mapper.Map<RealEstateAgentDTO>(agent);
+            return Ok(dto);
+        }
 
     }
 }

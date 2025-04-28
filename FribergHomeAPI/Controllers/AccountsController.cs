@@ -129,5 +129,18 @@ namespace FribergHomeAPI.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        [HttpGet("MyProfile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            //Get logged in ApiUser
+            var user = await userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            var userId = user.Id;
+            return Ok(new { UserId = userId });
+        }
     }
 }
