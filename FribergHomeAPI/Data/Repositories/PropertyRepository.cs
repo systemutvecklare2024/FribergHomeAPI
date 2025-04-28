@@ -30,5 +30,17 @@ namespace FribergHomeAPI.Data.Repositories
                         .OrderBy(p=>p.Id)
                         .ToListAsync();
         }
+
+        //Author: Glate
+        public async Task<IEnumerable<Property>?> GetLatestAsync(int take)
+        {
+			return await DbContext.Set<Property>()
+			             .Include(p => p.Address)
+			             .Include(p => p.Images)
+			             .Include(p => p.RealEstateAgent)
+			             .OrderByDescending(p => p.Id)
+                         .Take(take)
+			             .ToListAsync();
+		}
     }
 }
