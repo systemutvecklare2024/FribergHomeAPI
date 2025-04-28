@@ -1,4 +1,5 @@
-﻿using FribergHomeAPI.Models;
+﻿using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 
 namespace FribergHomeAPI.Data.Repositories
 {
@@ -10,5 +11,7 @@ namespace FribergHomeAPI.Data.Repositories
         Task<Property?> GetWithAddressAsync(int id);
 
         Task<IEnumerable<Property>?> GetLatestAsync(int id);
+        //Fredrik
+        Task<bool> UpdateAsync(int id, PropertyDTO dto);
     }
 }
