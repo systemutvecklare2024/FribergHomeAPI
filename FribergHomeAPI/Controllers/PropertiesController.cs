@@ -121,5 +121,19 @@ namespace FribergHome_API.Controllers
 		public void Delete(int id)
 		{
 		}
+
+		[HttpGet("{id}/details")]
+		public async Task<IActionResult> GetAll(int id)
+		{
+            var property = await _propertyRepo.GetWithAddressAndImages(id);
+
+            var DTO = _mapper.Map<PropertyDTO>(property);
+
+            if (DTO == null)
+            {
+                return NotFound();
+            }
+            return Ok(DTO);
+        }
 	}
 }
