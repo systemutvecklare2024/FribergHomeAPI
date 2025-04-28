@@ -18,19 +18,19 @@ namespace FribergHome_API.Controllers
 
 		public PropertiesController(IPropertyRepository propertyRepo, IMapper mapper)
 		{
-			 _propertyRepo = propertyRepo;
+			_propertyRepo = propertyRepo;
 			_mapper = mapper;
 		}
 
 		// GET: api/<PropertiesController>
-		
+
 		[HttpGet]
 		public async Task<ActionResult> Get()
 		{
-			var properties =  await _propertyRepo.GetAllAsync() ?? [];
+			var properties = await _propertyRepo.GetAllAsync() ?? [];
 			var dto = _mapper.Map<List<PropertyDTO>>(properties);
-			if (dto == null) 
-			{ 
+			if (dto == null)
+			{
 				return NotFound();
 			}
 			return Ok(dto);
@@ -51,6 +51,25 @@ namespace FribergHome_API.Controllers
 			return Ok(DTO);
 		}
 
+		//Author: Glate
+		[HttpGet("latest")]
+		public async Task<ActionResult> GetLatest(int take = 5) //Defaults take to 5 if no query is passed
+		{
+			var properties = await _propertyRepo.GetLatestAsync(take);
+
+			if (properties == null)
+			{
+				return NotFound();
+			}
+
+			var DTO = _mapper.Map<List<PropertyDTO>>(properties)
+							.OrderByDescending(i=>i.Id)
+							.Take(take);
+
+
+			return Ok(DTO);
+		}
+
 		// POST api/<PropertiesController>
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] PropertyDTO property)
@@ -67,7 +86,8 @@ namespace FribergHome_API.Controllers
 
 				return BadRequest(ModelState);
 
-			} catch (Exception)
+			}
+			catch (Exception)
 			{
 				return Problem("aaaaaaaaa");
 			}
@@ -77,12 +97,12 @@ namespace FribergHome_API.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
-                // Log all model errors
-                foreach (var error in ModelState)
-                {
-                    Console.WriteLine($"Key: {error.Key}");
+				// Log all model errors
+				foreach (var error in ModelState)
+				{
+					Console.WriteLine($"Key: {error.Key}");
 
                     foreach (var subError in error.Value.Errors)
                     {

@@ -8,6 +8,8 @@ namespace FribergHomeAPI.Data.Repositories
     {
         Task<ICollection<Property>?> FindPropertyInMuncipality(Muncipality muncipality);
         Task<Property?> GetWithAddressAsync(int id);
+
+        Task<IEnumerable<Property>?> GetLatestAsync(int id);
         //Fredrik
         Task<bool> UpdateAsync(int id, PropertyDTO dto);
     }

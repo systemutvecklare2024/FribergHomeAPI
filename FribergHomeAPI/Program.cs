@@ -32,6 +32,7 @@ builder.Services.AddIdentityCore<ApiUser>()
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<IRealEstateAgencyRepository, RealEstateAgencyRepository>();
 builder.Services.AddScoped<IRealEstateAgentRepository, RealEstateAgentRepository>();
+builder.Services.AddScoped<IMuncipalityRepository, MuncipalityRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
