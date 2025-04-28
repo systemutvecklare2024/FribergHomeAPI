@@ -6,6 +6,7 @@ namespace FribergHomeAPI.Data.Repositories
     public interface IPropertyRepository : IRepository<Property>
     {
         Task<ICollection<Property>?> FindPropertyInMuncipality(Muncipality muncipality);
+        Task<Property?> GetWithAddressAndImages(int id);
         Task<Property?> GetWithAddressAsync(int id);
     }
 }
