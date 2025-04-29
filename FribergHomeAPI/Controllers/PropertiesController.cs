@@ -130,6 +130,7 @@ namespace FribergHome_API.Controllers
 		{
 		}
 
+		// Author: Christoffer
 		[HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{

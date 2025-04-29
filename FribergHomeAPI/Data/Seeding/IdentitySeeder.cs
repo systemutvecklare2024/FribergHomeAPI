@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FribergHomeAPI.Data.Seeding
 {
+    // Author: Christoffer
     public static class IdentitySeeder
     {
         private const string UserID = "c9bef39b-80e8-4f5f-81bd-88ba728ff5de";
