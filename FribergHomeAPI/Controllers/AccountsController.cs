@@ -61,7 +61,7 @@ namespace FribergHomeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            await userManager.AddToRoleAsync(user, ApiRoles.Agent);
+            await userManager.AddToRoleAsync(user, ApiRoles.User);
 
             var agent = new RealEstateAgent
             {

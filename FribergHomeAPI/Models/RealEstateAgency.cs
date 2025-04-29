@@ -10,5 +10,6 @@
 
         // Navigation
         public virtual ICollection<RealEstateAgent> Agents { get; set; }
+        public ICollection<Application> Applications { get; set; }
     }
 }
