@@ -32,6 +32,10 @@ namespace FribergHomeAPI.Controllers
         {
             var agent = await agentRepository.GetByIdWithAgencyAsync(id);
             var dto = mapper.Map<RealEstateAgentDTO>(agent);
+            if(dto == null)
+            {
+                return NotFound();
+            }
             return Ok(dto);
         }
         
