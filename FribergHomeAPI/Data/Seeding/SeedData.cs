@@ -3,6 +3,7 @@ using FribergHomeAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.PropertyTypes;
 using Microsoft.AspNetCore.Identity;
+using FribergHomeAPI.Constants;
 
 namespace FribergHomeAPI.Data.Seeding
 {
@@ -16,7 +17,7 @@ namespace FribergHomeAPI.Data.Seeding
 			// Order matters!
 			if (!ctx.Agencies.Any())
 			{
-				await SeedAgencies(ctx);
+				await SeedAgencies(ctx, userManager);
 			}
 
 			if (!ctx.Muncipalities.Any())
@@ -31,31 +32,67 @@ namespace FribergHomeAPI.Data.Seeding
 		}
 
 		// Author: Christoffer
-		public static async Task SeedAgencies(ApplicationDbContext ctx)
+		public static async Task SeedAgencies(ApplicationDbContext ctx, UserManager<ApiUser> userManager)
 		{
-			ctx.Agencies.Add(new Models.RealEstateAgency
+			await using var transaction = await ctx.Database.BeginTransactionAsync();
+
+			try
 			{
-				Name = "BengtRealtorzAB",
-				Presentation = "Vi säljer osv",
-				LogoUrl = "https://picsum.photos/seed/property1/800/600",
-				Agents = new[] {
-					new Models.RealEstateAgent {
-						FirstName = "Bengt",
-						LastName = "Bengtzon",
-						Email = "Bengan@BengtRealtzorzAB.se",
-						PhoneNumber = "112",
-						ImageUrl = "https://randomuser.me/api/portraits/men/8.jpg"
-					},
-					new Models.RealEstateAgent {
-						FirstName = "Berit",
-						LastName = "Bengtzon",
-						Email = "Brittan@BengtRealtzorzAB.se",
-						PhoneNumber = "112",
-						ImageUrl = "https://randomuser.me/api/portraits/women/7.jpg"
-					},
-				}
-			});
-			await ctx.SaveChangesAsync();
+				var bengt = new Models.RealEstateAgent
+				{
+					FirstName = "Bengt",
+					LastName = "Bengtzon",
+					Email = "Bengan@BengtRealtzorzAB.se",
+					PhoneNumber = "112",
+					ImageUrl = "https://randomuser.me/api/portraits/men/8.jpg",
+					ApiUserId = "0c64a282-46e7-437d-b36c-60a7c6d71a68"
+                };
+
+                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+					Id: bengt.ApiUserId,
+					Email: bengt.Email,
+					UserName: bengt.Email,
+                    FirstName: bengt.FirstName,
+					LastName: bengt.LastName,
+					Password: "Bengt123!"), ApiRoles.Agent, userManager);
+
+				var berit = new Models.RealEstateAgent
+				{
+					FirstName = "Berit",
+					LastName = "Bengtzon",
+					Email = "Brittan@BengtRealtzorzAB.se",
+					PhoneNumber = "112",
+					ImageUrl = "https://randomuser.me/api/portraits/women/7.jpg",
+                    ApiUserId = "6148f50d-a317-413d-99fc-0c3a3680eb62"
+                };
+
+                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+                    Id: berit.ApiUserId,
+                    Email: berit.Email,
+                    UserName: berit.Email,
+                    FirstName: berit.FirstName,
+                    LastName: berit.LastName,
+                    Password: "Berit123!"), ApiRoles.Agent, userManager);
+
+
+                ctx.Agencies.Add(new Models.RealEstateAgency
+				{
+					Name = "BengtRealtorzAB",
+					Presentation = "Vi säljer osv",
+					LogoUrl = "https://picsum.photos/seed/property1/800/600",
+					Agents = new[] {
+						bengt,
+						berit,
+					}
+				});
+				await ctx.SaveChangesAsync();
+				await transaction.CommitAsync();
+
+            } catch(Exception)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
 		}
 
 		//Author: Glate
