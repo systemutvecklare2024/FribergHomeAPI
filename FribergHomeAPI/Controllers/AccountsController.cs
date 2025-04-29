@@ -82,6 +82,7 @@ namespace FribergHomeAPI.Controllers
 
         [HttpPost]
         [Route("login")]
+        // Co-Auth: Tobias
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
             var user = await userManager.FindByEmailAsync(loginDto.Email);
@@ -134,19 +135,6 @@ namespace FribergHomeAPI.Controllers
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-        [HttpGet("MyProfile")]
-        public async Task<IActionResult> GetProfile()
-        {
-            //Get logged in ApiUser
-            var user = await userManager.GetUserAsync(User);
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return Ok(userId);
         }
     }
 }

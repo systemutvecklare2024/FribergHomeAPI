@@ -19,6 +19,7 @@ namespace FribergHomeAPI.Controllers
             this.agencyRepository = agencyRepository;
         }
 
+        //Tobias
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
