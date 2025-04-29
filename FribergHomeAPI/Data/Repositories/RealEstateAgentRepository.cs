@@ -26,5 +26,10 @@ namespace FribergHomeAPI.Data.Repositories
                 .Include(a => a.Agency)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
+        public async Task<RealEstateAgent?> GetApiUserIdAsync(string id)
+        {
+            return await dbContext.Agents
+                .FirstOrDefaultAsync(a => a.ApiUserId == id);
+        }
     }
 }

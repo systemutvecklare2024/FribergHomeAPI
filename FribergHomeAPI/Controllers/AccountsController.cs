@@ -93,11 +93,17 @@ namespace FribergHomeAPI.Controllers
             }
 
             string token = await GenerateToken(user);
+            var agent = await agentRepository.FirstOrDefaultAsync(a => a.ApiUserId == user.Id);
+            if (agent == null) 
+            {
+                return Unauthorized();
+            }
             var response = new AuthResponse
             {
                 Email = loginDto.Email,
                 UserId = user.Id,
-                Token = token
+                Token = token,
+                AgentId = agent.Id
             };
 
             return Ok(response);
@@ -139,8 +145,8 @@ namespace FribergHomeAPI.Controllers
             {
                 return Unauthorized();
             }
-            var userId = user.Id;
-            return Ok(new { UserId = userId });
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return Ok(userId);
         }
     }
 }

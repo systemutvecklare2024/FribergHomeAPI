@@ -35,11 +35,11 @@ namespace FribergHomeAPI.Controllers
         }
         
         //To Do: Get id from logged in agent.
-        [HttpGet("My")]
-        public async Task<IActionResult> GetMyIdWithAgency()
+        [HttpGet("My/{userId}")]
+        public async Task<IActionResult> GetMyIdWithAgency(string userId)
         {
-            int agentId = 1;
-            var agent = await agentRepository.GetByIdWithAgencyAsync(agentId);
+            var agentId = userId;
+            var agent = await agentRepository.GetApiUserIdAsync(agentId);
             var dto = mapper.Map<RealEstateAgentDTO>(agent);
             return Ok(dto);
         }
