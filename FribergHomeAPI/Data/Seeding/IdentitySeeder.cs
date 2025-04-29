@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FribergHomeAPI.Data.Seeding
 {
+    // Author: Christoffer
     public static class IdentitySeeder
     {
         private const string UserID = "c9bef39b-80e8-4f5f-81bd-88ba728ff5de";
@@ -11,7 +12,9 @@ namespace FribergHomeAPI.Data.Seeding
         private const string SuperAgentID = "1b427517-3b8b-43eb-9d94-7fb7a55dade3";
         private const string AdministratorID = "bdd62857-84b2-4024-9166-d6a9540027bb";
 
-        
+        public record NewUser(string Id, string Email, string UserName, string FirstName, string LastName, string Password);
+
+
         public static async Task SeedAsync(ApplicationDbContext ctx, RoleManager<IdentityRole> roleManager, UserManager<ApiUser> userManager)
         {
             await SeedRoles(ctx, roleManager);
@@ -22,43 +25,8 @@ namespace FribergHomeAPI.Data.Seeding
         {
             if (!userManager.Users.Any())
             {
-                var user = new ApiUser
-                {
-                    Id = UserID,
-                    Email = "user@friberghome.com",
-                    NormalizedEmail = "user@friberghome.com".ToUpper(),
-                    UserName = "user@friberghome.com",
-                    NormalizedUserName = "user@friberghome.com".ToUpper(),
-                    FirstName = "Normal",
-                    LastName = "User",
-                    //SecurityStamp = "a26183dc-1ccf-4beb-a2a3-82f8b9baa7f3",
-                    //ConcurrencyStamp = "4d822a9f-bbdc-411d-b55e-df4f5610d8cb"
-                };
-
-                var userResult = await userManager.CreateAsync(user, "User123!");
-                if (userResult.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, ApiRoles.User);
-                }
-
-                var admin = new ApiUser
-                {
-                    Id = AdministratorID,
-                    Email = "admin@friberghome.com",
-                    NormalizedEmail = "admin@friberghome.com".ToUpper(),
-                    UserName = "admin@friberghome.com",
-                    NormalizedUserName = "admin@friberghome.com".ToUpper(),
-                    FirstName = "Normal",
-                    LastName = "Admin",
-                    //SecurityStamp = "a26183dc-1ccf-4beb-a2a3-82f8b9baa7f3",
-                    //ConcurrencyStamp = "4d822a9f-bbdc-411d-b55e-df4f5610d8cb"
-                };
-
-                var adminResult = await userManager.CreateAsync(admin, "Admin123!");
-                if (adminResult.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(admin, ApiRoles.Administrator);
-                }
+                await CreateUser(new NewUser(UserID, "user@friberghome.com", "user@friberghome.com", "Normal", "User", "User123!"), ApiRoles.User, userManager);
+                await CreateUser(new NewUser(AdministratorID, "admin@friberghome.com", "admin@friberghome.com", "Normal", "Admin", "Admin123!"), ApiRoles.Administrator, userManager);
             }
         }
 
@@ -98,6 +66,26 @@ namespace FribergHomeAPI.Data.Seeding
                 {
                     await roleManager.CreateAsync(role);
                 }
+            }
+        }
+
+        public static async Task CreateUser(NewUser newUser, string role, UserManager<ApiUser> userManager)
+        {
+            var user = new ApiUser
+            {
+                Id = newUser.Id,
+                Email = newUser.Email,
+                NormalizedEmail = newUser.Email.ToUpper(),
+                UserName = newUser.UserName,
+                NormalizedUserName = newUser.UserName.ToUpper(),
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName
+            };
+
+            var userResult = await userManager.CreateAsync(user, newUser.Password);
+            if (userResult.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, role);
             }
         }
     }
