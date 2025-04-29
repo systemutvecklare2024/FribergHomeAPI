@@ -82,6 +82,7 @@ namespace FribergHomeAPI.Controllers
 
         [HttpPost]
         [Route("login")]
+        // Co-Auth: Tobias
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
             var user = await userManager.FindByEmailAsync(loginDto.Email);
@@ -93,11 +94,17 @@ namespace FribergHomeAPI.Controllers
             }
 
             string token = await GenerateToken(user);
+            var agent = await agentRepository.FirstOrDefaultAsync(a => a.ApiUserId == user.Id);
+            if (agent == null) 
+            {
+                return Unauthorized();
+            }
             var response = new AuthResponse
             {
                 Email = loginDto.Email,
                 UserId = user.Id,
-                Token = token
+                Token = token,
+                AgentId = agent.Id
             };
 
             return Ok(response);
