@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,7 +37,7 @@ builder.Services.AddScoped<IMuncipalityRepository, MuncipalityRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddCors( options => options.AddPolicy("AllowAll",
+builder.Services.AddCors(options => options.AddPolicy("AllowAll",
     x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 // Use Identity
@@ -56,7 +57,8 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration[Settings.Issuer],
         ValidAudience = builder.Configuration[Settings.Audience],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            builder.Configuration[Settings.Key]))
+            builder.Configuration[Settings.Key])),
+        NameClaimType = ClaimTypes.NameIdentifier
     };
     options.Events = new JwtBearerEvents
     {

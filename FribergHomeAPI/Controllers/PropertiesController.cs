@@ -3,7 +3,9 @@ using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,12 +17,19 @@ namespace FribergHome_API.Controllers
 	{
 		private readonly IPropertyRepository _propertyRepo;
 		private readonly IMapper _mapper;
+        private readonly UserManager<ApiUser> userManager;
+        private readonly IRealEstateAgentRepository realEstateAgentRepository;
 
-		public PropertiesController(IPropertyRepository propertyRepo, IMapper mapper)
+        public PropertiesController(IPropertyRepository propertyRepo, 
+			IMapper mapper, 
+			UserManager<ApiUser> userManager,
+            IRealEstateAgentRepository realEstateAgentRepository)
 		{
 			_propertyRepo = propertyRepo;
 			_mapper = mapper;
-		}
+            this.userManager = userManager;
+            this.realEstateAgentRepository = realEstateAgentRepository;
+        }
 
 		// GET: api/<PropertiesController>
 
@@ -66,7 +75,6 @@ namespace FribergHome_API.Controllers
 							.OrderByDescending(i=>i.Id)
 							.Take(take);
 
-
 			return Ok(DTO);
 		}
 
@@ -97,6 +105,7 @@ namespace FribergHome_API.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
+			// TODO: We need to validate that the user is allowed to do this...
 			if (!ModelState.IsValid)
 			{
 				// Log all model errors
@@ -120,7 +129,6 @@ namespace FribergHome_API.Controllers
 
             await _propertyRepo.UpdateAsync(existingProperty);
             
-			var updatedProperty = _mapper.Map<PropertyDTO>(existingProperty);
             return Ok();
         }
 
@@ -128,10 +136,11 @@ namespace FribergHome_API.Controllers
 		[HttpDelete("{id}")]
 		public void Delete(int id)
 		{
-		}
+            // TODO: We need to validate that the user is allowed to do this...
+        }
 
-		// Author: Christoffer
-		[HttpGet("{id}/details")]
+        // Author: Christoffer
+        [HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
             var property = await _propertyRepo.GetWithAddressAndImages(id);
@@ -144,5 +153,26 @@ namespace FribergHome_API.Controllers
             }
             return Ok(DTO);
         }
+
+		// Author: Christoffer
+		[HttpGet("my")]
+		public async Task<IActionResult> My()
+		{
+            // This is awful, everything is awful. TODO: AccountService much?
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
+
+            var user = await userManager.FindByEmailAsync(userId);
+            if (user == null) return Unauthorized();
+
+            var agent = await realEstateAgentRepository.GetApiUserIdAsync(user.Id);
+			if (agent == null) return Unauthorized();
+
+			var properties = await _propertyRepo.GetAllMyPropertiesAsync(agent.Id);
+
+			var dto = _mapper.Map<List<PropertyDTO>>(properties);
+
+			return Ok(dto);
+		}
 	}
 }

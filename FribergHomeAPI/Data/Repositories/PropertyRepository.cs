@@ -78,5 +78,15 @@ namespace FribergHomeAPI.Data.Repositories
                 .Include(p => p.Images)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
+
+        public async Task<IEnumerable<Property>?> GetAllMyPropertiesAsync(int agentId)
+        {
+            return await DbContext.Set<Property>()
+                .Include(p => p.Address)
+                .Include(p => p.Images)
+                .Where(p => p.RealEstateAgentId == agentId)
+                .OrderByDescending(p => p.Id)
+                .ToListAsync();
+        }
     }
 }

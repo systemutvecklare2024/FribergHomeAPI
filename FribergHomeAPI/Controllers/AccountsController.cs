@@ -123,6 +123,7 @@ namespace FribergHomeAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, apiUser.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, apiUser.Email),
+                new Claim(ClaimTypes.NameIdentifier, apiUser.Id),
                 new Claim(CustomClaimTypes.Uid, apiUser.Id)
             }.Union(roleClaims).Union(userClaims);
 
