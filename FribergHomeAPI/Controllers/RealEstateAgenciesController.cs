@@ -27,5 +27,17 @@ namespace FribergHomeAPI.Controllers
             var dto = mapper.Map<List<RealEstateAgencyDTO>>(agencies);
             return Ok(dto);
         }
+        //Tobias
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAgencyByIdWithAgentsAsync(int id)
+        {
+            var agency = await agencyRepository.GetByIdWithAgentsAsync(id);
+            var dto = mapper.Map<RealEstateAgencyPageDTO>(agency);
+            if (dto == null)
+            {
+                return NotFound();
+            }
+            return Ok(dto);
+        }
     }
 }
