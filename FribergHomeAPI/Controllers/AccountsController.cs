@@ -22,17 +22,20 @@ namespace FribergHomeAPI.Controllers
         private readonly UserManager<ApiUser> userManager;
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly IConfiguration configuration;
+        private readonly IRealEstateAgencyRepository agencyRepository;
 
         public AccountsController(
             IMapper mapper, 
             UserManager<ApiUser> userManager, 
             IRealEstateAgentRepository agentRepository,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IRealEstateAgencyRepository agencyRepository)
         {
             this.mapper = mapper;
             this.userManager = userManager;
             this.agentRepository = agentRepository;
             this.configuration = configuration;
+            this.agencyRepository = agencyRepository;
         }
 
         [HttpPost]
@@ -71,13 +74,27 @@ namespace FribergHomeAPI.Controllers
                 PhoneNumber = accountDTO.PhoneNumber,
                 ImageUrl = accountDTO.ImageUrl,
                 ApiUserId = user.Id,
-                AgencyId = 1, //ToDo: Handle RealEstateAgency
+                AgencyId = accountDTO.AgencyId
             };
 
-            await agentRepository.AddAsync(agent);
+            var createdAgent = await agentRepository.AddAsync(agent);
+
+            var application = new Application
+            {
+                AgencyId = accountDTO.AgencyId,
+                AgentId = createdAgent.Id
+            };
+
+            var agency = await agencyRepository.GetAsync(application.AgencyId);
+            agency.Applications.Add(application);
+            await agencyRepository.UpdateAsync(agency);
+
+            var agentDTO = mapper.Map<AgentCreatedDTO>(createdAgent);
+
             //End Transaction
 
-            return Created(uri: $"/api/agents/{agent.Id}", agent);
+
+            return Created(uri: $"/api/RealEstateAgents/{createdAgent.Id}", agentDTO);
         }
 
         [HttpPost]

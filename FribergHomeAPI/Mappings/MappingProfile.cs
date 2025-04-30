@@ -26,10 +26,18 @@ namespace FribergHomeAPI.Mappings
 
 			CreateMap<PropertyImage, PropertyImageDTO>()
 				.ReverseMap();
+
 			CreateMap<Muncipality, MuncipalityDTO>()
 				.ForMember(d => d.Id, opt => opt.MapFrom(src => src.Id))
 				.ForMember(d=>d.Name, opt=> opt.MapFrom(src => src.Name))
 				.ReverseMap();
-		}
+
+			CreateMap<RealEstateAgent, AgentCreatedDTO>()
+				.ForMember(d => d.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(d => d.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(d => d.AgencyId, opt => opt.MapFrom(src => src.AgencyId))
+				.ReverseMap();
+
+        }
 	} 
 }

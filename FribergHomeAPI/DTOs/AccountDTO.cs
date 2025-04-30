@@ -9,6 +9,6 @@
         public string ImageUrl { get; set; }
         public string Password {  get; set; }
         public string ConfirmPassword { get; set; }
-        public string AgencyId { get; set; }
+        public int AgencyId { get; set; }
     }
 }
