@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,14 @@ namespace FribergHomeAPI.Controllers
             var agencies = await agencyRepository.GetAllAsync() ?? [];
             var dto = mapper.Map<List<RealEstateAgencyDTO>>(agencies);
             return Ok(dto);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWithAll(int id)
+        {
+            var agency = await agencyRepository.GetWithApplicationsAndAgentsAsync(id);
+            var agentDTO = mapper.Map<RealEstateAgency>(agency);
+            return Ok(agentDTO);
         }
     }
 }

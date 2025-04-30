@@ -1,5 +1,4 @@
-﻿using static FribergHomeAPI.Models.PropertyTypes;
-
+﻿
 namespace FribergHomeAPI.Models
 {
     public static class StatusTypes
