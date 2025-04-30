@@ -38,6 +38,7 @@ namespace FribergHomeAPI.Data.Seeding
 
 			try
 			{
+				//BengtRealtorzAB
 				var bengt = new Models.RealEstateAgent
 				{
 					FirstName = "Bengt",
@@ -83,6 +84,74 @@ namespace FribergHomeAPI.Data.Seeding
 					Agents = new[] {
 						bengt,
 						berit,
+					}
+				});
+
+				//ChristRealtorsAB
+				var christer = new Models.RealEstateAgent
+				{
+					FirstName = "Christer",
+					LastName = "Christersson",
+					Email = "christer@ChristRealtors.se",
+					PhoneNumber = "911",
+					ImageUrl = "https://randomuser.me/api/portraits/men/82.jpg",
+					ApiUserId = "de9feeda-c5ad-43d0-83db-9dbf3b241369"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+					Id: christer.ApiUserId,
+					Email: christer.Email,
+					UserName: christer.Email,
+					FirstName: christer.FirstName,
+					LastName: christer.LastName,
+					Password: "Christer123!"), ApiRoles.Agent, userManager);
+
+				var christina = new Models.RealEstateAgent
+				{
+					FirstName = "Christina",
+					LastName = "Christersson",
+					Email = "christina@ChristRealtors.se",
+					PhoneNumber = "911",
+					ImageUrl = "https://randomuser.me/api/portraits/women/24.jpg",
+					ApiUserId = "6cc53b1a-c6ec-4d9b-a71c-00b8565d1971"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+					Id: christina.ApiUserId,
+					Email: christina.Email,
+					UserName: christina.Email,
+					FirstName: christina.FirstName,
+					LastName: christina.LastName,
+					Password: "Christina123!"), ApiRoles.Agent, userManager);
+
+				var christin = new Models.RealEstateAgent
+				{
+					FirstName = "Christin",
+					LastName = "Christersson",
+					Email = "christin@ChristRealtors.se",
+					PhoneNumber = "911",
+					ImageUrl = "https://randomuser.me/api/portraits/women/16.jpg",
+					ApiUserId = "22e4b80d-a88a-428d-aef6-07f273b980dd"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+					Id: christin.ApiUserId,
+					Email: christin.Email,
+					UserName: christin.Email,
+					FirstName: christin.FirstName,
+					LastName: christin.LastName,
+					Password: "Christin123!"), ApiRoles.Agent, userManager);
+
+
+				ctx.Agencies.Add(new Models.RealEstateAgency
+				{
+					Name = "ChristRealtors",
+					Presentation = "Vi är christ. Vi dör för dina synder, och bostad.",
+					LogoUrl = "https://godvine.com/pics/Kierra/GVA-JesusinHouse.jpg",
+					Agents = new[] {
+						christer,
+						christina,
+						christin,
 					}
 				});
 				await ctx.SaveChangesAsync();
