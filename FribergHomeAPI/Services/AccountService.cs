@@ -1,0 +1,134 @@
+﻿using FribergHomeAPI.Constants;
+using FribergHomeAPI.Data;
+using FribergHomeAPI.Data.Repositories;
+using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
+using FribergHomeAPI.Results;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+
+namespace FribergHomeAPI.Services
+{
+    // Author: Christoffer
+    public class AccountService : IAccountService
+    {
+        private readonly UserManager<ApiUser> userManager;
+        private readonly IRealEstateAgentRepository agentRepository;
+        private readonly ApplicationDbContext dbContext;
+        private readonly IConfiguration configuration;
+
+        public AccountService(UserManager<ApiUser> userManager,
+            IRealEstateAgentRepository agentRepository,
+            ApplicationDbContext applicationDbContext,
+            IConfiguration configuration)
+        {
+            this.userManager = userManager;
+            this.agentRepository = agentRepository;
+            this.dbContext = applicationDbContext;
+            this.configuration = configuration;
+        }
+
+        public async Task<LoginResult> LoginAsync(LoginDTO loginDto)
+        {
+            var user = await userManager.FindByEmailAsync(loginDto.Email);
+            if (user == null)
+            {
+                return LoginResult.Failed("Ogiltig email eller lösenord");
+            }
+            var validPassword = await userManager.CheckPasswordAsync(user, loginDto.Password);
+
+            if (!validPassword)
+            {
+                return LoginResult.Failed("Ogiltig email eller lösenord");
+            }
+
+            var agent = await agentRepository.FirstOrDefaultAsync(a => a.ApiUserId == user.Id);
+            if (agent == null)
+            {
+                return LoginResult.Failed("Er profil hittades ej, försök igen.");
+            }
+
+            string token = await GenerateToken(user);
+
+            return LoginResult.SuccessResult(token, user.Email!, user.Id, agent.Id);
+        }
+
+        public async Task<RegistrationResult> RegisterAsync(AccountDTO dto)
+        {
+            try
+            {
+                using var transaction = await dbContext.Database.BeginTransactionAsync();
+
+                var user = new ApiUser
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    UserName = dto.Email,
+                    NormalizedUserName = dto.Email.ToUpper(),
+                    NormalizedEmail = dto.Email.ToUpper(),
+                    Email = dto.Email,
+                };
+
+                var result = await userManager.CreateAsync(user, dto.Password);
+
+                if (!result.Succeeded)
+                {
+                    return RegistrationResult.Failed(result.Errors);
+                }
+
+                await userManager.AddToRoleAsync(user, ApiRoles.Agent);
+
+                var agent = new RealEstateAgent
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    Email = dto.Email,
+                    PhoneNumber = dto.PhoneNumber,
+                    ImageUrl = dto.ImageUrl,
+                    ApiUserId = user.Id,
+                };
+
+                await agentRepository.AddAsync(agent);
+
+                await transaction.CommitAsync();
+                return RegistrationResult.SuccessResult(agent);
+
+            }
+            catch (Exception ex)
+            {
+                return RegistrationResult.Failed([new IdentityError { Code = "Exception", Description = ex.Message }]);
+            }
+        }
+
+        private async Task<string> GenerateToken(ApiUser apiUser)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[Settings.Key]!));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var roles = await userManager.GetRolesAsync(apiUser);
+            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
+            var userClaims = await userManager.GetClaimsAsync(apiUser);
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, apiUser.UserName!),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, apiUser.Email!),
+                new Claim(ClaimTypes.NameIdentifier, apiUser.Id),
+                new Claim(CustomClaimTypes.Uid, apiUser.Id)
+            }.Union(roleClaims).Union(userClaims);
+
+            var token = new JwtSecurityToken(
+                issuer: configuration[Settings.Issuer],
+                audience: configuration[Settings.Audience],
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration[Settings.Duration])),
+                signingCredentials: credentials
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+    }
+}

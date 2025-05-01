@@ -14,7 +14,7 @@
         public virtual RealEstateAgency Agency { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
 
-        public int AgencyId { get; set; }
+        public int? AgencyId { get; set; }
 
         public ApiUser ApiUser { get; set; }
         public string? ApiUserId { get; set; }

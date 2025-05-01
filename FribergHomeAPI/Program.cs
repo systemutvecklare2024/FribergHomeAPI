@@ -3,6 +3,7 @@ using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.Data.Seeding;
 using FribergHomeAPI.Models;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<IRealEstateAgencyRepository, RealEstateAgencyRepository>();
 builder.Services.AddScoped<IRealEstateAgentRepository, RealEstateAgentRepository>();
 builder.Services.AddScoped<IMuncipalityRepository, MuncipalityRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
