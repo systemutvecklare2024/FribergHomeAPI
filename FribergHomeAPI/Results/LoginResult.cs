@@ -1,5 +1,6 @@
 ﻿namespace FribergHomeAPI.Results
 {
+    // Author: Christoffer
     public record LoginResult(bool Success, string? Token, string? Email, string? UserId, int? AgentId, IEnumerable<string>? Errors)
     {
         public static LoginResult Failed(string failed) => 

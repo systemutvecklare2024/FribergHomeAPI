@@ -68,16 +68,6 @@ builder.Services.AddAuthentication(options =>
         {
             Console.WriteLine($"Authentication failed: {context.Exception.Message}");
             return Task.CompletedTask;
-        },
-        OnTokenValidated = context =>
-        {
-            Console.WriteLine("Token validated.");
-            var claims = context.Principal?.Claims;
-            foreach (var claim in claims)
-            {
-                Console.WriteLine($"Claim: {claim.Type} = {claim.Value}");
-            }
-            return Task.CompletedTask;
         }
     };
 });

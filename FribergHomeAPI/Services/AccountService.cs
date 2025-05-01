@@ -56,7 +56,7 @@ namespace FribergHomeAPI.Services
             return LoginResult.SuccessResult(token, user.Email!, user.Id, agent.Id);
         }
 
-        public async Task<RegistrationResult> RegisterAsync(AccountDTO dto)
+        public async Task<ServiceResult<RealEstateAgent>> RegisterAsync(AccountDTO dto)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace FribergHomeAPI.Services
 
                 if (!result.Succeeded)
                 {
-                    return RegistrationResult.Failed(result.Errors);
+                    return ServiceResult<RealEstateAgent>.Failure(result.Errors);
                 }
 
                 await userManager.AddToRoleAsync(user, ApiRoles.Agent);
@@ -94,13 +94,36 @@ namespace FribergHomeAPI.Services
                 await agentRepository.AddAsync(agent);
 
                 await transaction.CommitAsync();
-                return RegistrationResult.SuccessResult(agent);
+                return ServiceResult<RealEstateAgent>.SuccessResult(agent);
 
             }
             catch (Exception ex)
             {
-                return RegistrationResult.Failed([new IdentityError { Code = "Exception", Description = ex.Message }]);
+                return ServiceResult<RealEstateAgent>.Failure([new IdentityError { Code = "Exception", Description = ex.Message }]);
             }
+        }
+
+        public async Task<ServiceResult<int>> GetMyAgentIdAsync(ClaimsPrincipal user)
+        {
+            var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(string.IsNullOrWhiteSpace(userId))
+            {
+                return ServiceResult<int>.Failure("UserId saknas.");
+            }
+
+            var apiUser = await userManager.FindByEmailAsync(userId);
+            if (apiUser == null)
+            {
+                return ServiceResult<int>.Failure("Användare hittades ej.");
+            }
+
+            var agent = await agentRepository.GetApiUserIdAsync(apiUser.Id);
+            if(agent == null)
+            {
+                return ServiceResult<int>.Failure("Mäklare hittades ej.");
+            }
+
+            return ServiceResult<int>.SuccessResult(agent.Id);
         }
 
         private async Task<string> GenerateToken(ApiUser apiUser)

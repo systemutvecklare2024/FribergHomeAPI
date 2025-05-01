@@ -2,11 +2,9 @@
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FribergHome_API.Controllers
 {
@@ -14,20 +12,19 @@ namespace FribergHome_API.Controllers
 	[ApiController]
 	public class PropertiesController : ControllerBase
 	{
-		private readonly IPropertyRepository _propertyRepo;
-		private readonly IMapper _mapper;
-        private readonly UserManager<ApiUser> userManager;
-        private readonly IRealEstateAgentRepository realEstateAgentRepository;
+		private readonly IPropertyRepository propertyRepo;
+		private readonly IMapper mapper;
+        private readonly IAccountService accountService;
 
         public PropertiesController(IPropertyRepository propertyRepo, 
 			IMapper mapper, 
 			UserManager<ApiUser> userManager,
-            IRealEstateAgentRepository realEstateAgentRepository)
+            IRealEstateAgentRepository realEstateAgentRepository,
+			IAccountService accountService)
 		{
-			_propertyRepo = propertyRepo;
-			_mapper = mapper;
-            this.userManager = userManager;
-            this.realEstateAgentRepository = realEstateAgentRepository;
+			this.propertyRepo = propertyRepo;
+			this.mapper = mapper;
+            this.accountService = accountService;
         }
 
 		// GET: api/<PropertiesController>
@@ -35,8 +32,8 @@ namespace FribergHome_API.Controllers
 		[HttpGet]
 		public async Task<ActionResult> Get()
 		{
-			var properties = await _propertyRepo.GetAllAsync() ?? [];
-			var dto = _mapper.Map<List<PropertyDTO>>(properties);
+			var properties = await propertyRepo.GetAllAsync() ?? [];
+			var dto = mapper.Map<List<PropertyDTO>>(properties);
 			if (dto == null)
 			{
 				return NotFound();
@@ -48,9 +45,9 @@ namespace FribergHome_API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult> Get(int id)
 		{
-			var property = await _propertyRepo.GetWithAddressAsync(id);
+			var property = await propertyRepo.GetWithAddressAsync(id);
 
-			var DTO = _mapper.Map<PropertyDTO>(property);
+			var DTO = mapper.Map<PropertyDTO>(property);
 
 			if (DTO == null)
 			{
@@ -63,14 +60,14 @@ namespace FribergHome_API.Controllers
 		[HttpGet("latest")]
 		public async Task<ActionResult> GetLatest(int take = 5) //Defaults take to 5 if no query is passed
 		{
-			var properties = await _propertyRepo.GetLatestAsync(take);
+			var properties = await propertyRepo.GetLatestAsync(take);
 
 			if (properties == null)
 			{
 				return NotFound();
 			}
 
-			var DTO = _mapper.Map<List<PropertyDTO>>(properties)
+			var DTO = mapper.Map<List<PropertyDTO>>(properties)
 							.OrderByDescending(i=>i.Id)
 							.Take(take);
 
@@ -83,9 +80,9 @@ namespace FribergHome_API.Controllers
 		{
 			try
 			{
-				var pro = _mapper.Map<Property>(property);
+				var pro = mapper.Map<Property>(property);
 				pro.RealEstateAgentId = 1; // TODO: FIX THIS SHIT (Emelie tm)
-				var newProp = await _propertyRepo.AddAsync(pro);
+				var newProp = await propertyRepo.AddAsync(pro);
 				if (newProp != null)
 				{
 					return Accepted();
@@ -120,13 +117,13 @@ namespace FribergHome_API.Controllers
 				// Fredrik
 				return BadRequest(ModelState);
             }
-			var existingProperty = await _propertyRepo.GetWithAddressAsync(id);
+			var existingProperty = await propertyRepo.GetWithAddressAsync(id);
 			if (existingProperty == null) return NotFound();
 
 			dto.Id = id;
-			_mapper.Map(dto, existingProperty);
+			mapper.Map(dto, existingProperty);
 
-            await _propertyRepo.UpdateAsync(existingProperty);
+            await propertyRepo.UpdateAsync(existingProperty);
             
             return Ok();
         }
@@ -142,9 +139,9 @@ namespace FribergHome_API.Controllers
         [HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
-            var property = await _propertyRepo.GetWithAddressAndImages(id);
+            var property = await propertyRepo.GetWithAddressAndImages(id);
 
-            var DTO = _mapper.Map<PropertyDTO>(property);
+            var DTO = mapper.Map<PropertyDTO>(property);
 
             if (DTO == null)
             {
@@ -157,19 +154,19 @@ namespace FribergHome_API.Controllers
 		[HttpGet("my")]
 		public async Task<IActionResult> My()
 		{
-            // This is awful, everything is awful. TODO: AccountService much?
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null) return Unauthorized();
+			var result = await accountService.GetMyAgentIdAsync(User);
+			if (!result.Success)
+			{
+				foreach (var error in result.Errors)
+				{
+					ModelState.AddModelError("", error);
+				}
+				return BadRequest(ModelState);
+			}
 
-            var user = await userManager.FindByEmailAsync(userId);
-            if (user == null) return Unauthorized();
+			var properties = await propertyRepo.GetAllMyPropertiesAsync(result.Data);
 
-            var agent = await realEstateAgentRepository.GetApiUserIdAsync(user.Id);
-			if (agent == null) return Unauthorized();
-
-			var properties = await _propertyRepo.GetAllMyPropertiesAsync(agent.Id);
-
-			var dto = _mapper.Map<List<PropertyDTO>>(properties);
+			var dto = mapper.Map<List<PropertyDTO>>(properties);
 
 			return Ok(dto);
 		}
