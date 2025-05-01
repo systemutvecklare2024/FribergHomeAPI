@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.PropertyTypes;
 using Microsoft.AspNetCore.Identity;
 using FribergHomeAPI.Constants;
+using FribergHomeAPI.Migrations;
 
 namespace FribergHomeAPI.Data.Seeding
 {
@@ -56,7 +57,27 @@ namespace FribergHomeAPI.Data.Seeding
 					LastName: bengt.LastName,
 					Password: "Bengt123!"), ApiRoles.Agent, userManager);
 
-				var berit = new Models.RealEstateAgent
+				// Fredrik
+				var ture = new Models.RealEstateAgent
+				{
+					FirstName = "Ture",
+					LastName = "Tegel",
+					Email = "Ture@TegelsMaklarbyra.se",
+					PhoneNumber = "112",
+					ImageUrl = "https://randomuser.me/api/portraits/men/9.jpg",
+					ApiUserId = "9a90f6a7-b5ec-4025-bce8-c904a1dbdde7"
+                };
+
+                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+                    Id: ture.ApiUserId,
+                    Email: ture.Email,
+                    UserName: ture.Email,
+                    FirstName: ture.FirstName,
+                    LastName: ture.LastName,
+                    Password: "Ture123!"), ApiRoles.Agent, userManager);
+
+                var berit = new Models.RealEstateAgent
+
 				{
 					FirstName = "Berit",
 					LastName = "Bengtzon",
@@ -76,16 +97,27 @@ namespace FribergHomeAPI.Data.Seeding
 
 
                 ctx.Agencies.Add(new Models.RealEstateAgency
-				{
-					Name = "BengtRealtorzAB",
-					Presentation = "Vi säljer osv",
-					LogoUrl = "https://picsum.photos/seed/property1/800/600",
-					Agents = new[] {
-						bengt,
-						berit,
-					}
-				});
-				await ctx.SaveChangesAsync();
+                {
+                    Name = "BengtRealtorzAB",
+                    Presentation = "Vi säljer osv",
+                    LogoUrl = "https://picsum.photos/seed/property1/800/600",
+                    Agents = new[] {
+                        bengt,
+                        berit,
+                    }
+                });
+
+                ctx.Agencies.Add(new Models.RealEstateAgency
+                {
+                    Name = "TegelsMäklarbyrå",
+                    Presentation = "På stadig grund",
+                    LogoUrl = "https://picsum.photos/seed/property2/800/600",
+                    Agents = new[] {
+                        ture
+                    }
+                });
+
+                await ctx.SaveChangesAsync();
 				await transaction.CommitAsync();
 
             } catch(Exception)
