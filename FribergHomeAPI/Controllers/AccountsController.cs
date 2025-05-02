@@ -34,7 +34,7 @@ namespace FribergHomeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Created(uri: $"/api/RealEstateAgents/{result.Agent!.Id}", result.Agent);
+            return Created(uri: $"/api/RealEstateAgents/{result.Data!.Id}", result.Data);
         }
 
         [HttpPost]
@@ -48,7 +48,7 @@ namespace FribergHomeAPI.Controllers
             {
                 foreach(var error in result.Errors!)
                 {
-                    ModelState.AddModelError("", error);
+                    ModelState.AddModelError(error.Code, error.Description);
                 }
 
                 return BadRequest(ModelState);
@@ -56,10 +56,10 @@ namespace FribergHomeAPI.Controllers
             
             var response = new AuthResponse
             {
-                Email = result.Email!,
-                UserId = result.UserId!,
-                Token = result.Token!,
-                AgentId = result.AgentId!.Value
+                Email = result.Data!.Email!,
+                UserId = result.Data.UserId!,
+                Token = result.Data.Token!,
+                AgentId = result.Data.AgentId!.Value
             };
 
             return Ok(response);

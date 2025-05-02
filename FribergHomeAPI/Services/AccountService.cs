@@ -31,29 +31,29 @@ namespace FribergHomeAPI.Services
             this.configuration = configuration;
         }
 
-        public async Task<LoginResult> LoginAsync(LoginDTO loginDto)
+        public async Task<ServiceResult<LoginResult>> LoginAsync(LoginDTO loginDto)
         {
             var user = await userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
             {
-                return LoginResult.Failed("Ogiltig email eller lösenord");
+                return ServiceResult<LoginResult>.Failure("Ogiltig email eller lösenord");
             }
             var validPassword = await userManager.CheckPasswordAsync(user, loginDto.Password);
 
             if (!validPassword)
             {
-                return LoginResult.Failed("Ogiltig email eller lösenord");
+                return ServiceResult<LoginResult>.Failure("Ogiltig email eller lösenord");
             }
 
             var agent = await agentRepository.FirstOrDefaultAsync(a => a.ApiUserId == user.Id);
             if (agent == null)
             {
-                return LoginResult.Failed("Er profil hittades ej, försök igen.");
+                return ServiceResult<LoginResult>.Failure("Er profil hittades ej, försök igen.");
             }
 
             string token = await GenerateToken(user);
 
-            return LoginResult.SuccessResult(token, user.Email!, user.Id, agent.Id);
+            return ServiceResult<LoginResult>.SuccessResult(new LoginResult(token, user.Email!, user.Id, agent.Id));
         }
 
         public async Task<ServiceResult<RealEstateAgent>> RegisterAsync(AccountDTO dto)
@@ -76,7 +76,7 @@ namespace FribergHomeAPI.Services
 
                 if (!result.Succeeded)
                 {
-                    return ServiceResult<RealEstateAgent>.Failure(result.Errors);
+                    return ServiceResult<RealEstateAgent>.Failure(result.Errors.Select(e => new ServiceResultError { Code = e.Code, Description = e.Description}));
                 }
 
                 await userManager.AddToRoleAsync(user, ApiRoles.Agent);
@@ -99,14 +99,14 @@ namespace FribergHomeAPI.Services
             }
             catch (Exception ex)
             {
-                return ServiceResult<RealEstateAgent>.Failure([new IdentityError { Code = "Exception", Description = ex.Message }]);
+                return ServiceResult<RealEstateAgent>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
             }
         }
 
         public async Task<ServiceResult<int>> GetMyAgentIdAsync(ClaimsPrincipal user)
         {
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(string.IsNullOrWhiteSpace(userId))
+            if (string.IsNullOrWhiteSpace(userId))
             {
                 return ServiceResult<int>.Failure("UserId saknas.");
             }
@@ -114,7 +114,7 @@ namespace FribergHomeAPI.Services
             var apiUser = await userManager.FindByEmailAsync(userId);
             if (apiUser == null)
             {
-                return ServiceResult<int>.Failure("Användare hittades ej.");
+                return ServiceResult<int>.Failure("Användare hittades ej." );
             }
 
             var agent = await agentRepository.GetApiUserIdAsync(apiUser.Id);

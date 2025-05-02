@@ -159,7 +159,7 @@ namespace FribergHome_API.Controllers
 			{
 				foreach (var error in result.Errors)
 				{
-					ModelState.AddModelError("", error);
+					ModelState.AddModelError(error.Code, error.Description);
 				}
 				return BadRequest(ModelState);
 			}
