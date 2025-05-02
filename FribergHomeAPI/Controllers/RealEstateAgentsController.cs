@@ -41,7 +41,7 @@ namespace FribergHomeAPI.Controllers
         
         //Tobias
         //To Do: Get id from logged in agent.
-        [HttpGet("My/{userId}")]
+        [HttpGet("My")]
         public async Task<IActionResult> GetMyIdWithAgency(string userId)
         {
             var agentId = userId;

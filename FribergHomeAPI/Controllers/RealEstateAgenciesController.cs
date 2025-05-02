@@ -39,5 +39,11 @@ namespace FribergHomeAPI.Controllers
             }
             return Ok(dto);
         }
+        //[HttpGet("My")]
+        //public async Task<IActionResult> GetMyAgencyWithAgentsAsync(string userId)
+        //{
+
+        //}
+        // To Do: SKapa en HttpGet /my som liknar den i agents.
     }
 }
