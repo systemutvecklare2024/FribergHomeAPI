@@ -5,15 +5,18 @@ namespace FribergHomeAPI.Data.Repositories
 {
     public class RealEstateAgencyRepository : GenericRepository<RealEstateAgency, ApplicationDbContext>, IRealEstateAgencyRepository
     {
+        private readonly ApplicationDbContext dbContext;
 
-        public RealEstateAgencyRepository(ApplicationDbContext dbContext) : base(dbContext){}
-
-        public async Task<RealEstateAgency> GetWithApplicationsAndAgentsAsync(int id)
+        public RealEstateAgencyRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            return await DbContext.Agencies
-                .Include(a => a.Applications)
+            this.dbContext = dbContext;
+        }
+        //Tobias
+        public async Task<RealEstateAgency?> GetByIdWithAgentsAsync(int id)
+        {
+            return await dbContext.Agencies
                 .Include(a => a.Agents)
-                .FirstOrDefaultAsync(a =>  a.Id == id);
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
     }
 }

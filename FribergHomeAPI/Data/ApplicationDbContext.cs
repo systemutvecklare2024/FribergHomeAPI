@@ -52,6 +52,13 @@ namespace FribergHomeAPI.Data
                 .HasOne(a => a.Agency)
                 .WithMany(agency => agency.Agents)
                 .OnDelete(DeleteBehavior.Restrict);
+            //Co-Author: Tobias
+            //RealEstateAgency
+            modelBuilder.Entity<RealEstateAgency>()
+                .HasMany(agents => agents.Agents)
+                .WithOne(a => a.Agency)
+                .OnDelete(DeleteBehavior.Restrict);
+                
 
             modelBuilder.Entity<RealEstateAgency>()
                 .HasMany(r => r.Applications)
