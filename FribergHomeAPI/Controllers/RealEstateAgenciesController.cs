@@ -2,6 +2,7 @@
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,13 @@ namespace FribergHomeAPI.Controllers
     {
         private readonly IMapper mapper;
         private readonly IRealEstateAgencyRepository agencyRepository;
+        private readonly IAgencyService agencyService;
 
-        public RealEstateAgenciesController(IMapper mapper, IRealEstateAgencyRepository agencyRepository)
+        public RealEstateAgenciesController(IMapper mapper, IRealEstateAgencyRepository agencyRepository, IAgencyService agencyService)
         {
             this.mapper = mapper;
             this.agencyRepository = agencyRepository;
+            this.agencyService = agencyService;
         }
 
         //Tobias
@@ -45,7 +48,13 @@ namespace FribergHomeAPI.Controllers
         [HttpPost("{agencyId}/applications/{applicatonId}")]
         public async Task<IActionResult> HandleApplicationAsync(ApplicationDTO applicationDTO)
         {
-            return NotFound();
+            if (applicationDTO == null)
+            {
+                return BadRequest(); //Change to better SatusCode
+            }
+            agencyService.HandelApplication(applicationDTO);
+            return Ok();
+
         }
     }
 }
