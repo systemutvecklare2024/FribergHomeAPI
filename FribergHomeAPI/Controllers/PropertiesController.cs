@@ -76,14 +76,14 @@ namespace FribergHome_API.Controllers
 		[HttpGet("muncipality/{muncipalityId}")]
 		public async Task<ActionResult> GetByMuncipality(int muncipalityId)
 		{
-			var properties = await _propertyRepo.GetByMuncipalityId(muncipalityId);
+			var properties = await propertyRepo.GetByMuncipalityId(muncipalityId);
 
 			if (properties == null)
 			{
 				return NotFound();
 			}
 
-			var DTO = _mapper.Map<List<PropertyDTO>>(properties)
+			var DTO = mapper.Map<List<PropertyDTO>>(properties)
 							 .OrderByDescending(i => i.Id);
 
 			return Ok(DTO);
