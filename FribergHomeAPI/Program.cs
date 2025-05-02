@@ -3,10 +3,12 @@ using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.Data.Seeding;
 using FribergHomeAPI.Models;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,10 +35,11 @@ builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<IRealEstateAgencyRepository, RealEstateAgencyRepository>();
 builder.Services.AddScoped<IRealEstateAgentRepository, RealEstateAgentRepository>();
 builder.Services.AddScoped<IMuncipalityRepository, MuncipalityRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddCors( options => options.AddPolicy("AllowAll",
+builder.Services.AddCors(options => options.AddPolicy("AllowAll",
     x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 // Use Identity
@@ -56,23 +59,14 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration[Settings.Issuer],
         ValidAudience = builder.Configuration[Settings.Audience],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            builder.Configuration[Settings.Key]))
+            builder.Configuration[Settings.Key])),
+        NameClaimType = ClaimTypes.NameIdentifier
     };
     options.Events = new JwtBearerEvents
     {
         OnAuthenticationFailed = context =>
         {
             Console.WriteLine($"Authentication failed: {context.Exception.Message}");
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = context =>
-        {
-            Console.WriteLine("Token validated.");
-            var claims = context.Principal?.Claims;
-            foreach (var claim in claims)
-            {
-                Console.WriteLine($"Claim: {claim.Type} = {claim.Value}");
-            }
             return Task.CompletedTask;
         }
     };
