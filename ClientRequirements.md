@@ -47,6 +47,12 @@
 ### POST /Agencies/my
 - {Name, Presentation, LogoUrl}
 
+### GET /Agencies/{id}/applications
+ - MODEL: {Agency, Agent->ApiUser, ENUM status, created/updated}
+ - DTO {asdfasdf, AgentId}
+## POST /Agencies/{agencyId}/applications/{applicationId}
+- {AgentId, Status}
+
 
 ## PropertiesController
 
