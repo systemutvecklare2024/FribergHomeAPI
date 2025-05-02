@@ -10,8 +10,10 @@ namespace FribergHomeAPI.Data.Repositories
 		Task<ICollection<Property>?> GetByMuncipalityId(int muncipalityId);
 		Task<Property?> GetWithAddressAndImages(int id);
         Task<Property?> GetWithAddressAsync(int id);
-
         Task<IEnumerable<Property>?> GetLatestAsync(int id);
+
+        Task<IEnumerable<Property>?> GetAllMyPropertiesAsync(int agentId);
+
         //Fredrik
         Task<bool> UpdateAsync(int id, PropertyDTO dto);
     }
