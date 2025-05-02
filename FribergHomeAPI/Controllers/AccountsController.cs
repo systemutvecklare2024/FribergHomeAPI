@@ -1,15 +1,7 @@
 ﻿using AutoMapper;
-using FribergHomeAPI.Constants;
-using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
-using FribergHomeAPI.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace FribergHomeAPI.Controllers
 {
@@ -19,139 +11,58 @@ namespace FribergHomeAPI.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly UserManager<ApiUser> userManager;
-        private readonly IRealEstateAgentRepository agentRepository;
-        private readonly IConfiguration configuration;
-        private readonly IRealEstateAgencyRepository agencyRepository;
+        private readonly IAccountService accountService;
 
-        public AccountsController(
-            IMapper mapper, 
-            UserManager<ApiUser> userManager, 
-            IRealEstateAgentRepository agentRepository,
-            IConfiguration configuration,
-            IRealEstateAgencyRepository agencyRepository)
+        public AccountsController(IMapper mapper, IAccountService accountService)
         {
             this.mapper = mapper;
-            this.userManager = userManager;
-            this.agentRepository = agentRepository;
-            this.configuration = configuration;
-            this.agencyRepository = agencyRepository;
+            this.accountService = accountService;
         }
 
+        // Author: Charlie, Rewrite: Christoffer
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(AccountDTO accountDTO)
         {
-            //Begin Transaction
-            var user = new ApiUser
+            var result = await accountService.RegisterAsync(accountDTO);
+            if (!result.Success)
             {
-                FirstName = accountDTO.FirstName,
-                LastName = accountDTO.LastName,
-                UserName = accountDTO.Email,
-                NormalizedUserName = accountDTO.Email.ToUpper(),
-                NormalizedEmail = accountDTO.Email.ToUpper(),
-                Email = accountDTO.Email,
-            };
-
-            var userResult = await userManager.CreateAsync(user, accountDTO.Password);
-
-            if (!userResult.Succeeded)
-            {
-                foreach(var error in userResult.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
                 return BadRequest(ModelState);
             }
 
-            await userManager.AddToRoleAsync(user, ApiRoles.User);
-
-            var agent = new RealEstateAgent
-            {
-                FirstName = accountDTO.FirstName,
-                LastName = accountDTO.LastName,
-                Email = accountDTO.Email,
-                PhoneNumber = accountDTO.PhoneNumber,
-                ImageUrl = accountDTO.ImageUrl,
-                ApiUserId = user.Id,
-                AgencyId = accountDTO.AgencyId
-            };
-
-            var createdAgent = await agentRepository.AddAsync(agent);
-
-            var application = new Application
-            {
-                AgencyId = accountDTO.AgencyId,
-                AgentId = createdAgent.Id
-            };
-
-            var agency = await agencyRepository.GetAsync(application.AgencyId);
-            agency.Applications.Add(application);
-            await agencyRepository.UpdateAsync(agency);
-
-            var agentDTO = mapper.Map<AgentCreatedDTO>(createdAgent);
-
-            //End Transaction
-
-
-            return Created(uri: $"/api/RealEstateAgents/{createdAgent.Id}", agentDTO);
+            return Created(uri: $"/api/RealEstateAgents/{result.Data!.Id}", result.Data);
         }
 
         [HttpPost]
         [Route("login")]
-        // Co-Auth: Tobias
+        // Author: Charlie, Co-Auth: Tobias, Rewrite: Christoffer
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
-            var user = await userManager.FindByEmailAsync(loginDto.Email);
-            var validPassword = await userManager.CheckPasswordAsync(user, loginDto.Password);
+            var result = await accountService.LoginAsync(loginDto);
 
-            if(user == null || !validPassword)
+            if (!result.Success)
             {
-                 return Unauthorized();
-            }
+                foreach(var error in result.Errors!)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
 
-            string token = await GenerateToken(user);
-            var agent = await agentRepository.FirstOrDefaultAsync(a => a.ApiUserId == user.Id);
-            if (agent == null) 
-            {
-                return Unauthorized();
+                return BadRequest(ModelState);
             }
+            
             var response = new AuthResponse
             {
-                Email = loginDto.Email,
-                UserId = user.Id,
-                Token = token,
-                AgentId = agent.Id
+                Email = result.Data!.Email!,
+                UserId = result.Data.UserId!,
+                Token = result.Data.Token!,
+                AgentId = result.Data.AgentId!.Value
             };
 
             return Ok(response);
-        }
-
-        private async Task<string> GenerateToken(ApiUser apiUser)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[Settings.Key]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var roles =  await userManager.GetRolesAsync(apiUser);
-            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
-            var userClaims = await userManager.GetClaimsAsync(apiUser);
-
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, apiUser.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, apiUser.Email),
-                new Claim(CustomClaimTypes.Uid, apiUser.Id)
-            }.Union(roleClaims).Union(userClaims);
-
-            var token = new JwtSecurityToken(
-                issuer: configuration[Settings.Issuer],
-                audience: configuration[Settings.Audience],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration[Settings.Duration])),
-                signingCredentials: credentials
-                );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

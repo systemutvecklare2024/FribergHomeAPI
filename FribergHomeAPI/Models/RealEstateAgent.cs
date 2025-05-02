@@ -15,7 +15,7 @@
         public virtual ICollection<Property> Properties { get; set; }
         public virtual Application Application { get; set; }
 
-        public int AgencyId { get; set; }
+        public int? AgencyId { get; set; }
 
         public ApiUser ApiUser { get; set; }
         public string? ApiUserId { get; set; }
