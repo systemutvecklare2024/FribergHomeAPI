@@ -179,7 +179,7 @@ namespace FribergHome_API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var properties = await propertyRepo.GetAllMyPropertiesAsync(result.Data);
+			var properties = await propertyRepo.GetAllPropertiesByAgentIdAsync(result.Data);
 
 			var dto = mapper.Map<List<PropertyDTO>>(properties);
 
