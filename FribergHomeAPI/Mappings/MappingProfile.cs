@@ -20,7 +20,9 @@ namespace FribergHomeAPI.Mappings
 				.ForMember(d => d.Agents, opt => opt.MapFrom(src => src.Agents))
 				.ReverseMap();
 			CreateMap<RealEstateAgency, RealEstateAgencyPageDTO>()
-				.ForMember(d => d.Agents, opt => opt.MapFrom(src => src.Agents));
+				.ForMember(d => d.Agents, opt => opt.MapFrom(src => src.Agents))
+				.ForMember(d => d.Applications, opt => opt.MapFrom(src => src.Applications))
+				.ReverseMap();
 			
 			CreateMap<RealEstateAgent, RealEstateAgentDTO>()
 				.ForMember(d => d.Agency, opt => opt.MapFrom(src=>src.Agency))
@@ -41,6 +43,9 @@ namespace FribergHomeAPI.Mappings
 				.ForMember(d => d.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(d => d.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(d => d.AgencyId, opt => opt.MapFrom(src => src.AgencyId))
+				.ReverseMap();
+
+			CreateMap<Application, ApplicationDTO>()
 				.ReverseMap();
 
         }

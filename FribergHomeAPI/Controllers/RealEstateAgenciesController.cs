@@ -40,5 +40,12 @@ namespace FribergHomeAPI.Controllers
             }
             return Ok(dto);
         }
+
+        //Author:Emelie
+        [HttpPost("{agencyId}/applications/{applicatonId}")]
+        public async Task<IActionResult> HandleApplicationAsync(ApplicationDTO applicationDTO)
+        {
+            return NotFound();
+        }
     }
 }
