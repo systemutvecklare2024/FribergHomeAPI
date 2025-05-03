@@ -77,7 +77,6 @@ namespace FribergHomeAPI.Data.Seeding
                     Password: "Ture123!"), ApiRoles.Agent, userManager);
 
                 var berit = new Models.RealEstateAgent
-
 				{
 					FirstName = "Berit",
 					LastName = "Bengtzon",
