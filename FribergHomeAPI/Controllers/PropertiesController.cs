@@ -3,6 +3,7 @@ using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using FribergHomeAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -143,11 +144,27 @@ namespace FribergHome_API.Controllers
             return Ok();
         }
 
+		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
-		{
-            // TODO: We need to validate that the user is allowed to do this...
+		public async Task<IActionResult> Delete(int id)
+        {
+			// TODO: We need to validate that the user is allowed to do this...
+			try
+			{
+				var prop = await propertyRepo.GetAsync(id);
+				if (prop != null)
+				{
+					await propertyRepo.RemoveAsync(prop);
+                    return Ok();
+                }
+				
+				return NotFound(new { error = "Kunde ej hitta objektet" });
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
         }
 
         // Author: Christoffer
@@ -167,6 +184,7 @@ namespace FribergHome_API.Controllers
 
 		// Author: Christoffer
 		[HttpGet("my")]
+		[Authorize(Roles = "Agent")]
 		public async Task<IActionResult> My()
 		{
 			var result = await accountService.GetMyAgentIdAsync(User);
