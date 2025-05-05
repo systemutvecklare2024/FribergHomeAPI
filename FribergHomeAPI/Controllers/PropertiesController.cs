@@ -169,7 +169,7 @@ namespace FribergHome_API.Controllers
 		[HttpGet("my")]
 		public async Task<IActionResult> My()
 		{
-			var result = await accountService.GetMyAgentIdAsync(User);
+			var result = await accountService.GetMyAgentAsync(User);
 			if (!result.Success)
 			{
 				foreach (var error in result.Errors)
@@ -179,7 +179,7 @@ namespace FribergHome_API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var properties = await propertyRepo.GetAllMyPropertiesAsync(result.Data);
+			var properties = await propertyRepo.GetAllMyPropertiesAsync(result.Data.Id);
 
 			var dto = mapper.Map<List<PropertyDTO>>(properties);
 
