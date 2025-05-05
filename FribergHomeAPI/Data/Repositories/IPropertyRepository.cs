@@ -12,7 +12,7 @@ namespace FribergHomeAPI.Data.Repositories
         Task<Property?> GetWithAddressAsync(int id);
         Task<IEnumerable<Property>?> GetLatestAsync(int id);
 
-        Task<IEnumerable<Property>?> GetAllMyPropertiesAsync(int agentId);
+        Task<IEnumerable<Property>?> GetAllPropertiesByAgentIdAsync(int agentId);
 
         //Fredrik
         Task<bool> UpdateAsync(int id, PropertyDTO dto);

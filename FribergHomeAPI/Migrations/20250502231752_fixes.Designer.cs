@@ -4,6 +4,7 @@ using FribergHomeAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FribergHomeAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250502231752_fixes")]
+    partial class fixes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,36 +129,6 @@ namespace FribergHomeAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("FribergHomeAPI.Models.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AgencyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StatusType")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AgencyId");
-
-                    b.HasIndex("AgentId")
-                        .IsUnique();
-
-                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("FribergHomeAPI.Models.Muncipality", b =>
@@ -463,25 +436,6 @@ namespace FribergHomeAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FribergHomeAPI.Models.Application", b =>
-                {
-                    b.HasOne("FribergHomeAPI.Models.RealEstateAgency", "Agency")
-                        .WithMany("Applications")
-                        .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FribergHomeAPI.Models.RealEstateAgent", "Agent")
-                        .WithOne("Application")
-                        .HasForeignKey("FribergHomeAPI.Models.Application", "AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Agency");
-
-                    b.Navigation("Agent");
-                });
-
             modelBuilder.Entity("FribergHomeAPI.Models.Property", b =>
                 {
                     b.HasOne("FribergHomeAPI.Models.Address", "Address")
@@ -605,15 +559,10 @@ namespace FribergHomeAPI.Migrations
             modelBuilder.Entity("FribergHomeAPI.Models.RealEstateAgency", b =>
                 {
                     b.Navigation("Agents");
-
-                    b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("FribergHomeAPI.Models.RealEstateAgent", b =>
                 {
-                    b.Navigation("Application")
-                        .IsRequired();
-
                     b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618

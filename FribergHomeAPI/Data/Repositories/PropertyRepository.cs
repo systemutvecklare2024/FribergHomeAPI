@@ -91,7 +91,7 @@ namespace FribergHomeAPI.Data.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<Property>?> GetAllMyPropertiesAsync(int agentId)
+        public async Task<IEnumerable<Property>?> GetAllPropertiesByAgentIdAsync(int agentId)
         {
             return await DbContext.Set<Property>()
                 .Include(p => p.Address)

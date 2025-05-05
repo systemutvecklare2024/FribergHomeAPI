@@ -45,7 +45,7 @@ namespace FribergHomeAPI.Data
                 .HasMany(p => p.Images)
                 .WithOne(i => i.Property)
                 .HasForeignKey(i => i.PropertyId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // RealEstateAgent
             modelBuilder.Entity<RealEstateAgent>()
