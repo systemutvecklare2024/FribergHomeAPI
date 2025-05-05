@@ -187,7 +187,7 @@ namespace FribergHome_API.Controllers
 		[Authorize(Roles = "Agent")]
 		public async Task<IActionResult> My()
 		{
-			var result = await accountService.GetMyAgentIdAsync(User);
+			var result = await accountService.GetMyAgentAsync(User);
 			if (!result.Success)
 			{
 				foreach (var error in result.Errors)
@@ -197,7 +197,7 @@ namespace FribergHome_API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var properties = await propertyRepo.GetAllPropertiesByAgentIdAsync(result.Data);
+			var properties = await propertyRepo.GetAllPropertiesByAgentIdAsync(result.Data.Id);
 
 			var dto = mapper.Map<List<PropertyDTO>>(properties);
 
