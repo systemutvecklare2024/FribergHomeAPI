@@ -122,7 +122,7 @@ namespace FribergHomeAPI.Data.Seeding
 					UserName: christina.Email,
 					FirstName: christina.FirstName,
 					LastName: christina.LastName,
-					Password: "Christina123!"), ApiRoles.SuperAgent, userManager);
+					Password: "Christina123!"), ApiRoles.Agent, userManager);
 
 				var christin = new Models.RealEstateAgent
 				{
