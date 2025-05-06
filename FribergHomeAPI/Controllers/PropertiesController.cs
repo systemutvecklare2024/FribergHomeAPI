@@ -15,18 +15,18 @@ namespace FribergHome_API.Controllers
 	{
 		private readonly IPropertyRepository propertyRepo;
 		private readonly IMapper mapper;
-        private readonly IAccountService accountService;
+		private readonly IAccountService accountService;
 
-        public PropertiesController(IPropertyRepository propertyRepo, 
-			IMapper mapper, 
+		public PropertiesController(IPropertyRepository propertyRepo,
+			IMapper mapper,
 			UserManager<ApiUser> userManager,
-            IRealEstateAgentRepository realEstateAgentRepository,
+			IRealEstateAgentRepository realEstateAgentRepository,
 			IAccountService accountService)
 		{
 			this.propertyRepo = propertyRepo;
 			this.mapper = mapper;
-            this.accountService = accountService;
-        }
+			this.accountService = accountService;
+		}
 
 		// GET: api/<PropertiesController>
 		[HttpGet]
@@ -68,7 +68,7 @@ namespace FribergHome_API.Controllers
 			}
 
 			var DTO = mapper.Map<List<PropertyDTO>>(properties)
-							.OrderByDescending(i=>i.Id)
+							.OrderByDescending(i => i.Id)
 							.Take(take);
 
 			return Ok(DTO);
@@ -92,12 +92,18 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Post([FromBody] PropertyDTO property)
 		{
 			try
 			{
 				var pro = mapper.Map<Property>(property);
-				pro.RealEstateAgentId = 1; // TODO: FIX THIS SHIT (Emelie tm)
+				var agentId = await accountService.GetMyAgentAsync(User);
+				if (agentId == null) //If no agent, no adding properties right now.
+				{
+					return BadRequest(ModelState);
+				}
+				pro.RealEstateAgentId = agentId.Data!.Id; //FIXED THIS SHIT (GLATE tm)
 				var newProp = await propertyRepo.AddAsync(pro);
 				if (newProp != null)
 				{
@@ -125,30 +131,30 @@ namespace FribergHome_API.Controllers
 				{
 					Console.WriteLine($"Key: {error.Key}");
 
-                    foreach (var subError in error.Value.Errors)
-                    {
-                        Console.WriteLine($"  Error: {subError.ErrorMessage}");
-                    }
-                }
+					foreach (var subError in error.Value.Errors)
+					{
+						Console.WriteLine($"  Error: {subError.ErrorMessage}");
+					}
+				}
 				// Fredrik
 				return BadRequest(ModelState);
-            }
+			}
 			var existingProperty = await propertyRepo.GetWithAddressAsync(id);
 			if (existingProperty == null) return NotFound();
 
 			dto.Id = id;
 			mapper.Map(dto, existingProperty);
 
-            await propertyRepo.UpdateAsync(existingProperty);
-            
-            return Ok();
-        }
+			await propertyRepo.UpdateAsync(existingProperty);
+
+			return Ok();
+		}
 
 		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
-        {
+		{
 			// TODO: We need to validate that the user is allowed to do this...
 			try
 			{
@@ -156,35 +162,35 @@ namespace FribergHome_API.Controllers
 				if (prop != null)
 				{
 					await propertyRepo.RemoveAsync(prop);
-                    return Ok();
-                }
-				
+					return Ok();
+				}
+
 				return NotFound(new { error = "Kunde ej hitta objektet" });
 			}
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
 			}
-        }
+		}
 
-        // Author: Christoffer
-        [HttpGet("{id}/details")]
+		// Author: Christoffer
+		[HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
-            var property = await propertyRepo.GetWithAddressAndImages(id);
+			var property = await propertyRepo.GetWithAddressAndImages(id);
 
-            var DTO = mapper.Map<PropertyDTO>(property);
+			var DTO = mapper.Map<PropertyDTO>(property);
 
-            if (DTO == null)
-            {
-                return NotFound();
-            }
-            return Ok(DTO);
-        }
+			if (DTO == null)
+			{
+				return NotFound();
+			}
+			return Ok(DTO);
+		}
 
 		// Author: Christoffer
 		[HttpGet("my")]
-		[Authorize(Roles = "Agent")]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> My()
 		{
 			var result = await accountService.GetMyAgentAsync(User);
