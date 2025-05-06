@@ -52,7 +52,7 @@ namespace FribergHomeAPI.Controllers
             {
                 return BadRequest("Hittar inte ansökan"); //Change to better SatusCode???
             }
-            var result = await agencyService.HandelApplication(applicationDTO);
+            var result = await agencyService.HandleApplication(applicationDTO);
             if (!result.Success)
             {
                 foreach (var error in result.Errors!)

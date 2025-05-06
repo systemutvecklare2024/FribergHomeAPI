@@ -9,6 +9,6 @@ namespace FribergHomeAPI.Services
     {
         Task<ServiceResult<bool>> ApproveApplication(ApplicationDTO applicationDTO);
         Task<ServiceResult<bool>> DenyApplication(ApplicationDTO applicationDTO);
-        Task<ServiceResult<bool>> HandelApplication(ApplicationDTO applicationDTO);
+        Task<ServiceResult<bool>> HandleApplication(ApplicationDTO applicationDTO);
     }
 }

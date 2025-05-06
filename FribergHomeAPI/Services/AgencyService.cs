@@ -35,7 +35,11 @@ namespace FribergHomeAPI.Services
             using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                await ChangeApplicationStatusAsync(applicationDTO);
+                var result = await ChangeApplicationStatusAsync(applicationDTO);
+                if (!result.Success)
+                {
+                    return result;
+                }
                 var agent = await agentRepository.GetByIdWithApiUser(applicationDTO.AgentId);
                 if(agent == null)
                 {
@@ -54,8 +58,6 @@ namespace FribergHomeAPI.Services
             }
             catch (Exception ex)
             {
-                
-                //await dbContext.Database.RollbackTransactionAsync(); Should I include this one?
                 await transaction.RollbackAsync();
                 return ServiceResult<bool>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
             }
@@ -68,7 +70,7 @@ namespace FribergHomeAPI.Services
             return ServiceResult<bool>.SuccessResult(true);
         }
 
-        public async Task<ServiceResult<bool>> HandelApplication(ApplicationDTO applicationDTO)
+        public async Task<ServiceResult<bool>> HandleApplication(ApplicationDTO applicationDTO)
         {
             if(applicationDTO.StatusType == StatusType.Approved)
             {
@@ -86,12 +88,22 @@ namespace FribergHomeAPI.Services
             }
         }
 
-        public async Task ChangeApplicationStatusAsync(ApplicationDTO applicationDTO)
+        public async Task<ServiceResult<bool>> ChangeApplicationStatusAsync(ApplicationDTO applicationDTO)
         {
             var agency = await agencyRepository.GetByIdWithAgentsAsync(applicationDTO.AgencyId);
+            if(agency == null || agency.Applications == null)
+            {
+                return ServiceResult<bool>.Failure("Byrå eller ansökningar saknas");
+            }
             var application = agency.Applications.FirstOrDefault(a => a.Id == applicationDTO.Id);
+            if(application == null)
+            {
+                return ServiceResult<bool>.Failure("Ansökningen hittades inte");
+            }
             application.StatusType = applicationDTO.StatusType;
             await agencyRepository.UpdateAsync(agency); //Does this work?
+
+            return ServiceResult<bool>.SuccessResult(true);
         }
 
         public async Task<IdentityResult> ChangeUserRole(ApiUser apiUser)

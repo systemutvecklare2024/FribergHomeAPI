@@ -58,10 +58,9 @@ namespace FribergHomeAPI.Services
 
         public async Task<ServiceResult<RealEstateAgent>> RegisterAsync(AccountDTO dto)
         {
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                using var transaction = await dbContext.Database.BeginTransactionAsync();
-
                 var user = new ApiUser
                 {
                     FirstName = dto.FirstName,
@@ -99,6 +98,7 @@ namespace FribergHomeAPI.Services
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 return ServiceResult<RealEstateAgent>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
             }
         }
