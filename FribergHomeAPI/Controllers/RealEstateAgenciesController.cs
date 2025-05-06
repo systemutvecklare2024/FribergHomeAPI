@@ -50,9 +50,18 @@ namespace FribergHomeAPI.Controllers
         {
             if (applicationDTO == null)
             {
-                return BadRequest(); //Change to better SatusCode
+                return BadRequest("Hittar inte ansökan"); //Change to better SatusCode???
             }
-            agencyService.HandelApplication(applicationDTO);
+            var result = await agencyService.HandelApplication(applicationDTO);
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors!)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return BadRequest(ModelState);
+            }
             return Ok();
 
         }

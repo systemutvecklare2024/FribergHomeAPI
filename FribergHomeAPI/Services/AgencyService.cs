@@ -1,9 +1,13 @@
 ﻿using FribergHomeAPI.Constants;
+using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
+using FribergHomeAPI.Results;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.StatusTypes;
 
 namespace FribergHomeAPI.Services
@@ -14,47 +18,75 @@ namespace FribergHomeAPI.Services
         private readonly IRealEstateAgencyRepository agencyRepository;
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly UserManager<ApiUser> userManager;
+        private readonly ApplicationDbContext dbContext;
 
         public AgencyService(IRealEstateAgencyRepository agencyRepository, 
             IRealEstateAgentRepository agentRepository, 
-            UserManager<ApiUser> userManager)
+            UserManager<ApiUser> userManager,
+            ApplicationDbContext dbContext)
         {
             this.agencyRepository = agencyRepository;
             this.agentRepository = agentRepository;
             this.userManager = userManager;
+            this.dbContext = dbContext;
         }
-        public async Task<IActionResult> ApproveApplication(ApplicationDTO applicationDTO)
+        public async Task<ServiceResult<bool>> ApproveApplication(ApplicationDTO applicationDTO)
         {
-            ChangeApplicationStatusAsync(applicationDTO);
-            var agent = await agentRepository.GetByIdWithApiUser(applicationDTO.AgentId);
-            SetAgency(applicationDTO.AgencyId, agent);
-            ChangeUserRole(agent.ApiUser);
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                await ChangeApplicationStatusAsync(applicationDTO);
+                var agent = await agentRepository.GetByIdWithApiUser(applicationDTO.AgentId);
+                if(agent == null)
+                {
+                    return ServiceResult<bool>.Failure("Ingen mäklare funnen");
+                }
+                await SetAgency(applicationDTO.AgencyId, agent);
+                var identityResult = await ChangeUserRole(agent.ApiUser);
+                if (!identityResult.Succeeded)
+                {
+                    return ServiceResult<bool>.Failure(identityResult.Errors.Select(e => new ServiceResultError { Code = e.Code, Description = e.Description }));
+                }
 
+                await transaction.CommitAsync();
+
+                return ServiceResult<bool>.SuccessResult(true);
+            }
+            catch (Exception ex)
+            {
+                
+                //await dbContext.Database.RollbackTransactionAsync(); Should I include this one?
+                await transaction.RollbackAsync();
+                return ServiceResult<bool>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
+            }
+            
         }
 
-        public async Task<IActionResult> DenyApplication(ApplicationDTO applicationDTO)
+        public async Task<ServiceResult<bool>> DenyApplication(ApplicationDTO applicationDTO)
         {
-            throw new NotImplementedException();
+            await ChangeApplicationStatusAsync(applicationDTO);
+            return ServiceResult<bool>.SuccessResult(true);
         }
 
-        public async Task<IActionResult> HandelApplication(ApplicationDTO applicationDTO)
+        public async Task<ServiceResult<bool>> HandelApplication(ApplicationDTO applicationDTO)
         {
             if(applicationDTO.StatusType == StatusType.Approved)
             {
-                ApproveApplication(applicationDTO);
-                
+                var result = ApproveApplication(applicationDTO);
+                return await result;
             }
             else if(applicationDTO.StatusType == StatusType.Denied)
             {
-                DenyApplication(applicationDTO);
+                var result = DenyApplication(applicationDTO);
+                return await result;
             }
             else
             {
-                throw new NotImplementedException(); //Think about what to return here
+                return ServiceResult<bool>.Failure("Något gick fel, ingen förändring utförd på status på ansökan.");
             }
         }
 
-        public async void ChangeApplicationStatusAsync(ApplicationDTO applicationDTO)
+        public async Task ChangeApplicationStatusAsync(ApplicationDTO applicationDTO)
         {
             var agency = await agencyRepository.GetByIdWithAgentsAsync(applicationDTO.AgencyId);
             var application = agency.Applications.FirstOrDefault(a => a.Id == applicationDTO.Id);
@@ -62,12 +94,22 @@ namespace FribergHomeAPI.Services
             await agencyRepository.UpdateAsync(agency); //Does this work?
         }
 
-        public async void ChangeUserRole(ApiUser apiUser)
+        public async Task<IdentityResult> ChangeUserRole(ApiUser apiUser)
         {
-            await userManager.RemoveFromRoleAsync(apiUser, ApiRoles.User);
+            var removeResult = await userManager.RemoveFromRoleAsync(apiUser, ApiRoles.User);
+            if (!removeResult.Succeeded)
+            {
+                return removeResult;
+            }
+            var addResult = await userManager.AddToRoleAsync(apiUser, ApiRoles.Agent);
+            if (!addResult.Succeeded)
+            {
+                return addResult;
+            }
+            return IdentityResult.Success;
         }
 
-        public async void SetAgency(int agencyId, RealEstateAgent agent)
+        public async Task SetAgency(int agencyId, RealEstateAgent agent)
         {
             agent.AgencyId = agencyId;
             await agentRepository.UpdateAsync(agent);
