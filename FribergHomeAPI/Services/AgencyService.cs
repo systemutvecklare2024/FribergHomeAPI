@@ -127,5 +127,17 @@ namespace FribergHomeAPI.Services
             await agentRepository.UpdateAsync(agent);
         }
 
+        public async Task GenerateApplication(AccountDTO accountDTO, RealEstateAgent agent) //Return ServiceResult?
+        {
+            var application = new Application()
+            {
+                AgencyId = accountDTO.AgencyId,
+                AgentId = agent.Id
+            };
+            var agency = await agencyRepository.GetByIdWithAgentsAsync(application.AgencyId);
+            agency.Applications.Add(application);
+            await agencyRepository.UpdateAsync(agency);
+        }
+
     }
 }

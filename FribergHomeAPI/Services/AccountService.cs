@@ -19,16 +19,19 @@ namespace FribergHomeAPI.Services
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly IAgencyService agencyService;
 
         public AccountService(UserManager<ApiUser> userManager,
             IRealEstateAgentRepository agentRepository,
             ApplicationDbContext applicationDbContext,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IAgencyService agencyService)
         {
             this.userManager = userManager;
             this.agentRepository = agentRepository;
             this.dbContext = applicationDbContext;
             this.configuration = configuration;
+            this.agencyService = agencyService;
         }
 
         public async Task<ServiceResult<LoginResult>> LoginAsync(LoginDTO loginDto)
@@ -90,7 +93,14 @@ namespace FribergHomeAPI.Services
                     ApiUserId = user.Id,
                 };
 
-                await agentRepository.AddAsync(agent);
+                var newAgent = await agentRepository.AddAsync(agent);
+
+                if(newAgent == null)
+                {
+                    return ServiceResult<RealEstateAgent>.Failure("Lyckades inte skapa en Mäklare.");
+                }
+
+                await agencyService.GenerateApplication(dto, newAgent);
 
                 await transaction.CommitAsync();
                 return ServiceResult<RealEstateAgent>.SuccessResult(agent);
