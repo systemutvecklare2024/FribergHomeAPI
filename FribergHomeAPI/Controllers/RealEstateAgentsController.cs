@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,13 @@ namespace FribergHomeAPI.Controllers
     {
         private readonly IMapper mapper;
         private readonly IRealEstateAgentRepository agentRepository;
+        private readonly IAccountService accountservice;
 
-        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository)
+        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository, IAccountService accountservice)
         {
             this.mapper = mapper;
             this.agentRepository = realEstateAgentRepository;
+            this.accountservice = accountservice;
         }
         
         [HttpGet]
@@ -41,12 +44,21 @@ namespace FribergHomeAPI.Controllers
         
         //Tobias
         //To Do: Get id from logged in agent.
-        [HttpGet("My/{userId}")]
-        public async Task<IActionResult> GetMyIdWithAgency(string userId)
+        [HttpGet("My")]
+        public async Task<IActionResult> GetMyAgentWithAgency()
         {
-            var agentId = userId;
-            var agent = await agentRepository.GetApiUserIdAsync(agentId);
-            var dto = mapper.Map<RealEstateAgentDTO>(agent);
+            var result = await accountservice.GetMyAgentAsync(User);
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+
+            var dto = mapper.Map<RealEstateAgentDTO>(result);
+            
             return Ok(dto);
         }
 

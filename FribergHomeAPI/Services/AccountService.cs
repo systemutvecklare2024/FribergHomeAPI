@@ -103,27 +103,27 @@ namespace FribergHomeAPI.Services
             }
         }
 
-        public async Task<ServiceResult<int>> GetMyAgentIdAsync(ClaimsPrincipal user)
+        public async Task<ServiceResult<RealEstateAgent>> GetMyAgentAsync(ClaimsPrincipal user)
         {
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrWhiteSpace(userId))
             {
-                return ServiceResult<int>.Failure("UserId saknas.");
+                return ServiceResult<RealEstateAgent>.Failure("UserId saknas.");
             }
 
             var apiUser = await userManager.FindByEmailAsync(userId);
             if (apiUser == null)
             {
-                return ServiceResult<int>.Failure("Användare hittades ej." );
+                return ServiceResult<RealEstateAgent>.Failure("Användare hittades ej." );
             }
 
             var agent = await agentRepository.GetApiUserIdAsync(apiUser.Id);
             if(agent == null)
             {
-                return ServiceResult<int>.Failure("Mäklare hittades ej.");
+                return ServiceResult<RealEstateAgent>.Failure("Mäklare hittades ej.");
             }
 
-            return ServiceResult<int>.SuccessResult(agent.Id);
+            return ServiceResult<RealEstateAgent>.SuccessResult(agent);
         }
 
         private async Task<string> GenerateToken(ApiUser apiUser)
