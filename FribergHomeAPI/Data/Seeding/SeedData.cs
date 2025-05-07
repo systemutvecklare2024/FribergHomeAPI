@@ -497,6 +497,85 @@ namespace FribergHomeAPI.Data.Seeding
 
 			},
 
+            new Property
+            {
+                ListingPrice = 1160000,
+                LivingSpace = 47,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "För dig som vill bo billigt i en stor etta ges nu möjlighet att förvärva denna kvadratsmarta bostad med modernt kök. Planlösningen är optimal med stort kök, rymlig hall och luftigt allrum. Allrummet ligger i gavel med fint ljusinsläpp och med möjlighet att skärma av rummet för att skapa ett separat sovrum. Bra förvaringsmöjligheter med fastbyggda garderober och källarförråd. Tack vare läget intill E45:an är det smidigt att ta sig vidare in till stan, till Hisingen eller norr ut.  Här bor du i en skuldfri förening med låg månadsavgift, låg parkeringsavgift (100 kr/mån), renoverat gym, bastu och stort förråd i källaren. Lägenheten har ett tillgängligt läge på andra våning med härlig vy från berget ner mot älven. \r\nOmrådet i Agnesberg präglas av vacker natur och passar utmärkt för er som uppskattar lugna gröna omgivningar men samtidigt vill ha nära in till city! Kommunikationsförbindelser via buss nås alldeles i anslutning till föreningen. Närmsta hållplats är Steken som servar området  med linje 173 (ca 20 min in till stan) samt linje 401 mot Angered centrum på bara några minuter. Angered centrum erbjuder stort utbud på matbutiker och övrig service. Härifrån kan vi även ta spårvagnar vidare till andra delar av stan.",
+                NumberOfRooms = 2,
+                MonthlyFee = 2142,
+                OperationalCostPerYear = 3696,
+                YearBuilt = 1965,
+                PropertyType = PropertyType.Condo,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5e/3c/5e3ca433bb5a28d841ce55523969ae98.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bc/41/bc411ddc7ae1b8e32b0683c140caa412.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d8/3f/d83fa443d40fc2c5b797e50498a3e582.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/34/92/34928181ac8e56ac3c2db5b3067655de.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b3/f5/b3f5c8c670460f156368c474d85fb26d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/46/f546628585e0eab3aa2c88550e68064d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/01/b401c14a30d2f7d0d23072f22a651564.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f0/11/f011550b645b13a073b7dc2a2f2d9f18.jpg"}
+                },
+                Address = new Address
+                {
+                    Street = "Steken 3C",
+                    PostalCode = "424 38",
+                    City = "Angered",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 2565000,
+                LivingSpace = 59,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Stilren tvåa med inglasad balkong i soligt läge!\r\nVälkommen till denna fina tvårummare om ca 58,5 kvm – en bostad som kombinerar modern komfort med ett utmärkt läge. Här bor du på fjärde våningen med fint ljusinsläpp och många soltimmar. De ljusa golven och den genomtänkta planlösningen skapar en trivsam och luftig känsla, samtidigt som bostaden är lättmöblerad och anpassningsbar efter din personliga stil.\r\nKöket är praktiskt avskilt från vardagsrummet, vilket ger en tydlig rumsindelning och möjlighet till en lugn matlagningsmiljö. Intill köket finns en naturlig plats för matbordet, perfekt för trevliga middagsbjudningar. I vardagsrummet finns gott om plats för både soffgrupp och tillhörande möblemang. Härifrån når du även den rymliga inglasade balkongen i soligt läge – en perfekt plats för morgonkaffet, kvällens bok eller umgänge med vänner.\r\nSom boende i föreningen har du dessutom tillgång till en härlig gemensam takterrass – perfekt för att njuta av soliga dagar och vacker utsikt över närområdet. Du kan boka glashuset, inklusive pentry, för att bjuda vänner och familj på en extra trevlig kväll med god mat och härlig vy. \r\nLäget är svårslaget. Här bor du nära både matbutiker, caféer och annan service, samtidigt som du har utmärkta kommunikationer med kollektivtrafiken bara ett stenkast bort. Området är en knutpunkt i ständig utveckling, där stadspulsen möter ett avslappnat kvartersliv.\r\nVälkommen till Borstbindaregatan 1!",
+                NumberOfRooms = 4,
+                MonthlyFee = 4450,
+                OperationalCostPerYear = 6600,
+                YearBuilt = 2015,
+                PropertyType = PropertyType.Condo,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/1d/19/1d19ca836eaab75cd7b182734b48b526.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/98/74/9874c6b580131ce8e0d27a6346ef9a8a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/04/25/04254d2f2c65a7a0171c4f89a3fc5c35.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0a/4d/0a4d18d1610a5b64beb44f477188153f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c3/3d/c33d5712978e523b4c3e67724b8ebb63.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/19/fc/19fc7ca35f80ca9e0852eb350a29316c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/02/3f/023f6824a93d0bb65647839c2d227830.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4d/35/4d3568bda649f18daddc2ff352a7172e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/57/49/5749bec1156629d98d149c99cfa34630.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/a3/e0a370a43734b52a1e0adc3f8633adbb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/78/2b781ad5f65df5174514190dfa9f82bb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cb/38/cb389e352664fc48b60a6c3c31651c7f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bf/da/bfda01389817cb984a9eb7bb176056cb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d9/59/d959aab0e64faf0d77c7914d988917f7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f8/98/f8983b1e5dad82651c401f6dcd576452.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d0/64/d0649056a29a0b5a58f4b5b495fe8919.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2c/a4/2ca4bef843b73eb4d910a5afe99ea578.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/33/e03340ccd4d0ce09fd086ba6e4158a6b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Borstbindaregatan 1",
+                    PostalCode = "417 22",
+                    City = "Göteborg",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
             // Fredriks Property
             new Property
 			{
