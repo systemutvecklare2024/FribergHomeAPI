@@ -1,7 +1,6 @@
 ﻿using FribergHomeAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace FribergHomeAPI.Data.Repositories
 {
     public class RealEstateAgencyRepository : GenericRepository<RealEstateAgency, ApplicationDbContext>, IRealEstateAgencyRepository
@@ -17,6 +16,7 @@ namespace FribergHomeAPI.Data.Repositories
         {
             return await dbContext.Agencies
                 .Include(a => a.Agents)
+                .Include(a => a.Applications)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
     }

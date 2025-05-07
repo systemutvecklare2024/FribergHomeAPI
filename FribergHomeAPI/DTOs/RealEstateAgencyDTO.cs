@@ -1,4 +1,6 @@
-﻿namespace FribergHomeAPI.DTOs
+﻿using FribergHomeAPI.Models;
+
+namespace FribergHomeAPI.DTOs
 {
     public class RealEstateAgencyDTO
     {

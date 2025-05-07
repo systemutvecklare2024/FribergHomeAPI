@@ -4,6 +4,7 @@ using FribergHomeAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FribergHomeAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250430075420_Add Application")]
+    partial class AddApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,7 +298,7 @@ namespace FribergHomeAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AgencyId")
+                    b.Property<int>("AgencyId")
                         .HasColumnType("int");
 
                     b.Property<string>("ApiUserId")
@@ -514,7 +517,7 @@ namespace FribergHomeAPI.Migrations
                     b.HasOne("FribergHomeAPI.Models.Property", "Property")
                         .WithMany("Images")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Property");
@@ -525,7 +528,8 @@ namespace FribergHomeAPI.Migrations
                     b.HasOne("FribergHomeAPI.Models.RealEstateAgency", "Agency")
                         .WithMany("Agents")
                         .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("FribergHomeAPI.Models.ApiUser", "ApiUser")
                         .WithMany()
