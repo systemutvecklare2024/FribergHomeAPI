@@ -57,29 +57,9 @@ namespace FribergHomeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dto = mapper.Map<RealEstateAgentDTO>(result);
+            var dto = mapper.Map<RealEstateAgentDTO>(result.Data);
 
             return Ok(dto);
-        }
-        //Tobias
-        [HttpPut("My")]
-
-        public async Task<IActionResult> UpdateMyAgentProfile(UpdateAgentDTO dto)
-        {
-            var result = await accountservice.GetMyAgentAsync(User);
-            if (!result.Success)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-                return BadRequest(ModelState);
-            }
-
-            var agent = mapper.Map<UpdateAgentDTO>(result);
-            await agentRepository.UpdateAgentAsync(agent.Id, dto);
-            
-            return Ok(agent);
         }
 
         //Dubbel GET/{id}

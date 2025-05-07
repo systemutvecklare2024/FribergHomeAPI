@@ -36,18 +36,16 @@ namespace FribergHomeAPI.Data.Repositories
         public async Task<RealEstateAgent?> GetApiUserIdAsync(string id)
         {
             return await dbContext.Agents
+                .Include(a => a.Agency)
                 .FirstOrDefaultAsync(a => a.ApiUserId == id);
         }
-        public async Task UpdateAgentAsync(int id, UpdateAgentDTO dto) 
+        public async Task<RealEstateAgent> GetByIdWithApiUser(int id)
         {
-            var existingAgent = await dbContext.Agents.FirstOrDefaultAsync(a => a.Id == id);
-            
-            mapper.Map(dto, existingAgent);
-            
-            dbContext.Agents.Update(existingAgent);
-            await dbContext.SaveChangesAsync();
-
-            
+            return await dbContext.Agents.Include(a => a.ApiUser).FirstOrDefaultAsync(a => a.Id == id);
+        }
+        public async Task<RealEstateAgent> GetbyEmailAsync(string email)
+        {
+            return await dbContext.Agents.FirstAsync(a => a.Email == email);
         }
     }
 }
