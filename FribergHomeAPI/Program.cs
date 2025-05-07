@@ -37,6 +37,7 @@ builder.Services.AddScoped<IRealEstateAgentRepository, RealEstateAgentRepository
 builder.Services.AddScoped<IMuncipalityRepository, MuncipalityRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IPropertyService, PropertyService>();
+builder.Services.AddScoped<IAgencyService, AgencyService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

@@ -7,5 +7,6 @@ namespace FribergHomeAPI.Data.Repositories
         Task<IEnumerable<RealEstateAgent>> GetAllAgentsAsync();
         Task<RealEstateAgent?> GetByIdWithAgencyAsync(int id);
         Task<RealEstateAgent?> GetApiUserIdAsync(string id);
+        Task<RealEstateAgent> GetByIdWithApiUser(int id);
     }
 }
