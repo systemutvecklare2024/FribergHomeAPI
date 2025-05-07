@@ -21,7 +21,7 @@ namespace FribergHomeAPI.Controllers
             this.agentRepository = realEstateAgentRepository;
             this.accountservice = accountservice;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -35,13 +35,13 @@ namespace FribergHomeAPI.Controllers
         {
             var agent = await agentRepository.GetByIdWithAgencyAsync(id);
             var dto = mapper.Map<RealEstateAgentDTO>(agent);
-            if(dto == null)
+            if (dto == null)
             {
                 return NotFound();
             }
             return Ok(dto);
         }
-        
+
         //Tobias
         //To Do: Get id from logged in agent.
         [HttpGet("My")]
@@ -58,8 +58,28 @@ namespace FribergHomeAPI.Controllers
             }
 
             var dto = mapper.Map<RealEstateAgentDTO>(result);
-            
+
             return Ok(dto);
+        }
+        //Tobias
+        [HttpPut("My")]
+
+        public async Task<IActionResult> UpdateMyAgentProfile(UpdateAgentDTO dto)
+        {
+            var result = await accountservice.GetMyAgentAsync(User);
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+
+            var agent = mapper.Map<UpdateAgentDTO>(result);
+            await agentRepository.UpdateAgentAsync(agent.Id, dto);
+            
+            return Ok(agent);
         }
 
     }
