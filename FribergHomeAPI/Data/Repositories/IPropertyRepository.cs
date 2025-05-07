@@ -16,5 +16,6 @@ namespace FribergHomeAPI.Data.Repositories
 
         //Fredrik
         Task<bool> UpdateAsync(int id, PropertyDTO dto);
+        Task UpdateAsync(Property property, List<PropertyImage> imagesToDelete);
     }
 }

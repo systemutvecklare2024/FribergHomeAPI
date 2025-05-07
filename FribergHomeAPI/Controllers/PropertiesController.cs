@@ -16,17 +16,20 @@ namespace FribergHome_API.Controllers
 		private readonly IPropertyRepository propertyRepo;
 		private readonly IMapper mapper;
         private readonly IAccountService accountService;
+		private readonly IPropertyService propertyService;
 
-        public PropertiesController(IPropertyRepository propertyRepo, 
+		public PropertiesController(IPropertyRepository propertyRepo, 
 			IMapper mapper, 
 			UserManager<ApiUser> userManager,
             IRealEstateAgentRepository realEstateAgentRepository,
-			IAccountService accountService)
+			IAccountService accountService,
+			IPropertyService propertyService)
 		{
 			this.propertyRepo = propertyRepo;
 			this.mapper = mapper;
             this.accountService = accountService;
-        }
+			this.propertyService = propertyService;
+		}
 
 		// GET: api/<PropertiesController>
 		[HttpGet]
@@ -128,7 +131,7 @@ namespace FribergHome_API.Controllers
 			if (!ModelState.IsValid)
 			{
 				// Log all model errors
-				foreach (var error in ModelState)
+				foreach (var error in ModelState) //TODO: Replace with ModelState.AddModelError etc.
 				{
 					Console.WriteLine($"Key: {error.Key}");
 
@@ -136,20 +139,22 @@ namespace FribergHome_API.Controllers
                     {
                         Console.WriteLine($"  Error: {subError.ErrorMessage}");
                     }
-                }
+				}
 				// Fredrik
 				return BadRequest(ModelState);
-            }
-			var existingProperty = await propertyRepo.GetWithAddressAsync(id);
-			if (existingProperty == null) return NotFound();
+			}
+			try
+			{
+				await propertyService.UpdatePropertyAsync(id, dto);
+				return Ok();
+			}
+			catch(Exception ex)
+			{
+				return StatusCode(500, "An error occurred while processing your request.");
+			}
 
-			dto.Id = id;
-			mapper.Map(dto, existingProperty);
 
-            await propertyRepo.UpdateAsync(existingProperty);
-            
-            return Ok();
-        }
+		}
 
 		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
