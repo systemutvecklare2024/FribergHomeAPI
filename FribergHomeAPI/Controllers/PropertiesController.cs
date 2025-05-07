@@ -92,12 +92,18 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Post([FromBody] PropertyDTO property)
 		{
 			try
 			{
 				var pro = mapper.Map<Property>(property);
-				pro.RealEstateAgentId = 1; // TODO: FIX THIS SHIT (Emelie tm)
+				var agentId = await accountService.GetMyAgentAsync(User);
+				if (agentId == null) //If no agent, no adding properties right now.
+				{
+					return BadRequest(ModelState);
+				}
+				pro.RealEstateAgentId = agentId.Data!.Id; //FIXED THIS SHIT (GLATE tm)
 				var newProp = await propertyRepo.AddAsync(pro);
 				if (newProp != null)
 				{
@@ -115,6 +121,7 @@ namespace FribergHome_API.Controllers
 
 		// PUT api/<PropertiesController>/5
 		[HttpPut("{id}")]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
 			// TODO: We need to validate that the user is allowed to do this...
@@ -184,7 +191,7 @@ namespace FribergHome_API.Controllers
 
 		// Author: Christoffer
 		[HttpGet("my")]
-		[Authorize(Roles = "Agent")]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> My()
 		{
 			var result = await accountService.GetMyAgentAsync(User);
