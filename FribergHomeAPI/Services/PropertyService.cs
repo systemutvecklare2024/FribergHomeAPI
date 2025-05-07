@@ -18,6 +18,7 @@ namespace FribergHomeAPI.Services
 		public async Task UpdatePropertyAsync(int id, PropertyDTO dto)
 		{
 			var existingProperty = await _propertyRepository.GetWithAddressAndImages(id);
+
 			if (existingProperty == null)
 			{
 				throw new KeyNotFoundException($"Property with ID {id} not found.");
