@@ -1,9 +1,10 @@
 ﻿using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Results;
 
 namespace FribergHomeAPI.Services
 {
 	public interface IPropertyService
 	{
-		Task UpdatePropertyAsync(int id, PropertyDTO dto);
+		Task<ServiceResult<PropertyDTO>> UpdatePropertyAsync(int id, PropertyDTO dto);
 	}
 }

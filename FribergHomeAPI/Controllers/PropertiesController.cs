@@ -15,19 +15,19 @@ namespace FribergHome_API.Controllers
 	{
 		private readonly IPropertyRepository propertyRepo;
 		private readonly IMapper mapper;
-        private readonly IAccountService accountService;
+		private readonly IAccountService accountService;
 		private readonly IPropertyService propertyService;
 
-		public PropertiesController(IPropertyRepository propertyRepo, 
-			IMapper mapper, 
+		public PropertiesController(IPropertyRepository propertyRepo,
+			IMapper mapper,
 			UserManager<ApiUser> userManager,
-            IRealEstateAgentRepository realEstateAgentRepository,
+			IRealEstateAgentRepository realEstateAgentRepository,
 			IAccountService accountService,
 			IPropertyService propertyService)
 		{
 			this.propertyRepo = propertyRepo;
 			this.mapper = mapper;
-            this.accountService = accountService;
+			this.accountService = accountService;
 			this.propertyService = propertyService;
 		}
 
@@ -71,7 +71,7 @@ namespace FribergHome_API.Controllers
 			}
 
 			var DTO = mapper.Map<List<PropertyDTO>>(properties)
-							.OrderByDescending(i=>i.Id)
+							.OrderByDescending(i => i.Id)
 							.Take(take);
 
 			return Ok(DTO);
@@ -122,45 +122,30 @@ namespace FribergHome_API.Controllers
 			}
 		}
 
+		//Author: Glate, Fredrik
 		// PUT api/<PropertiesController>/5
 		[HttpPut("{id}")]
 		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
+			var result = await propertyService.UpdatePropertyAsync(id, dto);
 			// TODO: We need to validate that the user is allowed to do this...
-			if (!ModelState.IsValid)
+			if (!result.Success)
 			{
-				// Log all model errors
-				foreach (var error in ModelState) //TODO: Replace with ModelState.AddModelError etc.
+				foreach (var error in result.Errors)
 				{
-					Console.WriteLine($"Key: {error.Key}");
-
-                    foreach (var subError in error.Value.Errors)
-                    {
-                        Console.WriteLine($"  Error: {subError.ErrorMessage}");
-                    }
+					ModelState.AddModelError(error.Code, error.Description);
 				}
-				// Fredrik
 				return BadRequest(ModelState);
 			}
-			try
-			{
-				await propertyService.UpdatePropertyAsync(id, dto);
-				return Ok();
-			}
-			catch(Exception ex)
-			{
-				return StatusCode(500, "An error occurred while processing your request.");
-			}
-
-
+			return Ok(result.Success); //What to be returned to client? Just true for now.
 		}
 
 		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
-        {
+		{
 			// TODO: We need to validate that the user is allowed to do this...
 			try
 			{
@@ -168,31 +153,31 @@ namespace FribergHome_API.Controllers
 				if (prop != null)
 				{
 					await propertyRepo.RemoveAsync(prop);
-                    return Ok();
-                }
-				
+					return Ok();
+				}
+
 				return NotFound(new { error = "Kunde ej hitta objektet" });
 			}
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
 			}
-        }
+		}
 
-        // Author: Christoffer
-        [HttpGet("{id}/details")]
+		// Author: Christoffer
+		[HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
-            var property = await propertyRepo.GetWithAddressAndImages(id);
+			var property = await propertyRepo.GetWithAddressAndImages(id);
 
-            var DTO = mapper.Map<PropertyDTO>(property);
+			var DTO = mapper.Map<PropertyDTO>(property);
 
-            if (DTO == null)
-            {
-                return NotFound();
-            }
-            return Ok(DTO);
-        }
+			if (DTO == null)
+			{
+				return NotFound();
+			}
+			return Ok(DTO);
+		}
 
 		// Author: Christoffer
 		[HttpGet("my")]

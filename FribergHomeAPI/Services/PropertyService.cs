@@ -2,6 +2,7 @@
 using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Results;
 
 namespace FribergHomeAPI.Services
 {
@@ -15,13 +16,13 @@ namespace FribergHomeAPI.Services
 			_propertyRepository = propertyRepository;
 			_mapper = mapper;
 		}
-		public async Task UpdatePropertyAsync(int id, PropertyDTO dto)
+		public async Task<ServiceResult<PropertyDTO>> UpdatePropertyAsync(int id, PropertyDTO dto)
 		{
 			var existingProperty = await _propertyRepository.GetWithAddressAndImages(id);
 
 			if (existingProperty == null)
 			{
-				throw new KeyNotFoundException($"Property with ID {id} not found.");
+				return ServiceResult<PropertyDTO>.Failure("Felaktigt Id på bostaden. Xtreme error.");
 			}
 			var imagesToDelete = existingProperty.Images
 				.Where(img => !dto.ImageUrls.Any(updatedImg => updatedImg.Id == img.Id))
@@ -29,6 +30,8 @@ namespace FribergHomeAPI.Services
 
 			_mapper.Map(dto, existingProperty);
 			await _propertyRepository.UpdateAsync(existingProperty, imagesToDelete);
+			var mapped = _mapper.Map(existingProperty, dto);
+			return ServiceResult<PropertyDTO>.SuccessResult(mapped);
 		}
 	}
 }
