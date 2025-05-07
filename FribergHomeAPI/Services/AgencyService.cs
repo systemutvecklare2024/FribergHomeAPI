@@ -101,7 +101,7 @@ namespace FribergHomeAPI.Services
                 return ServiceResult<bool>.Failure("Ansökningen hittades inte");
             }
             application.StatusType = applicationDTO.StatusType;
-            await agencyRepository.UpdateAsync(agency); //Does this work?
+            await agencyRepository.UpdateAsync(agency);
 
             return ServiceResult<bool>.SuccessResult(true);
         }
