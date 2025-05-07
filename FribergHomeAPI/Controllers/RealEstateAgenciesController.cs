@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,14 @@ namespace FribergHomeAPI.Controllers
         private readonly IMapper mapper;
         private readonly IRealEstateAgencyRepository agencyRepository;
         private readonly IAccountService accountservice;
+        private readonly IAgencyService agencyService;
 
-        public RealEstateAgenciesController(IMapper mapper, IRealEstateAgencyRepository agencyRepository, IAccountService accountservice)
+        public RealEstateAgenciesController(IMapper mapper, IRealEstateAgencyRepository agencyRepository, IAccountService accountservice, IAgencyService agencyService)
         {
             this.mapper = mapper;
             this.agencyRepository = agencyRepository;
             this.accountservice = accountservice;
+            this.agencyService = agencyService;
         }
 
         //Tobias
@@ -42,6 +45,29 @@ namespace FribergHomeAPI.Controllers
             }
             return Ok(dto);
         }
+
+        //Author:Emelie
+        [HttpPost("{agencyId}/applications/{applicatonId}")]
+        public async Task<IActionResult> HandleApplicationAsync(ApplicationDTO applicationDTO)
+        {
+            if (applicationDTO == null)
+            {
+                return BadRequest("Hittar inte ansökan"); //Change to better SatusCode???
+            }
+            var result = await agencyService.HandleApplication(applicationDTO);
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors!)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return BadRequest(ModelState);
+            }
+            return Ok();
+
+        }
+        
         [HttpGet("My")]
         public async Task<IActionResult> GetMyAgencyWithAgentsAsync()
         {

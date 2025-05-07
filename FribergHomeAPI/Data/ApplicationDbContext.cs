@@ -11,7 +11,9 @@ namespace FribergHomeAPI.Data
         public DbSet<RealEstateAgency> Agencies {get;set;}
         public DbSet<RealEstateAgent> Agents { get; set; }
         public DbSet<Muncipality> Muncipalities { get; set; }
-        public DbSet<PropertyImage> PropertyImages { get; set; } 
+        public DbSet<PropertyImage> PropertyImages { get; set; }
+
+        public DbSet<Application> Applications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
 
@@ -57,6 +59,12 @@ namespace FribergHomeAPI.Data
                 .WithOne(a => a.Agency)
                 .OnDelete(DeleteBehavior.Restrict);
                 
+
+            modelBuilder.Entity<RealEstateAgency>()
+                .HasMany(r => r.Applications)
+                .WithOne(a => a.Agency)
+                .HasForeignKey(a => a.AgencyId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -82,5 +82,14 @@ namespace FribergHomeAPI.Controllers
             return Ok(agent);
         }
 
+        //Dubbel GET/{id}
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var agent = await agentRepository.GetAsync(id);
+        //    //göra om till AgentDTO???
+        //    return Ok(agent);
+        //}
+
     }
 }
