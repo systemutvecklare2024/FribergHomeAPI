@@ -34,7 +34,9 @@ namespace FribergHomeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Created(uri: $"/api/RealEstateAgents/{result.Data!.Id}", result.Data);
+            var dto = mapper.Map<AgentCreatedDTO>(result.Data);
+
+            return Created(uri: $"/api/RealEstateAgents/{dto.Id}", dto);
         }
 
         [HttpPost]
@@ -46,14 +48,14 @@ namespace FribergHomeAPI.Controllers
 
             if (!result.Success)
             {
-                foreach(var error in result.Errors!)
+                foreach (var error in result.Errors!)
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
                 return BadRequest(ModelState);
             }
-            
+
             var response = new AuthResponse
             {
                 Email = result.Data!.Email!,
