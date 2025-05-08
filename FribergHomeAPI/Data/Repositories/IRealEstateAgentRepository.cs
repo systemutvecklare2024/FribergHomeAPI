@@ -1,4 +1,5 @@
-﻿using FribergHomeAPI.Models;
+﻿using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 
 namespace FribergHomeAPI.Data.Repositories
 {
@@ -8,5 +9,6 @@ namespace FribergHomeAPI.Data.Repositories
         Task<RealEstateAgent?> GetByIdWithAgencyAsync(int id);
         Task<RealEstateAgent?> GetApiUserIdAsync(string id);
         Task<RealEstateAgent> GetByIdWithApiUser(int id);
+        Task<RealEstateAgent> GetbyEmailAsync(string email);
     }
 }

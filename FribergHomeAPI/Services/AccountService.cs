@@ -1,10 +1,12 @@
-﻿using FribergHomeAPI.Constants;
+﻿using AutoMapper;
+using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using FribergHomeAPI.Results;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -20,18 +22,21 @@ namespace FribergHomeAPI.Services
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
         private readonly IAgencyService agencyService;
+        private readonly IMapper mapper;
 
         public AccountService(UserManager<ApiUser> userManager,
             IRealEstateAgentRepository agentRepository,
             ApplicationDbContext applicationDbContext,
             IConfiguration configuration,
-            IAgencyService agencyService)
+            IAgencyService agencyService,
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.agentRepository = agentRepository;
             this.dbContext = applicationDbContext;
             this.configuration = configuration;
             this.agencyService = agencyService;
+            this.mapper = mapper;
         }
 
         public async Task<ServiceResult<LoginResult>> LoginAsync(LoginDTO loginDto)
@@ -134,6 +139,18 @@ namespace FribergHomeAPI.Services
             }
 
             return ServiceResult<RealEstateAgent>.SuccessResult(agent);
+        }
+        public async Task UpdateAsync(UpdateAgentDTO dto, RealEstateAgent existingAgent)
+        {
+            
+
+            mapper.Map(dto, existingAgent);
+
+            dbContext.Agents.Update(existingAgent);
+            
+            await dbContext.SaveChangesAsync();
+            
+
         }
 
         private async Task<string> GenerateToken(ApiUser apiUser)
