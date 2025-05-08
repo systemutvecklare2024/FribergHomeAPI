@@ -46,14 +46,14 @@ namespace FribergHomeAPI.Controllers
 
             if (!result.Success)
             {
-                foreach(var error in result.Errors!)
+                foreach (var error in result.Errors!)
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
                 return BadRequest(ModelState);
             }
-            
+
             var response = new AuthResponse
             {
                 Email = result.Data!.Email!,
