@@ -245,6 +245,7 @@ namespace FribergHomeAPI.Data.Seeding
 				Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Stockholm"),
 				RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
 			},
+			//Author: Emelie
 			new Property
 			{
 				ListingPrice = 2595000,
@@ -570,6 +571,51 @@ namespace FribergHomeAPI.Data.Seeding
                     Street = "Borstbindaregatan 1",
                     PostalCode = "417 22",
                     City = "Göteborg",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 5900000,
+                LivingSpace = 122,
+                SecondaryArea = 0,
+                LotSize = 824,
+                Description = "Här bor du omgiven av hästhagar, öppna landskap och rogivande skogspartier – perfekt för dig som söker lugnet men ändå vill ha närhet till stadens bekvämligheter.\r\nHuset är en stilren och nybyggd Smålandsvilla av modellen Fredriksdal, uppförd 2018. Bostaden erbjuder en öppen planlösning med generösa fönsterpartier som släpper in ljuset och skapar en harmonisk kontakt med utemiljön. Från vardagsrummet nås en stor altan i soligt söderläge – en perfekt plats för sommarens måltider, avkoppling och umgänge.\r\nHär finns tre rogivande sovrum, två helkaklade badrum, ett smakfullt kök och ett luftigt vardagsrum som bjuder in till både vardagsliv och fest.\r\nTrädgården är plan och lättskött, med gott om plats för både lek, odling och trädgårdsmöbler. Här kan du skapa din egen grönskande oas, med vackra perenner, fruktträd eller kanske en köksträdgård.\r\nTill fastigheten hör även en rymlig dubbel carport med tillhörande förråd – praktiskt för både förvaring och skydd för bilen.\r\nDessutom är fastigheten befriad från fastighetsavgift ända till 2033 – en extra ekonomisk fördel!\r\nHär bor du med ett lantligt läge, endast 15 minuter med bil från centrala Hisingen och sju minuter till Kärra centrum. På bekvämt avstånd finns även Albatross golfbana för den golfintresserade.\r\nEtt hem att trivas i – välkommen att uppleva det på plats!",
+                NumberOfRooms = 5,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 36835,
+                YearBuilt = 2018,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c0/c7/c0c7c025b596a3b292427662e91616eb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/88/d9/88d9a17f125aa5bf293da897a55d9bd7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3e/12/3e12a683d1d3313fa86bce9ad69fb06c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/64/71/64717b5275594e644fa144586b664360.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/07/b407d2cc59bbc0ebb20bed2ff49b5d8e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e1/89/e189c0a717e548c42f0874c9647157b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/f9/40f9488ec67b27eeb1c614f6d1653f76.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/16/23/1623c5d8d56a8fbb46e3a880c208eb32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/18/4a/184a9320af57323110ff815eeb0017ea.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/33/b5/33b5e91b12283ff484061484f5a3e6ae.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9f/df/9fdfc8d41923464027345deb5e39db74.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/71/8d71fe890d92560f7c15ad5cae1d52c7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/05/1f/051f8fe0fc708c330e68f80338a948a0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/62/88/628855a485003ccf22e8762fb24f06b5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/8e/458e269145c6180c717cc1f79f0743c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9e/1d/9e1df75e36d13a9150f1c1c1d731e2ac.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/20/d1/20d127ebf69ff9ba341e2a6cb9d55ebf.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/da/4f/da4f0d551225b411d419b3cccdff6da4.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Böneredslyckan 7",
+                    PostalCode = "425 38",
+                    City = "Hisings Kärra",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
