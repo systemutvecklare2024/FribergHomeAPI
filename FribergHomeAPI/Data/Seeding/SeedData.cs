@@ -667,6 +667,57 @@ namespace FribergHomeAPI.Data.Seeding
 
             },
 
+            new Property
+            {
+                ListingPrice = 22000000,
+                LivingSpace = 262,
+                SecondaryArea = 146,
+                LotSize = 1062,
+                Description = "Uppe i den höga villans glasade penthousevåning lyfter sig havspanoramat och öppnar den helt fria horisonten. Vyerna är milsvida och långt mer än 180 grader över hav, öar och inlopp. Vågorna slår mot Långedrags klippor och kajer cirka 300 meter nerför klippsluttningen. I solnedgången är atmosfären häruppe närmast förtätad och den höga utsiktsplatsen fortsätter ut på takterrassen inramad av räcken i marin stil.\r\nPenthousevåningens spiraltrappa i ek och borstat stål leder ner till mellanplanets stora allrum där glaspartierna vetter i tre olika väderstreck. Havsutsikten kommer igen och utanför finns en lång terrassbalkong. Den blonda ekparketten sträcker ut och förbinder till två sovrum, en walk-in-closet samt ett nyskapat och oerhört sobert badrum. Härifrån leder den raka balktrappan i ek och stål rakt ner till entréplanets mycket stora sällskapsytor. De ligger i öppen planlösning med kök, matsalsdel och vardagsrumsdel. En formren öppen spis är den självklar fokuspunkten. Känslan av stora och ljusa rumsvolymer är påtaglig och ytterst mot havet finns ett glasat uterum. Även på detta plan är havsutsikten fri tack vare det höga läget. Glaspartier i flera väderstreck släpper in kaskader av ljus. Trestavsparketten i ek öppnar ytorna och fortsätter in i det stora köket med central köksö, avskalad design och utgång till terrasser och uteplatser i olika etage. På detta plan finns även sovrum, badrum och tvättstuga. Med egen entré från uppfarten finns en nyskapad gäst- eller uthyrningslägenhet i sluttningsplanet. Den är komplett med badrum, kök, allrum, sovavdelning och walk-in-closet. Den stora villan har även ett stort garage och ansenliga förrådsytor i källarplanet. Närheten till hamn, hav och skärgård är en del av livet i dessa trivsamma kvarter, med båt och vattensport eller kvällspromenader längs kustlinjen. Samtidigt bor du inbäddad av grönska. Det höga och havsnära läget kombinerar känslan av att bo avskilt och exklusivt med all tänkbar service och bra skolor i närområdet. Den stora stadens citykärna känns långt borta men, efter knappa femton minuter i bilen kan du parkera på Avenyn.\r\n",
+                NumberOfRooms = 7,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 43575,
+                YearBuilt = 2004,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/66/f4/66f442df8a9afee29d5b20d5298ecf1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/dd/97/dd9797c533c5884e370fdd17a10f72ef.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fa/1e/fa1e2eb9e296a1c841bf28c815e5ee34.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/69/09/6909055cfd5519d2667195db23346375.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/51/1f/511f886687f735a23e6db22c68012aa1.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c6/98/c698aaacd920c4ec103ce04b1a0f29c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b7/9f/b79feaa094c0098d5a9bec8e3311771c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c5/a6/c5a62bcf6d20f65eb6e2c13b0e093c88.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a4/45/a445cf135cfbc4e3721b777e24dca4bd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9c/79/9c798fe9ae601b837bc08b777ce6893b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/84/de/84de3e9f38b791609d3dc2076b02653b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ec/59/ec591aa6409a61049e7a3c98e4eeea1b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b2/c7/b2c7f52a8be5a67ea8241c5d7ca94545.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/db/18/db18c8c8adfa1b51fea227c52afed620.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4b/01/4b01d84db0512a13ff352f8ffa6c9114.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e4/0e/e40e1d492aecc30dc8797e145af0f8cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/87/b48783e1a531c36136f3b168404109b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e6/87/e687d648b2381fc3b4cbdb05646d5568.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a8/1b/a81b6b671c5c420cf8bcb76035c5bc70.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d4/47/d447e4cb962ed1bf9a15aa262f2c37a7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ee/ab/eeab29b55bc7edc4cc3eb4c61c2bca67.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/93/7f/937fc1d639a352ac1b06e8fbf56935f8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/24/d4/24d45b9eae965fe41d27c0e4583a236b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/41/05/41056f94cb5feb299dcd26fed2f24a5b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Väbelgatan 3",
+                    PostalCode = "426 76",
+                    City = "Västra Frölunda",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
             // Fredriks Property
             new Property
 			{
