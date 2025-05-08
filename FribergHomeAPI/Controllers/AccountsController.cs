@@ -64,32 +64,6 @@ namespace FribergHomeAPI.Controllers
 
             return Ok(response);
         }
-        [HttpPut("My")]
-        public async Task<IActionResult> UpdateAccount(UpdateAgentDTO dto)
-        {
-            var result = await accountService.GetMyAgentAsync(User);
-            if (!result.Success)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(error.Code, error.Description);
-                }
-                return BadRequest(ModelState);
-            }
-
-            var agent = mapper.Map<UpdateAgentDTO>(result.Data);
-            await accountService.UpdateAsync(dto, result.Data);
-
-            return Ok();
-            //try
-            //{
-            //    await accountService.UpdateAsync(dto);
-            //    return Ok();
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-            //}
-        }
+        
     }
 }

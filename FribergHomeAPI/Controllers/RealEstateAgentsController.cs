@@ -13,13 +13,13 @@ namespace FribergHomeAPI.Controllers
     {
         private readonly IMapper mapper;
         private readonly IRealEstateAgentRepository agentRepository;
-        private readonly IAccountService accountservice;
+        private readonly IAccountService accountService;
 
-        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository, IAccountService accountservice)
+        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository, IAccountService accountService)
         {
             this.mapper = mapper;
             this.agentRepository = realEstateAgentRepository;
-            this.accountservice = accountservice;
+            this.accountService = accountService;
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace FribergHomeAPI.Controllers
         [HttpGet("My")]
         public async Task<IActionResult> GetMyAgentWithAgency()
         {
-            var result = await accountservice.GetMyAgentAsync(User);
+            var result = await accountService.GetMyAgentAsync(User);
             if (!result.Success)
             {
                 foreach (var error in result.Errors)
@@ -61,15 +61,43 @@ namespace FribergHomeAPI.Controllers
 
             return Ok(dto);
         }
+        //Tobias
+		[HttpPut("My")]
+		public async Task<IActionResult> UpdateAgentProfile([FromBody] UpdateAgentDTO dto)
+		{
+			var result = await accountService.GetMyAgentAsync(User);
+			if (!result.Success)
+			{
+				foreach (var error in result.Errors)
+				{
+					ModelState.AddModelError(error.Code, error.Description);
+				}
+				return BadRequest(ModelState);
+			}
 
-        //Dubbel GET/{id}
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-        //    var agent = await agentRepository.GetAsync(id);
-        //    //göra om till AgentDTO???
-        //    return Ok(agent);
-        //}
+			var agent = mapper.Map<UpdateAgentDTO>(result.Data);
+			await accountService.UpdateAsync(dto, result.Data);
 
-    }
+			return Ok();
+			//try
+			//{
+			//    await accountService.UpdateAsync(dto);
+			//    return Ok();
+			//}
+			//catch (Exception ex)
+			//{
+			//    return BadRequest(ex.Message);
+			//}
+		}
+
+		//Dubbel GET/{id}
+		//[HttpGet("{id}")]
+		//public async Task<IActionResult> GetById(int id)
+		//{
+		//    var agent = await agentRepository.GetAsync(id);
+		//    //göra om till AgentDTO???
+		//    return Ok(agent);
+		//}
+
+	}
 }
