@@ -70,6 +70,16 @@ namespace FribergHomeAPI.Data.Repositories
 
 			return true;
 		}
+		//Glate
+		public async Task UpdateAsync(Property property, List<PropertyImage> imagesToDelete)
+		{
+			if (imagesToDelete.Count > 0)
+			{
+				DbContext.PropertyImages.RemoveRange(imagesToDelete);
+			}
+			DbContext.Properties.Update(property);
+			await DbContext.SaveChangesAsync();
+		}
 
 		//Author: Glate
 		public async Task<IEnumerable<Property>?> GetLatestAsync(int take)
