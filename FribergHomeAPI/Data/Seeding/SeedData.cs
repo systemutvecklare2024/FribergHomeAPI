@@ -622,6 +622,51 @@ namespace FribergHomeAPI.Data.Seeding
 
             },
 
+            new Property
+            {
+                ListingPrice = 5995000,
+                LivingSpace = 123,
+                SecondaryArea = 37,
+                LotSize = 713,
+                Description = "På en lugn återvändsgata, belägen på en fridfull hörntomt, finner ni denna genomgående moderna och högkvalitativa enplansvilla. Här kombineras stilren design med praktisk funktion, vilket skapar ett hem som både är inbjudande och lätt att trivas i.\r\nHuset har genomgått en omfattande renovering mellan 2018 och 2022 och erbjuder en välplanerad planlösning med fem sovrum, varav två rymligare master bedrooms. Utöver detta finns ett stilrent badrum, en praktisk gästtoalett, en rymlig tvättstuga samt ett garage med förrådsutrymme.\r\nKöket och vardagsrummet ligger i en öppen planlösning, vilket skapar en luftig och social atmosfär. De stora fönsterpartierna släpper in ett vackert ljusinsläpp som speglar sig genom hela bostaden och förstärker känslan av rymd. Det helkaklade badrummet är utrustat med både badkar och dusch, vilket ger en kombination av komfort och elegans.\r\nHär bor ni i ett barnvänligt område där naturen finns precis runt hörnet. Mysiga promenadstigar, en lekplats och grönskande omgivningar skapar en trivsam och lugn boendemiljö. Samtidigt finns smidiga kommunikationsmöjligheter med både bil och buss, vilket gör det enkelt att ta sig in till centrala Göteborg eller Backaplan.",
+                NumberOfRooms = 6,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 37008,
+                YearBuilt = 1966,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2f/ba/2fba962c1271e4e6ed1a3e8f9ee945d5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/fc/2bfc86448ccc40ac6eed95aaabc5a72e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3a/46/3a4635406c6ed0efaad6e5eebf0c73d0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fb/13/fb1313921aad61886ecc4b581df9da55.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bd/6f/bd6f1114d9320f90c9f5622d9b9ec750.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/96/3e/963e42057b87c182d54ba198a19d98cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/a6/45a65aa3f32b9c7ebbf0ae6c137f866f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/51/f551fa5f9a26efcf4e5f5483acf2c31b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/12/40125e28e3e943768cb4f24928187a32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/af/d6/afd66392150c3ecf0928006bdc34dc8f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/90/8f/908fdd918347c4513db102b2310ce8ec.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/24/8d24644731cae0ae3c66c8b5295ed586.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f6/c8/f6c8935598c2a9b7fa35a8e05bce9454.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5d/8e/5d8e3df80fc8d62b706cd06b7639b58b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2e/69/2e699ec194a9cd5e77c53967ad45bd1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/df/5adfa029de7b610e7328df8c04649c3e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/70/9c/709c17d97d0d4881ef1c05c89caf86f9.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a2/4e/a24e4a04a53418becf9cd8643c310931.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Forsbäcksvägen 12",
+                    PostalCode = "417 29",
+                    City = "Helgered",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
             // Fredriks Property
             new Property
 			{
