@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Models;
-using FribergHomeAPI.DTOs;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace FribergHomeAPI.Data.Repositories
@@ -9,12 +7,10 @@ namespace FribergHomeAPI.Data.Repositories
     public class RealEstateAgentRepository : GenericRepository<RealEstateAgent, ApplicationDbContext>, IRealEstateAgentRepository
     {
         private readonly ApplicationDbContext dbContext;
-        private readonly IMapper mapper;
 
-        public RealEstateAgentRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext)
+        public RealEstateAgentRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<RealEstateAgent>> GetAllAgentsAsync()

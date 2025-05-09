@@ -2,7 +2,6 @@
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FribergHomeAPI.Controllers
@@ -34,11 +33,11 @@ namespace FribergHomeAPI.Controllers
         public async Task<IActionResult> GetByIdWithAgency(int id)
         {
             var agent = await agentRepository.GetByIdWithAgencyAsync(id);
-            var dto = mapper.Map<RealEstateAgentDTO>(agent);
-            if (dto == null)
+            if (agent == null)
             {
                 return NotFound();
             }
+            var dto = mapper.Map<RealEstateAgentDTO>(agent);
             return Ok(dto);
         }
 
@@ -61,7 +60,7 @@ namespace FribergHomeAPI.Controllers
 
             return Ok(dto);
         }
-        //Tobias
+        //Tobias - TODO: Fix this
 		[HttpPut("My")]
 		public async Task<IActionResult> UpdateAgentProfile([FromBody] UpdateAgentDTO dto)
 		{
