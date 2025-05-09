@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,15 @@ namespace FribergHomeAPI.Controllers
     {
         private readonly IMapper mapper;
         private readonly IRealEstateAgentRepository agentRepository;
+        private readonly IAccountService accountService;
 
-        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository)
+        public RealEstateAgentsController(IMapper mapper, IRealEstateAgentRepository realEstateAgentRepository, IAccountService accountService)
         {
             this.mapper = mapper;
             this.agentRepository = realEstateAgentRepository;
+            this.accountService = accountService;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -32,23 +35,50 @@ namespace FribergHomeAPI.Controllers
         {
             var agent = await agentRepository.GetByIdWithAgencyAsync(id);
             var dto = mapper.Map<RealEstateAgentDTO>(agent);
-            if(dto == null)
+            if (dto == null)
             {
                 return NotFound();
             }
             return Ok(dto);
         }
-        
+
         //Tobias
         //To Do: Get id from logged in agent.
-        [HttpGet("My/{userId}")]
-        public async Task<IActionResult> GetMyIdWithAgency(string userId)
+        [HttpGet("My")]
+        public async Task<IActionResult> GetMyAgentWithAgency()
         {
-            var agentId = userId;
-            var agent = await agentRepository.GetApiUserIdAsync(agentId);
-            var dto = mapper.Map<RealEstateAgentDTO>(agent);
+            var result = await accountService.GetMyAgentAsync(User);
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+
+            var dto = mapper.Map<RealEstateAgentDTO>(result.Data);
+
             return Ok(dto);
         }
+        //Tobias
+		[HttpPut("My")]
+		public async Task<IActionResult> UpdateAgentProfile([FromBody] UpdateAgentDTO dto)
+		{
+			var result = await accountService.GetMyAgentAsync(User);
+			if (!result.Success)
+			{
+				foreach (var error in result.Errors)
+				{
+					ModelState.AddModelError(error.Code, error.Description);
+				}
+				return BadRequest(ModelState);
+			}
 
+			var agent = mapper.Map<UpdateAgentDTO>(result.Data);
+			await accountService.UpdateAsync(dto, result.Data);
+
+			return Ok();
+		}
     }
 }

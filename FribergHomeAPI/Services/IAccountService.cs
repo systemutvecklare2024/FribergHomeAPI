@@ -10,6 +10,7 @@ namespace FribergHomeAPI.Services
     {
         Task<ServiceResult<RealEstateAgent>> RegisterAsync(AccountDTO dto);
         Task<ServiceResult<LoginResult>> LoginAsync(LoginDTO loginDto);
-        Task<ServiceResult<int>> GetMyAgentIdAsync(ClaimsPrincipal user);
+        Task<ServiceResult<RealEstateAgent>> GetMyAgentAsync(ClaimsPrincipal user);
+        Task UpdateAsync(UpdateAgentDTO dto, RealEstateAgent existingAgent);
     }
 }

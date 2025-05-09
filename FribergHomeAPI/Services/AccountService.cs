@@ -1,10 +1,12 @@
-﻿using FribergHomeAPI.Constants;
+﻿using AutoMapper;
+using FribergHomeAPI.Constants;
 using FribergHomeAPI.Data;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using FribergHomeAPI.Results;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,16 +21,22 @@ namespace FribergHomeAPI.Services
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
+        private readonly IAgencyService agencyService;
+        private readonly IMapper mapper;
 
         public AccountService(UserManager<ApiUser> userManager,
             IRealEstateAgentRepository agentRepository,
             ApplicationDbContext applicationDbContext,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IAgencyService agencyService,
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.agentRepository = agentRepository;
             this.dbContext = applicationDbContext;
             this.configuration = configuration;
+            this.agencyService = agencyService;
+            this.mapper = mapper;
         }
 
         public async Task<ServiceResult<LoginResult>> LoginAsync(LoginDTO loginDto)
@@ -58,10 +66,9 @@ namespace FribergHomeAPI.Services
 
         public async Task<ServiceResult<RealEstateAgent>> RegisterAsync(AccountDTO dto)
         {
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                using var transaction = await dbContext.Database.BeginTransactionAsync();
-
                 var user = new ApiUser
                 {
                     FirstName = dto.FirstName,
@@ -79,7 +86,7 @@ namespace FribergHomeAPI.Services
                     return ServiceResult<RealEstateAgent>.Failure(result.Errors.Select(e => new ServiceResultError { Code = e.Code, Description = e.Description}));
                 }
 
-                await userManager.AddToRoleAsync(user, ApiRoles.Agent);
+                await userManager.AddToRoleAsync(user, ApiRoles.User);
 
                 var agent = new RealEstateAgent
                 {
@@ -91,7 +98,14 @@ namespace FribergHomeAPI.Services
                     ApiUserId = user.Id,
                 };
 
-                await agentRepository.AddAsync(agent);
+                var newAgent = await agentRepository.AddAsync(agent);
+
+                if(newAgent == null)
+                {
+                    return ServiceResult<RealEstateAgent>.Failure("Lyckades inte skapa en Mäklare.");
+                }
+
+                await agencyService.GenerateApplication(dto, newAgent);
 
                 await transaction.CommitAsync();
                 return ServiceResult<RealEstateAgent>.SuccessResult(agent);
@@ -99,31 +113,44 @@ namespace FribergHomeAPI.Services
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 return ServiceResult<RealEstateAgent>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
             }
         }
 
-        public async Task<ServiceResult<int>> GetMyAgentIdAsync(ClaimsPrincipal user)
+        public async Task<ServiceResult<RealEstateAgent>> GetMyAgentAsync(ClaimsPrincipal user)
         {
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrWhiteSpace(userId))
             {
-                return ServiceResult<int>.Failure("UserId saknas.");
+                return ServiceResult<RealEstateAgent>.Failure("UserId saknas.");
             }
 
             var apiUser = await userManager.FindByEmailAsync(userId);
             if (apiUser == null)
             {
-                return ServiceResult<int>.Failure("Användare hittades ej." );
+                return ServiceResult<RealEstateAgent>.Failure("Användare hittades ej." );
             }
 
             var agent = await agentRepository.GetApiUserIdAsync(apiUser.Id);
             if(agent == null)
             {
-                return ServiceResult<int>.Failure("Mäklare hittades ej.");
+                return ServiceResult<RealEstateAgent>.Failure("Mäklare hittades ej.");
             }
 
-            return ServiceResult<int>.SuccessResult(agent.Id);
+            return ServiceResult<RealEstateAgent>.SuccessResult(agent);
+        }
+        public async Task UpdateAsync(UpdateAgentDTO dto, RealEstateAgent existingAgent)
+        {
+            
+
+            mapper.Map(dto, existingAgent);
+
+            dbContext.Agents.Update(existingAgent);
+            
+            await dbContext.SaveChangesAsync();
+            
+
         }
 
         private async Task<string> GenerateToken(ApiUser apiUser)

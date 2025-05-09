@@ -15,18 +15,21 @@ namespace FribergHome_API.Controllers
 	{
 		private readonly IPropertyRepository propertyRepo;
 		private readonly IMapper mapper;
-        private readonly IAccountService accountService;
+		private readonly IAccountService accountService;
+		private readonly IPropertyService propertyService;
 
-        public PropertiesController(IPropertyRepository propertyRepo, 
-			IMapper mapper, 
+		public PropertiesController(IPropertyRepository propertyRepo,
+			IMapper mapper,
 			UserManager<ApiUser> userManager,
-            IRealEstateAgentRepository realEstateAgentRepository,
-			IAccountService accountService)
+			IRealEstateAgentRepository realEstateAgentRepository,
+			IAccountService accountService,
+			IPropertyService propertyService)
 		{
 			this.propertyRepo = propertyRepo;
 			this.mapper = mapper;
-            this.accountService = accountService;
-        }
+			this.accountService = accountService;
+			this.propertyService = propertyService;
+		}
 
 		// GET: api/<PropertiesController>
 		[HttpGet]
@@ -68,7 +71,7 @@ namespace FribergHome_API.Controllers
 			}
 
 			var DTO = mapper.Map<List<PropertyDTO>>(properties)
-							.OrderByDescending(i=>i.Id)
+							.OrderByDescending(i => i.Id)
 							.Take(take);
 
 			return Ok(DTO);
@@ -92,12 +95,18 @@ namespace FribergHome_API.Controllers
 
 		// POST api/<PropertiesController>
 		[HttpPost]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Post([FromBody] PropertyDTO property)
 		{
 			try
 			{
 				var pro = mapper.Map<Property>(property);
-				pro.RealEstateAgentId = 1; // TODO: FIX THIS SHIT (Emelie tm)
+				var agentId = await accountService.GetMyAgentAsync(User);
+				if (agentId == null) //If no agent, no adding properties right now.
+				{
+					return BadRequest(ModelState);
+				}
+				pro.RealEstateAgentId = agentId.Data!.Id; //FIXED THIS SHIT (GLATE tm)
 				var newProp = await propertyRepo.AddAsync(pro);
 				if (newProp != null)
 				{
@@ -113,36 +122,24 @@ namespace FribergHome_API.Controllers
 			}
 		}
 
+		//Author: Glate, Fredrik
 		// PUT api/<PropertiesController>/5
 		[HttpPut("{id}")]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
+			var result = await propertyService.UpdatePropertyAsync(id, dto);
 			// TODO: We need to validate that the user is allowed to do this...
-			if (!ModelState.IsValid)
+			if (!result.Success)
 			{
-				// Log all model errors
-				foreach (var error in ModelState)
+				foreach (var error in result.Errors)
 				{
-					Console.WriteLine($"Key: {error.Key}");
-
-                    foreach (var subError in error.Value.Errors)
-                    {
-                        Console.WriteLine($"  Error: {subError.ErrorMessage}");
-                    }
-                }
-				// Fredrik
+					ModelState.AddModelError(error.Code, error.Description);
+				}
 				return BadRequest(ModelState);
-            }
-			var existingProperty = await propertyRepo.GetWithAddressAsync(id);
-			if (existingProperty == null) return NotFound();
-
-			dto.Id = id;
-			mapper.Map(dto, existingProperty);
-
-            await propertyRepo.UpdateAsync(existingProperty);
-            
-            return Ok();
-        }
+			}
+			return Ok(result.Success); //What to be returned to client? Just true for now.
+		}
 
 		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
@@ -167,27 +164,27 @@ namespace FribergHome_API.Controllers
 			}
         }
 
-        // Author: Christoffer
-        [HttpGet("{id}/details")]
+		// Author: Christoffer
+		[HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
-            var property = await propertyRepo.GetWithAddressAndImages(id);
+			var property = await propertyRepo.GetWithAddressAndImages(id);
 
-            var DTO = mapper.Map<PropertyDTO>(property);
+			var DTO = mapper.Map<PropertyDTO>(property);
 
-            if (DTO == null)
-            {
-                return NotFound();
-            }
-            return Ok(DTO);
-        }
+			if (DTO == null)
+			{
+				return NotFound();
+			}
+			return Ok(DTO);
+		}
 
 		// Author: Christoffer
 		[HttpGet("my")]
-		[Authorize(Roles = "Agent")]
+		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> My()
 		{
-			var result = await accountService.GetMyAgentIdAsync(User);
+			var result = await accountService.GetMyAgentAsync(User);
 			if (!result.Success)
 			{
 				foreach (var error in result.Errors)
@@ -197,7 +194,7 @@ namespace FribergHome_API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var properties = await propertyRepo.GetAllPropertiesByAgentIdAsync(result.Data);
+			var properties = await propertyRepo.GetAllPropertiesByAgentIdAsync(result.Data.Id);
 
 			var dto = mapper.Map<List<PropertyDTO>>(properties);
 

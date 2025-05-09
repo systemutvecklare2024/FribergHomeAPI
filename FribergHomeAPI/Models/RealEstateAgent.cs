@@ -13,6 +13,7 @@
         // Navigation
         public virtual RealEstateAgency Agency { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
+        public virtual Application Application { get; set; }
 
         public int? AgencyId { get; set; }
 
