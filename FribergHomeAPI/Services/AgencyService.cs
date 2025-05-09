@@ -4,10 +4,7 @@ using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using FribergHomeAPI.Results;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.StatusTypes;
 
 namespace FribergHomeAPI.Services

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
-using FribergHomeAPI.Models;
 using FribergHomeAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FribergHomeAPI.Controllers
@@ -38,11 +36,13 @@ namespace FribergHomeAPI.Controllers
         public async Task<IActionResult> GetAgencyByIdWithAgentsAsync(int id)
         {
             var agency = await agencyRepository.GetByIdWithAgentsAsync(id);
-            var dto = mapper.Map<RealEstateAgencyPageDTO>(agency);
-            if (dto == null)
+            if (agency == null)
             {
                 return NotFound();
             }
+
+            var dto = mapper.Map<RealEstateAgencyPageDTO>(agency);
+            
             return Ok(dto);
         }
 
@@ -52,7 +52,7 @@ namespace FribergHomeAPI.Controllers
         {
             if (applicationDTO == null)
             {
-                return BadRequest("Hittar inte ansökan"); //Change to better SatusCode???
+                return BadRequest("Ansökan saknas, eller ogiltig.");
             }
             var result = await agencyService.HandleApplication(applicationDTO);
             if (!result.Success)
@@ -62,7 +62,7 @@ namespace FribergHomeAPI.Controllers
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                return BadRequest(ModelState);
+                return ValidationProblem(ModelState);
             }
             return Ok();
 
@@ -86,6 +86,5 @@ namespace FribergHomeAPI.Controllers
 
             return Ok(dto);
         }
-        // To Do: SKapa en HttpGet /my som liknar den i agents.
     }
 }
