@@ -33,8 +33,9 @@ namespace FribergHomeAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
+            var dto = mapper.Map<AgentCreatedDTO>(result.Data);
 
-            return Created();
+            return Created(uri: $"/api/RealEstateAgents/{dto.Id}", dto);
         }
 
         [HttpPost]

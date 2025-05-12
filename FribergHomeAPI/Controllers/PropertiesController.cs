@@ -145,7 +145,7 @@ namespace FribergHome_API.Controllers
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
-		{
+        {
 			// TODO: We need to validate that the user is allowed to do this...
 			try
 			{
@@ -153,16 +153,16 @@ namespace FribergHome_API.Controllers
 				if (prop != null)
 				{
 					await propertyRepo.RemoveAsync(prop);
-					return Ok();
-				}
-
+                    return Ok();
+                }
+				
 				return NotFound(new { error = "Kunde ej hitta objektet" });
 			}
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
 			}
-		}
+        }
 
 		// Author: Christoffer
 		[HttpGet("{id}/details")]

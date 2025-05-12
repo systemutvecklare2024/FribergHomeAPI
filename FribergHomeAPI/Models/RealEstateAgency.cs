@@ -9,7 +9,7 @@
         public string LogoUrl { get; set; }
 
         // Navigation
-        public virtual ICollection<RealEstateAgent> Agents { get; set; }
+        public virtual ICollection<RealEstateAgent>? Agents { get; set; }
         public ICollection<Application> Applications { get; set; } = new List<Application>();
     }
 }
