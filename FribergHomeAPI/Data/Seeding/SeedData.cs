@@ -316,6 +316,8 @@ namespace FribergHomeAPI.Data.Seeding
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Stockholm"),
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
             },
+
+            //Emelie
             new Property
             {
                 ListingPrice = 2595000,
@@ -567,7 +569,226 @@ namespace FribergHomeAPI.Data.Seeding
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
 
             },
-			
+
+            new Property
+            {
+                ListingPrice = 1160000,
+                LivingSpace = 47,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "För dig som vill bo billigt i en stor etta ges nu möjlighet att förvärva denna kvadratsmarta bostad med modernt kök. Planlösningen är optimal med stort kök, rymlig hall och luftigt allrum. Allrummet ligger i gavel med fint ljusinsläpp och med möjlighet att skärma av rummet för att skapa ett separat sovrum. Bra förvaringsmöjligheter med fastbyggda garderober och källarförråd. Tack vare läget intill E45:an är det smidigt att ta sig vidare in till stan, till Hisingen eller norr ut.  Här bor du i en skuldfri förening med låg månadsavgift, låg parkeringsavgift (100 kr/mån), renoverat gym, bastu och stort förråd i källaren. Lägenheten har ett tillgängligt läge på andra våning med härlig vy från berget ner mot älven. \r\nOmrådet i Agnesberg präglas av vacker natur och passar utmärkt för er som uppskattar lugna gröna omgivningar men samtidigt vill ha nära in till city! Kommunikationsförbindelser via buss nås alldeles i anslutning till föreningen. Närmsta hållplats är Steken som servar området  med linje 173 (ca 20 min in till stan) samt linje 401 mot Angered centrum på bara några minuter. Angered centrum erbjuder stort utbud på matbutiker och övrig service. Härifrån kan vi även ta spårvagnar vidare till andra delar av stan.",
+                NumberOfRooms = 2,
+                MonthlyFee = 2142,
+                OperationalCostPerYear = 3696,
+                YearBuilt = 1965,
+                PropertyType = PropertyType.Condo,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5e/3c/5e3ca433bb5a28d841ce55523969ae98.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bc/41/bc411ddc7ae1b8e32b0683c140caa412.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d8/3f/d83fa443d40fc2c5b797e50498a3e582.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/34/92/34928181ac8e56ac3c2db5b3067655de.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b3/f5/b3f5c8c670460f156368c474d85fb26d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/46/f546628585e0eab3aa2c88550e68064d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/01/b401c14a30d2f7d0d23072f22a651564.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f0/11/f011550b645b13a073b7dc2a2f2d9f18.jpg"}
+                },
+                Address = new Address
+                {
+                    Street = "Steken 3C",
+                    PostalCode = "424 38",
+                    City = "Angered",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 2565000,
+                LivingSpace = 59,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Stilren tvåa med inglasad balkong i soligt läge!\r\nVälkommen till denna fina tvårummare om ca 58,5 kvm – en bostad som kombinerar modern komfort med ett utmärkt läge. Här bor du på fjärde våningen med fint ljusinsläpp och många soltimmar. De ljusa golven och den genomtänkta planlösningen skapar en trivsam och luftig känsla, samtidigt som bostaden är lättmöblerad och anpassningsbar efter din personliga stil.\r\nKöket är praktiskt avskilt från vardagsrummet, vilket ger en tydlig rumsindelning och möjlighet till en lugn matlagningsmiljö. Intill köket finns en naturlig plats för matbordet, perfekt för trevliga middagsbjudningar. I vardagsrummet finns gott om plats för både soffgrupp och tillhörande möblemang. Härifrån når du även den rymliga inglasade balkongen i soligt läge – en perfekt plats för morgonkaffet, kvällens bok eller umgänge med vänner.\r\nSom boende i föreningen har du dessutom tillgång till en härlig gemensam takterrass – perfekt för att njuta av soliga dagar och vacker utsikt över närområdet. Du kan boka glashuset, inklusive pentry, för att bjuda vänner och familj på en extra trevlig kväll med god mat och härlig vy. \r\nLäget är svårslaget. Här bor du nära både matbutiker, caféer och annan service, samtidigt som du har utmärkta kommunikationer med kollektivtrafiken bara ett stenkast bort. Området är en knutpunkt i ständig utveckling, där stadspulsen möter ett avslappnat kvartersliv.\r\nVälkommen till Borstbindaregatan 1!",
+                NumberOfRooms = 4,
+                MonthlyFee = 4450,
+                OperationalCostPerYear = 6600,
+                YearBuilt = 2015,
+                PropertyType = PropertyType.Condo,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/1d/19/1d19ca836eaab75cd7b182734b48b526.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/98/74/9874c6b580131ce8e0d27a6346ef9a8a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/04/25/04254d2f2c65a7a0171c4f89a3fc5c35.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0a/4d/0a4d18d1610a5b64beb44f477188153f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c3/3d/c33d5712978e523b4c3e67724b8ebb63.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/19/fc/19fc7ca35f80ca9e0852eb350a29316c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/02/3f/023f6824a93d0bb65647839c2d227830.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4d/35/4d3568bda649f18daddc2ff352a7172e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/57/49/5749bec1156629d98d149c99cfa34630.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/a3/e0a370a43734b52a1e0adc3f8633adbb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/78/2b781ad5f65df5174514190dfa9f82bb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cb/38/cb389e352664fc48b60a6c3c31651c7f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bf/da/bfda01389817cb984a9eb7bb176056cb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d9/59/d959aab0e64faf0d77c7914d988917f7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f8/98/f8983b1e5dad82651c401f6dcd576452.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d0/64/d0649056a29a0b5a58f4b5b495fe8919.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2c/a4/2ca4bef843b73eb4d910a5afe99ea578.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/33/e03340ccd4d0ce09fd086ba6e4158a6b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Borstbindaregatan 1",
+                    PostalCode = "417 22",
+                    City = "Göteborg",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 5900000,
+                LivingSpace = 122,
+                SecondaryArea = 0,
+                LotSize = 824,
+                Description = "Här bor du omgiven av hästhagar, öppna landskap och rogivande skogspartier – perfekt för dig som söker lugnet men ändå vill ha närhet till stadens bekvämligheter.\r\nHuset är en stilren och nybyggd Smålandsvilla av modellen Fredriksdal, uppförd 2018. Bostaden erbjuder en öppen planlösning med generösa fönsterpartier som släpper in ljuset och skapar en harmonisk kontakt med utemiljön. Från vardagsrummet nås en stor altan i soligt söderläge – en perfekt plats för sommarens måltider, avkoppling och umgänge.\r\nHär finns tre rogivande sovrum, två helkaklade badrum, ett smakfullt kök och ett luftigt vardagsrum som bjuder in till både vardagsliv och fest.\r\nTrädgården är plan och lättskött, med gott om plats för både lek, odling och trädgårdsmöbler. Här kan du skapa din egen grönskande oas, med vackra perenner, fruktträd eller kanske en köksträdgård.\r\nTill fastigheten hör även en rymlig dubbel carport med tillhörande förråd – praktiskt för både förvaring och skydd för bilen.\r\nDessutom är fastigheten befriad från fastighetsavgift ända till 2033 – en extra ekonomisk fördel!\r\nHär bor du med ett lantligt läge, endast 15 minuter med bil från centrala Hisingen och sju minuter till Kärra centrum. På bekvämt avstånd finns även Albatross golfbana för den golfintresserade.\r\nEtt hem att trivas i – välkommen att uppleva det på plats!",
+                NumberOfRooms = 5,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 36835,
+                YearBuilt = 2018,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c0/c7/c0c7c025b596a3b292427662e91616eb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/88/d9/88d9a17f125aa5bf293da897a55d9bd7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3e/12/3e12a683d1d3313fa86bce9ad69fb06c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/64/71/64717b5275594e644fa144586b664360.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/07/b407d2cc59bbc0ebb20bed2ff49b5d8e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e1/89/e189c0a717e548c42f0874c9647157b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/f9/40f9488ec67b27eeb1c614f6d1653f76.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/16/23/1623c5d8d56a8fbb46e3a880c208eb32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/18/4a/184a9320af57323110ff815eeb0017ea.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/33/b5/33b5e91b12283ff484061484f5a3e6ae.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9f/df/9fdfc8d41923464027345deb5e39db74.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/71/8d71fe890d92560f7c15ad5cae1d52c7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/05/1f/051f8fe0fc708c330e68f80338a948a0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/62/88/628855a485003ccf22e8762fb24f06b5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/8e/458e269145c6180c717cc1f79f0743c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9e/1d/9e1df75e36d13a9150f1c1c1d731e2ac.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/20/d1/20d127ebf69ff9ba341e2a6cb9d55ebf.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/da/4f/da4f0d551225b411d419b3cccdff6da4.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Böneredslyckan 7",
+                    PostalCode = "425 38",
+                    City = "Hisings Kärra",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 5995000,
+                LivingSpace = 123,
+                SecondaryArea = 37,
+                LotSize = 713,
+                Description = "På en lugn återvändsgata, belägen på en fridfull hörntomt, finner ni denna genomgående moderna och högkvalitativa enplansvilla. Här kombineras stilren design med praktisk funktion, vilket skapar ett hem som både är inbjudande och lätt att trivas i.\r\nHuset har genomgått en omfattande renovering mellan 2018 och 2022 och erbjuder en välplanerad planlösning med fem sovrum, varav två rymligare master bedrooms. Utöver detta finns ett stilrent badrum, en praktisk gästtoalett, en rymlig tvättstuga samt ett garage med förrådsutrymme.\r\nKöket och vardagsrummet ligger i en öppen planlösning, vilket skapar en luftig och social atmosfär. De stora fönsterpartierna släpper in ett vackert ljusinsläpp som speglar sig genom hela bostaden och förstärker känslan av rymd. Det helkaklade badrummet är utrustat med både badkar och dusch, vilket ger en kombination av komfort och elegans.\r\nHär bor ni i ett barnvänligt område där naturen finns precis runt hörnet. Mysiga promenadstigar, en lekplats och grönskande omgivningar skapar en trivsam och lugn boendemiljö. Samtidigt finns smidiga kommunikationsmöjligheter med både bil och buss, vilket gör det enkelt att ta sig in till centrala Göteborg eller Backaplan.",
+                NumberOfRooms = 6,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 37008,
+                YearBuilt = 1966,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2f/ba/2fba962c1271e4e6ed1a3e8f9ee945d5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/fc/2bfc86448ccc40ac6eed95aaabc5a72e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3a/46/3a4635406c6ed0efaad6e5eebf0c73d0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fb/13/fb1313921aad61886ecc4b581df9da55.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bd/6f/bd6f1114d9320f90c9f5622d9b9ec750.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/96/3e/963e42057b87c182d54ba198a19d98cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/a6/45a65aa3f32b9c7ebbf0ae6c137f866f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/51/f551fa5f9a26efcf4e5f5483acf2c31b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/12/40125e28e3e943768cb4f24928187a32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/af/d6/afd66392150c3ecf0928006bdc34dc8f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/90/8f/908fdd918347c4513db102b2310ce8ec.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/24/8d24644731cae0ae3c66c8b5295ed586.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f6/c8/f6c8935598c2a9b7fa35a8e05bce9454.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5d/8e/5d8e3df80fc8d62b706cd06b7639b58b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2e/69/2e699ec194a9cd5e77c53967ad45bd1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/df/5adfa029de7b610e7328df8c04649c3e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/70/9c/709c17d97d0d4881ef1c05c89caf86f9.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a2/4e/a24e4a04a53418becf9cd8643c310931.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Forsbäcksvägen 12",
+                    PostalCode = "417 29",
+                    City = "Helgered",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 22000000,
+                LivingSpace = 262,
+                SecondaryArea = 146,
+                LotSize = 1062,
+                Description = "Uppe i den höga villans glasade penthousevåning lyfter sig havspanoramat och öppnar den helt fria horisonten. Vyerna är milsvida och långt mer än 180 grader över hav, öar och inlopp. Vågorna slår mot Långedrags klippor och kajer cirka 300 meter nerför klippsluttningen. I solnedgången är atmosfären häruppe närmast förtätad och den höga utsiktsplatsen fortsätter ut på takterrassen inramad av räcken i marin stil.\r\nPenthousevåningens spiraltrappa i ek och borstat stål leder ner till mellanplanets stora allrum där glaspartierna vetter i tre olika väderstreck. Havsutsikten kommer igen och utanför finns en lång terrassbalkong. Den blonda ekparketten sträcker ut och förbinder till två sovrum, en walk-in-closet samt ett nyskapat och oerhört sobert badrum. Härifrån leder den raka balktrappan i ek och stål rakt ner till entréplanets mycket stora sällskapsytor. De ligger i öppen planlösning med kök, matsalsdel och vardagsrumsdel. En formren öppen spis är den självklar fokuspunkten. Känslan av stora och ljusa rumsvolymer är påtaglig och ytterst mot havet finns ett glasat uterum. Även på detta plan är havsutsikten fri tack vare det höga läget. Glaspartier i flera väderstreck släpper in kaskader av ljus. Trestavsparketten i ek öppnar ytorna och fortsätter in i det stora köket med central köksö, avskalad design och utgång till terrasser och uteplatser i olika etage. På detta plan finns även sovrum, badrum och tvättstuga. Med egen entré från uppfarten finns en nyskapad gäst- eller uthyrningslägenhet i sluttningsplanet. Den är komplett med badrum, kök, allrum, sovavdelning och walk-in-closet. Den stora villan har även ett stort garage och ansenliga förrådsytor i källarplanet. Närheten till hamn, hav och skärgård är en del av livet i dessa trivsamma kvarter, med båt och vattensport eller kvällspromenader längs kustlinjen. Samtidigt bor du inbäddad av grönska. Det höga och havsnära läget kombinerar känslan av att bo avskilt och exklusivt med all tänkbar service och bra skolor i närområdet. Den stora stadens citykärna känns långt borta men, efter knappa femton minuter i bilen kan du parkera på Avenyn.\r\n",
+                NumberOfRooms = 7,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 43575,
+                YearBuilt = 2004,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/66/f4/66f442df8a9afee29d5b20d5298ecf1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/dd/97/dd9797c533c5884e370fdd17a10f72ef.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fa/1e/fa1e2eb9e296a1c841bf28c815e5ee34.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/69/09/6909055cfd5519d2667195db23346375.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/51/1f/511f886687f735a23e6db22c68012aa1.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c6/98/c698aaacd920c4ec103ce04b1a0f29c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b7/9f/b79feaa094c0098d5a9bec8e3311771c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c5/a6/c5a62bcf6d20f65eb6e2c13b0e093c88.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a4/45/a445cf135cfbc4e3721b777e24dca4bd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9c/79/9c798fe9ae601b837bc08b777ce6893b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/84/de/84de3e9f38b791609d3dc2076b02653b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ec/59/ec591aa6409a61049e7a3c98e4eeea1b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b2/c7/b2c7f52a8be5a67ea8241c5d7ca94545.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/db/18/db18c8c8adfa1b51fea227c52afed620.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4b/01/4b01d84db0512a13ff352f8ffa6c9114.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e4/0e/e40e1d492aecc30dc8797e145af0f8cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/87/b48783e1a531c36136f3b168404109b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e6/87/e687d648b2381fc3b4cbdb05646d5568.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a8/1b/a81b6b671c5c420cf8bcb76035c5bc70.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d4/47/d447e4cb962ed1bf9a15aa262f2c37a7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ee/ab/eeab29b55bc7edc4cc3eb4c61c2bca67.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/93/7f/937fc1d639a352ac1b06e8fbf56935f8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/24/d4/24d45b9eae965fe41d27c0e4583a236b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/41/05/41056f94cb5feb299dcd26fed2f24a5b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Väbelgatan 3",
+                    PostalCode = "426 76",
+                    City = "Västra Frölunda",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+
+            },
 
             // Fredriks Property
             new Property
