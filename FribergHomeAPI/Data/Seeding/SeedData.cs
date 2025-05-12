@@ -316,6 +316,8 @@ namespace FribergHomeAPI.Data.Seeding
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Stockholm"),
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
             },
+
+            //Emelie
             new Property
             {
                 ListingPrice = 2595000,
@@ -567,9 +569,6 @@ namespace FribergHomeAPI.Data.Seeding
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
 
             },
-			
-
-			},
 
             new Property
             {
