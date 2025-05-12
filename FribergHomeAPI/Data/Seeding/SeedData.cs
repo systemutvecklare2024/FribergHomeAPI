@@ -4,39 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using static FribergHomeAPI.Models.PropertyTypes;
 using Microsoft.AspNetCore.Identity;
 using FribergHomeAPI.Constants;
-using FribergHomeAPI.Migrations;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.VisualBasic;
-using static System.Net.Mime.MediaTypeNames;
-using System.Numerics;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using System;
-using static Azure.Core.HttpHeader;
-using System.Collections.Generic;
-using System.Data;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Identity.Client.Extensions.Msal;
-using System.Diagnostics.Metrics;
-using System.IO;
-using System.Net.Sockets;
-using System.Threading.Tasks;
-using Microsoft.Extensions.FileSystemGlobbing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Reflection;
-using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-using System.Threading;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Timers;
 
 namespace FribergHomeAPI.Data.Seeding
 {
-    public class SeedData
+	public class SeedData
     {
         // Author: Christoffer
         public static async Task SeedAsync(ApplicationDbContext ctx, RoleManager<IdentityRole> roleManager, UserManager<ApiUser> userManager)
@@ -772,7 +743,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 44,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna välplanerade och rymliga 1:a om 43,5 kvm på populära Mariehem! Här får du en bostad med smart planlösning, gott om förvaring och modern bekvämlighet.",
+                Description = "Välkommen till denna välplanerade och rymliga 1:a om 43,5 kvm på populära Mariehem! Här får du en bostad med smart planlösning, gott om förvaring och modern bekvämlighet. Det luftiga allrummet ger plats för både soffhörna och sovdel, medan det separata köket har bra arbetsytor och förvaring – perfekt för dig som gillar att laga mat. Badrummet är fräscht och utrustat med dusch och egen tvättmaskin, vilket ger en bekväm vardag utan att behöva nyttja gemensam tvättstuga. Lägenheten ligger i Brf Storspoven, en stabil förening som genomför stora uppgraderingar med fasadrenovering, ventilation och solceller – insatser som både förbättrar boendemiljön och energieffektiviteten. Här finns även möjlighet att hyra garage- eller parkeringsplats. Läget är utmärkt med närhet till grönområden, mataffärer och goda kommunikationer till centrum. Ett perfekt boende för den som söker en första bostad, studentlägenhet eller en bekväm övernattningslägenhet i ett lugnt och trevligt område.",
                 NumberOfRooms = 1,
                 MonthlyFee = 3958,
                 OperationalCostPerYear = 32069,
@@ -812,7 +783,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 36,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Porfyrvägen 3A – en trivsam och välplanerad etta med närhet till både natur och stad!",
+                Description = "Välkommen till Porfyrvägen 3A – en trivsam och välplanerad etta med närhet till både natur och stad! På omtyckta Gimonäs finner du denna ljusa och stilrena bostad om ett rum och kök, belägen i den välskötta föreningen Brf Cykeln. Här bor du i ett lugnt och trivsamt område med närhet till älven, grönområden, fina cykelvägar samt goda kommunikationer som snabbt tar dig in till centrala Umeå och universitetet. Lägenheten är smart planerad med en välkomnande hall, fräscht kök med plats för matgrupp, ett rymligt allrum med goda möbleringsmöjligheter samt ett helkaklat badrum. Tack vare fönster i bra läge får bostaden ett fint ljusinsläpp som förstärker känslan av rymd. Här finns gott om plats för både vardagsliv och studiero. Brf Cykeln är en stabil förening med god ekonomi och flera gemensamma bekvämligheter såsom tvättstuga, förråd och cykelförvaring. På Gimonäs bor du nära både natur och service – perfekt för dig som vill ha det bästa av två världar. En perfekt förstaboende, studentlägenhet eller övernattningslägenhet.",
                 NumberOfRooms = 1,
                 MonthlyFee = 2843,
                 OperationalCostPerYear = 37500,
@@ -853,7 +824,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 40,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen längst upp i huset och denna kvadratsmarta lägenhet på populära Tomtebo.",
+                Description = "Välkommen längst upp i huset och denna kvadratsmarta lägenhet på populära Tomtebo. Här får du ett hem med sociala ytor och öppen planlösning mellan kök och vardagsrum, ett stilrent kök som är utrustat med all den maskinella utrustning du kan tänkas behöva. Badrummet är helkaklat och full-utrustat med egna tvättmöjligheter och golvvärme. God förvaring med skjutgarderob samt extra garderober. Sovalkov som inrymmer dubbelsäng på 180 cm. Bo dessutom i en trevlig och välskött förening på Tomtebo. Området präglas av sina gröna omgivningar och bra kommunikationer. Bussen som stannar strax i närheten tar er till såväl till universitetsområdet som centrala stan inom kort.  Här bor ni dessutom ett stenkast från omtyckta Nydalasjön.",
                 NumberOfRooms = 1,
                 MonthlyFee = 4250,
                 OperationalCostPerYear = 31250,
@@ -894,7 +865,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 44,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Skolgatan 9B – ett drömboende som väntar på dig i Brf Skräddaren 4! Denna charmiga lägenhet i gårdshuset erbjuder en perfekt kombination av stil, komfort och harmoni.",
+                Description = "Välkommen till Skolgatan 9B – ett drömboende som väntar på dig i Brf Skräddaren 4! Denna charmiga lägenhet i gårdshuset erbjuder en perfekt kombination av stil, komfort och harmoni. Med 2 rum och kök breder sig det stilfulla hemmet ut över 44 kvadratmeter. Lägenheten erbjuder en mysig och välkomnande atmosfär med balans mellan gammalt och nytt. Huset är ursprungligen från 1920-talet, men hela lägenheten totalrenoverades 2016 med moderna ytskikt. Ljusa och luftiga ytor skapar en harmonisk känsla där du genast kan känna dig hemma. Brf Skräddaren 4 har ett perfekt läge nära Umeås centrumkärna. Här har du närhet till allt du behöver – allt från grönskande parker, till trendiga caféer och bekväma kommunikationer. Varför välja mellan stadslivets puls och lugnet i hemmet när du kan ha båda? Föreningen har en mysig gemensam innergård, omsluten av häckar. På innergården finns också ett stort körsbärsträd och pallkragar med möjlighet att odla i. Tvättstuga finns mellan garage och gårdshus. Bostaden har ett genomgående ljust ytskikt, vitpigmenterat ekgolv och vackra spröjsade fönster. Lägenheten har fantastiska detaljer och smarta lösningar som ger dig allt du behöver för att leva bekvämt och njuta av varje ögonblick. Här möts du av fina hus i ett vackert område, med stadens puls som granne och bekvämt gångavstånd till både centrum och natursköna promenadstråk längs älven. Direkt bussförbindelse samt cykel- och gångvägar till universitet. Så varför vänta? Ta chansen att bli en del av gemenskapen på Skolgatan 9B och upptäck allt som Brf Skräddaren 4 har att erbjuda. Denna lägenhet har ett lägre andelstal pga annan uppvärmning.",
                 NumberOfRooms = 2,
                 MonthlyFee = 3442,
                 OperationalCostPerYear = 9756,
@@ -935,7 +906,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 39,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Här har du möjlighet att förvärva en ljus och välplanerad etta på 39,5 kvadratmeter i den populära bostadsrättsföreningen Skidstaven 1.",
+                Description = "Här har du möjlighet att förvärva en ljus och välplanerad etta på 39,5 kvadratmeter i den populära bostadsrättsföreningen Skidstaven 1. Belägen på attraktiva Berghem, erbjuder denna bostad en fantastisk kombination av komfort, bekvämlighet och närhet till allt du behöver. Denna etta bjuder på ett rymligt och inbjudande vardagsrum med gott om plats för både sovdel och sällskapsytor. De stora fönstren släpper in rikligt med dagsljus vilket skapar en ljus och öppen atmosfär. Köket är smart utformat med bra arbetsytor och förvaringsmöjligheter, perfekt för den matlagningsintresserade. Badrummet är fräscht och funktionellt, utrustat med badkar och förvaringsskåp. Berghem är känt för sin trevliga och lugna atmosfär med närhet till natur och rekreationsområden. Här bor du med gångavstånd till Umeå universitet, Norrlands universitetssjukhus och stadens centrum, vilket gör detta till ett utmärkt val för både studenter och yrkesverksamma. Goda kommunikationsmöjligheter och närhet till service såsom mataffärer, gym och restauranger gör vardagen enkel och bekväm. Brf Skidstaven 1 är en omtyckt förening som erbjuder sina medlemmar fina gemensamhetsutrymmen och god ekonomi. Här finns bland annat tvättstuga, cykelrum och förråd, vilket bidrar till en bekväm boendemiljö.",
                 NumberOfRooms = 1,
                 MonthlyFee = 2292,
                 OperationalCostPerYear = 0,
@@ -976,7 +947,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 70,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Kvarnvägen 8B – en ljus och välplanerad tvårummare med balkong!",
+                Description = "Välkommen till Kvarnvägen 8B – en ljus och välplanerad tvårummare med balkong! I Brf Skäppan 34 finns nu en genomtänkt lägenhet om 70 kvm tillgänglig. Bostaden ligger högst upp i huset på våning 3, och hiss finns. Lägenheten har en öppen och funktionell planlösning där vardagsrummet leder ut till en balkong med utsikt mot centrala Umeå. Här finns möjlighet att njuta av morgonkaffet eller en stunds avkoppling på kvällen. Köket är välbehållet och erbjuder gott om både arbetsyta och förvaring, vilket underlättar både vardagsmatlagning och middagsbjudningar. Sovrummet är rymligt och har plats för en dubbelsäng. Intill finns en praktisk klädkammare som ger bra förvaringsmöjligheter. Läget är bekvämt med närhet till centrum, universitetet, restauranger och promenadstråk längs Umeälven. En bostad med hiss och en genomtänkt planlösning för ett smidigt boende.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4709,
                 OperationalCostPerYear = 0,
@@ -1017,7 +988,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 78,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Tråggränd 42B – ett hemtrevligt och insynsskyddat boende med genomtänkt planlösning, belägen i en populär förening på lugna och barnvänliga Ersboda.",
+                Description = "Ljus och välplanerad trea med balkong i lugnt område! Välkommen till Tråggränd 42B – ett hemtrevligt och insynsskyddat boende med genomtänkt planlösning, belägen i en populär förening på lugna och barnvänliga Ersboda. Här bor du i ett trivsamt bostadsområde med närhet till både natur, service och goda kommunikationer. Bostaden är belägen en trappa upp och bjuder på 79,5 välplanerade kvadratmeter fördelade över tre rum och kök. Här finns två rogivande sovrum med god förvaring, ett ljust och luftigt vardagsrum med stora fönster samt ett kök med matplats intill fönsterparti. Planlösningen ger bra flöde mellan rummen och gott om plats för både vardagsliv och gäster. Från köket nås den generösa balkongen i bra solläge – en perfekt plats att njuta av kaffe eller middag större delen av året. Badrummet är praktiskt placerat och utrustat med badkar. I hallen och sovrummen finns flera garderober som ger bra förvaringsmöjligheter. Brf Tråget är en välskött förening med låg månadsavgift, fina innergårdar och god gemenskap. Här bor du med cykelavstånd till centrala Umeå, nära till Ersboda handelsområde, skolor, förskolor och fina grönområden.",
                 NumberOfRooms = 3,
                 MonthlyFee = 4336,
                 OperationalCostPerYear = 3492,
@@ -1058,7 +1029,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 54,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Kålhagsvägen 29A erbjuder ett modernt och bekvämt boende i ett naturnära och populärt område.",
+                Description = "Kålhagsvägen 29A erbjuder ett modernt och bekvämt boende i ett naturnära och populärt område. Lägenheten är belägen i Brf Lav Alfa, en välskött förening med byggår 2020 där både fastighet och utemiljö håller hög standard. Här bor du i ett lugnt kvarter med närhet till det mesta – perfekt för både studenter, yrkesverksamma och den som bara vill bo bekvämt. Bostaden är en välplanerad tvåa om 54 kvm med genomtänkta materialval, ljusa ytskikt och smarta förvaringslösningar. Planlösningen är spegelvänd jämfört med liknande lägenheter i huset, vilket ger en egen karaktär till hemmet. Den rymliga balkongen i västerläge bjuder på soliga eftermiddagar och utsikt mot grönska. Läget är optimalt med gångavstånd till Umeå universitet, Norrlands universitetssjukhus, IKSU sportcenter och flera matbutiker. Endast ett par hundra meter bort ligger Nydalasjön – ett omtyckt rekreationsområde med badplats, motionsspår och vacker natur året om. Goda bussförbindelser tar dig snabbt in till centrum. Brf Lav Alfa är en stabil bostadsrättsförening med låga driftskostnader och moderna bekvämligheter. Här bor du med det bästa av två världar – nära naturen, men med stadens puls inom räckhåll.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4790,
                 OperationalCostPerYear = 0,
@@ -1099,7 +1070,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 79,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Hermelinvägen 113 – en smakfullt renoverad trea om 79 kvm med genomtänkta materialval, öppen planlösning och ett av föreningens bästa lägen!",
+                Description = "Stilren och välplanerad trea i populära Brf Hartassen där allt inkl huhållsel ingår i månadsavgiften. Välkommen till Hermelinvägen 113 – en smakfullt renoverad trea om 79 kvm med genomtänkta materialval, öppen planlösning och ett av föreningens bästa lägen! Här bor du utan hus framför, med fri utsikt mot den grönskande innergården, samtidigt som du har närhet till parkeringarna. Denna bostad erbjuder en harmonisk kombination av stil och funktionalitet med ett modernt kök, smakfullt badrum och ljusa, rymliga rum. Lägenheten ligger i Brf Hartassen, en välskött och stabil förening med gedigen underhållsplan, låga avgifter och utmärkta faciliteter. Lägenheten erbjuder: Rymligt förråd i lägenheten. Modernt kök – stilren inredning med ljusa skåpluckor, svart beslag och betongmönstrad bänkskiva. Här finns gott om förvaring och arbetsytor, samt en praktisk bardel som inbjuder till sociala måltider. Rymligt vardagsrum – ett ljust och inbjudande rum med plats för både matgrupp och soffhörna. Två sovrum – det större rymmer en dubbelsäng och förvaring, medan det andra passar utmärkt som barnrum, kontor eller gästrum. Stilrent badrum – lyxig känsla med glasväggar, stilren kommod, dusch och kombinerad tvätt och torktumlare. Lugnt läge – bostaden ligger insynsskyddad, omgiven av föreningens fina innergårdar.",
                 NumberOfRooms = 3,
                 MonthlyFee = 4238,
                 OperationalCostPerYear = 0,
@@ -1140,7 +1111,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 99,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna trivsamma markplanslägenhet på hela 99 kvm i hjärtat av Tomtebo! ",
+                Description = "Välkommen till denna trivsamma markplanslägenhet på hela 99 kvm i hjärtat av Tomtebo! Här erbjuds ett bekvämt och funktionellt boende med fyra rum och en social planlösning där köket står i centrum. Köket bjuder in till matlagning och umgänge, perfekt för både vardagsmiddagar och festliga tillfällen. Eftersom det finns uteplatser på både fram och baksida så kan ni njuta av solen både på morgon och kväll. Bostaden bjuder på två uteplatser vilket gör att man både kan fånga morgon och kvällssolen. På baksidan finns också körsbärsträd, vinbärsbuskar och hallon samt en rymlig altan. Lägenheten har tre sovrum, varav ett med en stor klädkammare som ger gott om förvaring. Här får du både komfort och praktiska lösningar för en smidig vardag. Badrummet är funktionellt med tvättmaskin, och dessutom finns en separat toalett som underlättar morgonrutinerna. Den välskötta bostadsrättsföreningen erbjuder många bekvämligheter för sina boende, såsom ett gym, en avkopplande bastu, hobbyrum, samlingslokal samt en övernattningslägenhet för gäster. För den som har bil finns gott om gästparkeringar, vilket gör det smidigt att ta emot besök. Området är populärt och lugnt, med närhet till både natur och stadens puls. Här bor du med bekväma kommunikationer och fina grönområden som inbjuder till härliga promenader och friluftsliv. Bara ett stenkast bort ligger Nydalasjön. Ett hem som kombinerar funktion, komfort och en trivsam atmosfär – perfekt för dig som söker ett harmoniskt boende!",
                 NumberOfRooms = 4,
                 MonthlyFee = 6949,
                 OperationalCostPerYear = 0,
@@ -1181,7 +1152,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 53,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Varmt välkomna till Hissjövägen 44! Ett säkert kort bland Umeås föreningar. Här hittar du ett välskött hem med bekvämt avstånd till stadskärnan och gröna strövområden.",
+                Description = "Varmt välkomna till Hissjövägen 44! Ett säkert kort bland Umeås föreningar. Här hittar du ett välskött hem med bekvämt avstånd till stadskärnan och gröna strövområden. Denna trerummare på 53,4 kvadratmeter, belägen på våning två, erbjuder allt du behöver för en bekväm livsstil. Njut av en trivsam balkong med eftermiddags- och kvällssol, perfekt för avkoppling efter en lång dag. Interiört möts du av en välkomnande hall, ett badrum med tvättmaskin och ett fullutrustat kök i öppen planlösning mot sällskapsrummet. De två sovrummen har en sober färgsättning och erbjuder goda förvaringsmöjligheter.  Det finns också ett tillhörande förråd på vinden för extra förvaring. BRF Kruthornet är en välskött förening med stabil ekonomi, vilket bidrar till en låg månadsavgift och gör detta till ett långsiktigt smart val. Läget är fantastiskt – du har både natur och stad inom räckhåll, med goda kommunikationer som tar dig till både shopping, restauranger och service på kort tid. På bara 15 minuter med kollektivtrafik når du universitetet – en perfekt lösning för den pendlande studenten eller arbetande. Här finns alla förutsättningar för att trivas riktigt bra! Välkommen att boka din visning!",
                 NumberOfRooms = 3,
                 MonthlyFee = 3624,
                 OperationalCostPerYear = 0,
@@ -1221,7 +1192,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 27,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna kvadratsmarta etta på Teg! Denna ljusa och fräscha bostad erbjuder en smart planlösning med en mysig sovalkov.",
+                Description = "Välkommen till denna kvadratsmarta etta på Teg! Denna ljusa och fräscha bostad erbjuder en smart planlösning med en mysig sovalkov. Här finns gott om plats för både matbord, soffa och tv-möbel, vilket gör det enkelt att skapa en trivsam och funktionell hemmiljö. Badrummet är utrustat med dusch och tvättmaskin för extra bekvämlighet. Lägenheten säljs delvis möblerad. Lägenheten har ett utmärkt läge med närhet till centrum, vilket ger dig tillgång till allt du behöver inom gångavstånd. Perfekt för dig som söker ett praktiskt och stilrent boende! Behöver du ta dig till universitetet så går bussen precis utanför!",
                 NumberOfRooms = 1,
                 MonthlyFee = 2032,
                 OperationalCostPerYear = 0,
@@ -1261,7 +1232,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 69,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna rymliga tvåa på 69,5 kvm belägen på Kemigränd 14 i en stabil förening. Här möts du av ett fint renoverat kök och ett badrum med tvättmaskin för extra bekvämlighet.",
+                Description = "Charmig tvåa med perfekt läge! Välkommen till denna rymliga tvåa på 69,5 kvm belägen på Kemigränd 14 i en stabil förening. Här möts du av ett fint renoverat kök och ett badrum med tvättmaskin för extra bekvämlighet. Den öppna planlösningen mellan vardagsrum och matplats skapar en inbjudande atmosfär, balkongen erbjuder en plats för avkoppling. Lägenheten ligger nära universitetet, NUS, busshållplats, mataffärer och restauranger, vilket gör den idealisk för både studenter och yrkesverksamma. Föreningen har en mysig innergård och erbjuder flera bekvämligheter såsom kvarterslokal, gästrum, odlingslotter, tvättstugor och hobbylokaler. Här finns allt du behöver för ett bekvämt och trivsamt boende.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4424,
                 OperationalCostPerYear = 0,
@@ -1302,7 +1273,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 119,
                 SecondaryArea = 0,
                 LotSize = 226,
-                Description = "Välkommen till detta fantastiska radhus i ett populärt område på Tomtebo, bara ett stenkast från Nydalasjön! Detta hem erbjuder hela 119 kvm av välplanerad yta, byggt 2008, med fyra rymliga sovrum och två helkaklade badrum.",
+                Description = "Välkommen till detta fantastiska radhus i ett populärt område på Tomtebo, bara ett stenkast från Nydalasjön! Detta hem erbjuder hela 119 kvm av välplanerad yta, byggt 2008, med fyra rymliga sovrum och två helkaklade badrum. Huset har genomgående ljusa ytskikt och parkettgolv som löper vidare genom hela bostaden. På nedre plan finns golvvärme som ger en behaglig och jämn temperatur året runt. Den separata tvättstugan gör vardagen enklare, och de två uteplatserna ger möjlighet till både avkoppling och sociala aktiviteter utomhus. På morgonen kan ni njuta av solen på framsidan, medan baksidan erbjuder härlig kvällssol. Eftersom baksidan vetter mot skogen, är det både lugnt och mysigt. Till huset tillhör också en praktisk carport och förråd. Bostaden ligger i en samfällighet där bland annat internet och renhållning ingår. I samfälligheten finns också ett rum som man kan nyttja för att till exempel valla skidorna i.  Området är mysigt och har närhet till både skog och Nydalasjön, vilket skapar en naturnära och harmonisk miljö. En bit bort finns också den populära äventyrslekparken.  Dessutom ligger skola och förskolor nära, och det finns bra bussförbindelser som gör det enkelt att ta sig till och från centrum. Perfekt för familjen som söker ett bekvämt och trivsamt boende!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 49268,
@@ -1343,7 +1314,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 69,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna trivsamma tvåa på 69,5 kvm! Här finner du en inglasad balkong som förlänger sommaren och ger extra utrymme att njuta av. ",
+                Description = "Välkommen till denna trivsamma tvåa på 69,5 kvm! Här finner du en inglasad balkong som förlänger sommaren och ger extra utrymme att njuta av. Lägenheten har ett helkaklat badrum med tvättmaskin, vilket gör vardagen bekväm och praktisk. Köket är utrustat med en matplats där du kan njuta av dina måltider, och det rymliga vardagsrummet erbjuder gott om plats för både avkoppling och umgänge. Sovrummet har gott om förvaring, vilket gör det enkelt att hålla ordning. Föreningens gemensamma utrymmen inkluderar allt från bastu och relaxavdelning till övernattningsrum, samlingslokal och en fullt utrustad tvättstuga. Lägenheten ligger i närhet till Mariehems centrum, där du har tillgång till gym, mataffärer och andra bekvämligheter. Dessutom finns det bra busskommunikationer som gör det enkelt att ta sig runt. Både universitet och NUS ligger på bekvämt avstånd.",
                 NumberOfRooms = 2,
                 MonthlyFee = 6000,
                 OperationalCostPerYear = 0,
@@ -1384,7 +1355,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 126,
                 SecondaryArea = 48,
                 LotSize = 738,
-                Description = "",
+                Description = "Välkommen till denna trevliga enplansvilla på gaveln, belägen i det natursköna och eftertraktade Holmsund. Här erbjuds ett hem med genomtänkta och praktiska lösningar, perfekt för hela familjen. Villan har tre sovrum och två badrum, vilket ger gott om utrymme och bekvämlighet i vardagen. De två sällskapsrummen skapar möjligheter för både avkoppling och socialt umgänge. Det vidbyggda garaget och carporten ger smidig parkering och extra förvaringsutrymme. Utanför möts du av en mysig tomt där du kan njuta av lugnet och naturen i denna vackra omgivning. Ett hem som kombinerar funktionalitet, charm och ett fantastiskt läge – varmt välkommen!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 32173,
@@ -1425,7 +1396,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 76,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Söker du något utöver det vanliga? Då är du varmt välkommen till denna fantastiska trea med industriell stil och moderna inslag!",
+                Description = "Söker du något utöver det vanliga? Då är du varmt välkommen till denna fantastiska trea med industriell stil och moderna inslag! En lägenhet som verkligen sticker ut i mängden. Det sociala köket ligger i öppen planlösning med vardagsrummet och gör att släkt och vänner kan samsas när middagen tillagas. Med genomgående enstavsparkett och omsorgsfullt valda detaljer är detta verkligen en lägenhet att trivas i! En tvåa på pappret, men så mycket mer i verkligheten. Industriväggen i vardagsrummet utgör ytterligare ett rum med flera olika användningsmöjligheter. Här finner du också ett helkaklat badrum med golvvärme som ger en lyxig känsla varje morgon. De platsbyggda garderoberna i sovrummet erbjuder gott om förvaring och den extra gästtoaletten är perfekt för besökare. Njut av soliga dagar på den inglasade balkongen i söderläge som också har infravärme för lite kallare dagar. Se till att boka in er på visning och ta chansen att bo i en av Umeås bästa föreningar. Vad sägs om låg månadsavgift, gym, övernattningsrum och bastu? Att du dessutom har närhet till affärer, gym, universitet och sjukhus är ju bara en bonus! Intresserad av skidåkning? Bakom husen finns Mariehemsängarna för längdskidåkning och Bräntbacken om du föredrar utförsåkning.",
                 NumberOfRooms = 3,
                 MonthlyFee = 3578,
                 OperationalCostPerYear = 0,
@@ -1507,7 +1478,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 80,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna välplanerade 3:a i en populär förening på Ersboda!",
+                Description = "Välkommen till denna välplanerade 3:a i en populär förening på Ersboda! Här finner du ett renoverat kök med köksö, perfekt för matlagning och sociala tillställningar. De rymliga sovrummen har praktiska klädkammare, och badrummet är utrustat med tvättmaskin som underlättar vardagen. Vardagsrummet har en utgång till balkongen, där du kan njuta av en kopp kaffe när solen tittar fram. Föreningen erbjuder faciliteter såsom en stor samlingslokal, bastu, tvättstugor, hobbyrum, grillplats samt en uthyrningslägenhet för besökare. Här finns också lekplats på innergården. På Mjölkvägen 82 bor du nära naturen, skolor, förskolor och butiker – allt för en bekväm och trivsam vardag. Dessutom finns busshållsplats ett stenkast bort som gör det enkelt att ta sig runt stan!",
                 NumberOfRooms = 3,
                 MonthlyFee = 6392,
                 OperationalCostPerYear = 0,
@@ -1548,7 +1519,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 157,
                 SecondaryArea = 0,
                 LotSize = 1206,
-                Description = "Varmt välkommen till Avaliden 39 och detta magiska hem i naturnära läge.",
+                Description = "Varmt välkommen till Avaliden 39 och detta magiska hem i naturnära läge. Här bor du i ett välplanerat hus där varje kvadratmeter är fylld av möjligheter. Det fantastiska köket bjuder på generösa arbetsytor, gott om förvaring och en smart layout som gör matlagningen både inspirerande och social. De stora fönstren släpper in ett härligt ljus och skapar en luftig och inbjudande känsla i hela hemmet. Från köket når du den soliga altanen och tomten – en självklar plats för morgonkaffet, barnens lek och grillkvällar med familj och vänner. Med fem generösa sovrum finns gott om plats för familjen att växa, för gäster att stanna över – eller för att inreda det där hemmakontoret, hobbyrummet eller den kreativa studion du alltid drömt om. Två badrum underlättar morgonrutinerna och gör vardagen smidigare. Här bor du i en naturskön oas, omgiven av rofyllda skogar, glittrande sjöar och vidsträckta landskap, samtidigt som du har nära till all nödvändig service. Bara 3 km bort ligger Tavelsjö, där du hittar både förskola, skola och matbutik. Området är känt för sitt aktiva föreningsliv, fina vandrings- och cykelleder samt den populära skridskobanan på Tavelsjön under vinterhalvåret. Med endast 30 minuter till centrala Umeå erbjuder Tavelsjö den perfekta balansen mellan lugnet i naturen och stadens alla bekvämligheter. Ett boende att växa i – och längta hem till. Boka din visning redan idag!",
                 NumberOfRooms = 6,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 23208,
@@ -1589,7 +1560,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 53,
                 SecondaryArea = 40,
                 LotSize = 2269,
-                Description = "Magiskt läge vid havet – insynsskyddad oas med panoramautsikt.",
+                Description = "Magiskt läge vid havet – insynsskyddad oas med panoramautsikt. Välkommen till Sillviken 77 – ett riktigt smultronställe med vidsträckt havsutsikt, sol från morgon till kväll och total avskildhet. På den lummiga och lättskötta tomten finns en charmig huvudstuga med nyare kök, uterum, vintervatten och fiber, samt två fräscha gäststugor – samtliga byggnader är i mycket gott skick med moderna ytskikt. Här njuter du av morgonkaffet i soluppgången, kvällsdopp direkt från tomten och närhet till både båtplats och badmöjlighet. En plats att trivas på – året om.",
                 NumberOfRooms = 2,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 13184,
@@ -1630,7 +1601,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 62,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till ett hem som sätter ribban för lyxigt boende! Här bor du i en modern oas byggd 2021, där hissen smidigt tar dig direkt från markplan upp till din egen fristad.",
+                Description = "Välkommen till ett hem som sätter ribban för lyxigt boende! Här bor du i en modern oas byggd 2021, där hissen smidigt tar dig direkt från markplan upp till din egen fristad. På sjunde våningen möts du av en en bostad med en ljus och genomtänkt planlösning samt eleganta materialval. Kronan på verket är den stora, inglasade balkongen med en hänförande utsikt över Umeälven – din alldeles egna front row-plats till naturens skådespel. Balkongen badar i sol större delen av dagen och bjuder på magiska kvällar, perfekta för både avkoppling och sociala stunder. Utanför dörren väntar dessutom en vacker strandpromenad längs älvkanten som tar dig hela vägen in till stadens puls. Lägg därtill möjligheten att hyra ett gästrum på markplan, närhet till natur, skolor, universitet och city samt bra bussförbindelser – och du har ett boende som är lika praktiskt som förtrollande. Och när stadens puls kallar? Hoppa på cykeln – på bara fem minuter är du mitt i hjärtat av Umeå. Varmt välkommen att boka din visning och upptäck en bostad utöver det vanliga!",
                 NumberOfRooms = 2,
                 MonthlyFee = 4929,
                 OperationalCostPerYear = 3192,
@@ -1671,7 +1642,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 120,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till en stor och ljus 5:a i perfekt gavelläge på populära Mariehem! Separat uthyrningsrum ger lägre boendekostnad!",
+                Description = "Välkommen till en stor och ljus 5:a i perfekt gavelläge på populära Mariehem! Separat uthyrningsrum ger lägre boendekostnad! Denna ljusa gavellägenhet med fönster i tre väderstreck bjuder på ett fantastiskt ljusinsläpp och en luftig känsla genom hela bostaden. Här bor du bekvämt med tre väl tilltagna sovrum, perfekt för familjen eller dig som vill ha utrymme för hemmakontor, gästrum eller kreativa projekt. Lägenheten har renoverat och helkaklat badrum samt helkaklad WC. Som en extra bonus finns en uthyrningsdel med egen ingång och WC. Denna del kan enkelt stängas igen om ni önskar hyra ut, vilket gör hemmet extra flexibelt – oavsett om du vill skapa ett fjärde sovrum eller ha en separat del för gäster, tonårsbarn eller uthyrning. Ett hem som verkligen växer med dig och dina behov. På Mariehemsvägen bor du med en perfekt balans mellan natur och stadens alla bekvämligheter. Här har du grönområden, Norrlands universitetssjukhus, universitetet, skolor och butiker bara ett stenkast bort. Dessutom finns goda kommunikationer som snabbt tar dig till centrala Umeå, vilket gör vardagen både enkel och bekväm. I föreningen finns uppskattade gemensamhetsutrymmen såsom bastu och relax, övernattningslägenhet, samlingslokal och en fullt utrustad tvättstuga. Föreningen har genomfört omfattande renoveringar med SmartFront, vilket resulterat i en avsevärt förbättrad energiprestanda och en mer hälsosam inomhusmiljö. Detta har lett till att energideklarationen uppgraderats från E till B – en förbättring som även möjliggör att ansöka om så kallade gröna bolån. Med andra ord: ett modernt och hållbart boende med både ekonomiska och miljömässiga fördelar. Det här är ett hem som anpassar sig efter din livsstil och dina behov – med genomtänkta lösningar, gott om utrymme och en trivsam atmosfär. Välkommen att boka din visning och upplev det på plats!",
                 NumberOfRooms = 5,
                 MonthlyFee = 7914,
                 OperationalCostPerYear = 0,
@@ -1712,7 +1683,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 87,
                 SecondaryArea = 0,
                 LotSize = 1900,
-                Description = "Varmt välkomna till denna rymliga stuga med åretrunt standard. Stora härliga ytor perfekt för umgänge för familj och vänner men ändå gott om sovrum för övernattande gäster.",
+                Description = "Varmt välkomna till denna rymliga stuga med åretrunt standard. Stora härliga ytor perfekt för umgänge för familj och vänner men ändå gott om sovrum för övernattande gäster. Stugan har två mysiga kaminer som ger härlig värme. Stort inglasat uterum med stora inredningsmöjligheter. På gården finns  gäststuga även den inredd med mysig kamin. Här har ni huset som ni aldrig behöver oroa er för förvaringen igen.  Det finns stort garage med carport  och gott om förrådsytor samt växthus och fristående uterum. Stor härlig tomt med gräsytor och buskar och fina planteringar. Här bor ni med gångavstånd till havet samt tillgång till båtplats!",
                 NumberOfRooms = 3,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 23203,
@@ -1752,7 +1723,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 100,
                 SecondaryArea = 0,
                 LotSize = 1429,
-                Description = "",
+                Description = "Välkommen till detta hemtrevliga och funktionella boende! Detta välplanerade hem om 100 kvm bjuder på stora, öppna sociala ytor i kök och vardagsrum – perfekta för både vardag och umgänge. Här finner du två mysiga sovrum och ett ljust badrum. För extra värme och mys under kyliga dagar kan du samlas kring inte bara en, utan två kaminer som sprider en ombonad och inbjudande atmosfär genom hela bostaden. Utöver det inbjudande interiören erbjuder bostaden en rymlig gård, perfekt för avkoppling eller odling. Här finns gott om utrymme för att skapa din egen oas, både för lugna stunder och som plats för grönskande projekt. Detta hem ger verkligen möjlighet till en härlig livsstil, både inomhus och utomhus. Varmt välkommen att boka en visning och upptäck alla fördelar med detta charmiga boende!",
                 NumberOfRooms = 3,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 24320,
@@ -1792,7 +1763,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 155,
                 SecondaryArea = 0,
                 LotSize = 2955,
-                Description = "Högt i tak, ljus i överflöd och havet runt hörnet – det här är inte bara ett hus, det är ett livsstilsboende. Med generösa ytor, en öppen planlösning och en stämningsfull kamin i hjärtat av vardagsrummet bjuder detta hem in till både stilla vardagar och stora middagar.",
+                Description = "Högt i tak, ljus i överflöd och havet runt hörnet – det här är inte bara ett hus, det är ett livsstilsboende. Med generösa ytor, en öppen planlösning och en stämningsfull kamin i hjärtat av vardagsrummet bjuder detta hem in till både stilla vardagar och stora middagar. Här är varje rum skapat för att kännas – inte bara fungera. Det moderna köket med svarta luckor, stenskivor och ett lyxigt walk-in-skafferi är en dröm för både kocken och värden. Matplatsen omges av fönster i tre väderstreck och badar i dagsljus, medan altanen utanför suddar ut gränsen mellan inne och ute. Möjlighet till flera sovrum fördelade över två plan, walk-in closet, bastu, badkar, tvättstuga, extra WC och smart förvaring gör att både vardagslogistik och livsnjutning får plats. Välkommen till Täftefjärden – ett stenkast från havet med ett område som förenar naturnära livskvalitet med en trygg och levande vardag. Med del i brygga, fin utsikt mot vattnet och en lummig tomt med växthus, vedeldad bastu och plats för både lek och lugn, får du ett hem där naturen alltid är nära – utan att kompromissa med komfort. Här bor du med direkt närhet till Täftefjärden, en välkänd plats för sitt fantastiska fiskevatten. Under sommarhalvåret fylls fjärden av kajaker, SUP-brädor och badande besökare – och när isen lägger sig blir området ett vinterparadis för skridskoåkning, snöskoter och längdskidor. Bara några minuter bort ligger en trivsam badplats vid den gamla barnkolonin, och för den som vill hitta sitt eget smultronställe väntar den mer avskilda stranden Fäbosand, cirka 2 km längre ut. För den friluftsintresserade finns fina promenadstigar i skogen, och hjortronmyrarna lockar till sensommarutflykter – endast några hundra meter från tomten. Äventyret fortsätter mot Laxögern där den populära vandringsleden ut till Tavasten erbjuder fantastisk utsikt och vacker kustnatur. När hungern gör sig påmind ligger den populära restaurangen Kvarken Fisk bara en kort biltur bort – känd för sina färska skaldjur, fiskrätter och vackra läge vid vattnet. Perfekt för både vardagslyx och sommarutflykter. Samtidigt är Täftefjärden inte bara ett fritidsområde – här bor människor året runt. Grannskapet är levande med barnfamiljer och skolskjuts som stannar i området, vilket gör det till en plats som fungerar lika bra för helgmys som för vardagsliv.",
                 NumberOfRooms = 4,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 26215,
@@ -1832,7 +1803,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 66,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till 66,5 välplanerade kvadratmeter som inrymmer allt du behöver - för ett boende över lång tid!",
+                Description = "Välkommen till 66,5 välplanerade kvadratmeter som inrymmer allt du behöver - för ett boende över lång tid! Ett stort vardagsrum med tillgång till härlig balkong i vinkel med magisk utsikt. Köket erbjuder gott om plats för både förvaring och middagssällskap. Lägg där till ett stort sovrum, ett delvis kaklat badrum, rymligt förråd samt en stor klädkammare. Hela lägenheten är ljus och trivsam med en mycket bra planlösning som tar till vara varje kvadratmeter på ett bra sätt. Den stora balkongen bjuder in till mysiga frukostar och sena kvällar med sol från morgon till kväll. Här kan du både tjuvstarta och förlänga sommaren! På Kuratorvägen 48 bor du i ett lugnt och framförallt trivsamt område med närhet till både friluftsområden, matvarubutiker, NUS, Universitetet, IKSU samt med bra kommunikationsmöjligheter med buss till centrum och tåg från Umeå Östra station.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4551,
                 OperationalCostPerYear = 2796,
@@ -1872,7 +1843,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 252,
                 SecondaryArea = 162,
                 LotSize = 1143,
-                Description = "Välkommen till en anrik och vacker fastighet som bjuder på något utöver det vanliga.",
+                Description = "Välkommen till en anrik och vacker fastighet som bjuder på något utöver det vanliga. Här möts du av en fantastisk atmosfär med generös takhöjd, stora fönster och klassiska detaljer som andas 1800-tal – perfekt för den stora eller växande familjen, eller för dig som drömmer om att kombinera boende med uthyrning. Huset är idag inrett som två separata lägenheter – perfekt för dig som vill hyra ut den ena delen, ha ett generationsboende eller driva verksamhet hemifrån. För den som önskar går det enkelt att återförena våningsplanen och skapa ett enhetligt och mycket rymligt hem. Bergvärme och modern fönsterteknik ger ekonomisk trygghet i form av låga uppvärmningskostnader. På övervåningen hittar du tre rejäla sovrum, ett badrum, ett kök samt ett luftigt vardagsrum med fönster i tre väderstreck - perfekt för att släppa in både ljus och och liv. Dessutom finns här ett charmigt inrett vindsrum som kan bli precis vad du behöver: ett extra sovrum, ett hemmakontor eller kanske ett mysigt krypin för kreativt skapande. Bottenvåningen rymmer två sovrum, kök, matsal, vardagsrum, ett badrum samt en extra wc - praktiskt och bekvämt för både vardag och gäster. De generösa sällskapsytorna på båda våningsplanen inbjuder till allt från lugna kvällar i soffan till festliga middagar med nära och kära. Här finns gott om plats för stora matbord, mjuka soffgrupper och socialt umgänge i alla former. Källaren är både praktisk och rymlig, med tvättstuga, matkällare och gott om förvaringsutrymmen. I gårdshuset återfinns ett rymligt dubbelgarage  med plats för både bil och ytterligare förvaring. Som en extra bonus finns en fristående uthyrningslägenhet i gårdshuset – perfekt som gästhus, kontor, ateljé eller extra inkomstkälla. Låga driftkostnader tack vare effektiv bergvärme ger både komfort och god ekonomi. Denna charmiga fastighet är vackert beläget i den äldre delen av Täfteå, på en fin tomt med underbar utsikt över grönska och öppna landskap. Här bor du med närhet till både ICA, skola/förskola och den idylliska småbåtshamnen – och med busshållplatsen bara ett stenkast bort är det enkelt att ta sig in till stan.",
                 NumberOfRooms = 9,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 52071,
@@ -1912,7 +1883,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 60,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "I ett omtyckt område, bekvämt belägen på första våningen, hittar ni denna mycket trivsamma och helrenoverade tvåa.",
+                Description = "I ett omtyckt område, bekvämt belägen på första våningen, hittar ni denna mycket trivsamma och helrenoverade tvåa. Bostaden är utrustad med flera eftertraktade kvaliteter, som en inglasad balkong i söderläge, ett renoverat och välutrustat kök samt ett fräscht badrum med egen tvättmaskin. Här erbjuds också genomgående fina ytskikt, ekparkett och ett härligt ljusinsläpp. Ett väl tilltaget sovrum samt ett vardagsrum som rymmer både soffgrupp och middagsbord ger bostaden en luftig och funktionell känsla. Brf Biologigränd är en välskött bostadsrättsförening där medlemmarna trivs med de stora, luftiga innergårdarna som erbjuder gemensamma grill-, lek- och sittplatser. Föreningen har dessutom fina faciliteter såsom gym, biljardrum, pingis, bastu, fritidslokal, gästrum, kompostering och en gästlägenhet. Med låg belåning och förmånligt kollektivt avtal för TV och bredband hålls boendekostnaderna låga. Läget på Biologigränd 37 är suveränt för er som uppskattar närheten till både natur och all nödvändig service. I Ålidhems centrum finns en välsorterad Ica, apotek, hälsocentral samt ett flertal restauranger. Här bor ni också nära Universitetet, NUS och IKSU. Busshållplats ligger på kort gångavstånd och för er med barn finns flera förskolor och skolor inom bekvämt avstånd.",
                 NumberOfRooms = 2,
                 MonthlyFee = 3914,
                 OperationalCostPerYear = 0,
@@ -1952,7 +1923,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 125,
                 SecondaryArea = 58,
                 LotSize = 468,
-                Description = "",
+                Description = "Välkommen till ett ljust och rymligt hem med en genomtänkt planlösning som kombinerar stora, bekväma sovrum med öppna, inbjudande sociala ytor – perfekt för både avkoppling och umgänge. Det välutrustade köket erbjuder generösa arbetsytor och gott om förvaring, vilket gör matlagningen till en ren glädje – oavsett om det handlar om vardagsmiddagar eller festliga tillställningar. Intill köket ligger det stora och ljusa vardagsrummet, med fantastiskt ljusinsläpp och gott om plats för både soffgrupp och matbord. Härifrån har du dessutom direkt utgång till en härlig altan samt ett trivsamt inglasat uterum – perfekta platser för att njuta av både lugna morgnar och ljumma sommarkvällar. Bostaden rymmer fyra rymliga sovrum och två fräscha badrum, vilket ger gott om plats för både familjen och gäster. Sovrummen är flexibla och kan enkelt anpassas efter dina behov – som barnrum, hemmakontor eller gästrum. De två badrummen underlättar vardagen och gör morgonrutinerna smidigare för hela familjen. Huset erbjuder även mycket bra förvaring. Snickargatan 10 är beläget i ett lugnt och barnvänligt område med närhet till lekparker, förskola och skola. Här bor du dessutom nära älven och vackra naturområden med fina promenad- och motionsstråk – perfekt för dig som uppskattar friluftsliv och naturens lugn. Med goda bussförbindelser och välutbyggda cykelvägar tar du dig enkelt runt i Umeå, oavsett om du ska till centrum eller andra delar av staden. Varmt välkommen att boka en visning – upplev själv allt detta trivsamma hem har att erbjuda dig och din familj!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 39962,
