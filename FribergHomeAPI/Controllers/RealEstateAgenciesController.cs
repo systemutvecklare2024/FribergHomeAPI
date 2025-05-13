@@ -2,6 +2,7 @@
 using FribergHomeAPI.Data.Repositories;
 using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FribergHomeAPI.Controllers
@@ -48,13 +49,14 @@ namespace FribergHomeAPI.Controllers
 
         //Author:Emelie
         [HttpPost("{agencyId}/applications/{applicatonId}")]
+        [Authorize( Roles = "Agent, SuperAgent")]
         public async Task<IActionResult> HandleApplicationAsync(ApplicationDTO applicationDTO)
         {
             if (applicationDTO == null)
             {
                 return BadRequest("Ansökan saknas, eller ogiltig.");
             }
-            var result = await agencyService.HandleApplication(applicationDTO);
+            var result = await agencyService.HandleApplication(User, applicationDTO);
             if (!result.Success)
             {
                 foreach (var error in result.Errors!)

@@ -1,4 +1,5 @@
-﻿using FribergHomeAPI.Models;
+﻿using FribergHomeAPI.DTOs;
+using FribergHomeAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FribergHomeAPI.Data.Repositories
@@ -11,6 +12,7 @@ namespace FribergHomeAPI.Data.Repositories
         {
             this.dbContext = dbContext;
         }
+
         //Tobias
         public async Task<RealEstateAgency?> GetByIdWithAgentsAsync(int id)
         {
@@ -18,6 +20,31 @@ namespace FribergHomeAPI.Data.Repositories
                 .Include(a => a.Agents)
                 .Include(a => a.Applications)
                 .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<bool> AddApplication(int agentId, int agencyId)
+        {
+            try
+            {
+                var agency = await GetByIdWithAgentsAsync(agencyId);
+                if (agency == null)
+                {
+                    return false;
+                }
+                var application = new Application
+                {
+                    AgencyId = agencyId,
+                    AgentId = agentId
+                };
+
+                agency.Applications.Add(application);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
