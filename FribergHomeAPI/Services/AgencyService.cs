@@ -5,6 +5,7 @@ using FribergHomeAPI.DTOs;
 using FribergHomeAPI.Models;
 using FribergHomeAPI.Results;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using static FribergHomeAPI.Models.StatusTypes;
 
 namespace FribergHomeAPI.Services
@@ -16,125 +17,124 @@ namespace FribergHomeAPI.Services
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly UserManager<ApiUser> userManager;
         private readonly ApplicationDbContext dbContext;
+        private readonly IAccountService accountService;
 
         public AgencyService(IRealEstateAgencyRepository agencyRepository, 
             IRealEstateAgentRepository agentRepository, 
             UserManager<ApiUser> userManager,
-            ApplicationDbContext dbContext)
+            ApplicationDbContext dbContext,
+            IAccountService accountService)
         {
             this.agencyRepository = agencyRepository;
             this.agentRepository = agentRepository;
             this.userManager = userManager;
             this.dbContext = dbContext;
+            this.accountService = accountService;
         }
-        public async Task<ServiceResult<bool>> ApproveApplication(ApplicationDTO applicationDTO)
+
+        public async Task<ServiceResult> HandleApplication(ClaimsPrincipal user, ApplicationDTO applicationDTO)
+        {
+            var agency = await agencyRepository.GetByIdWithAgentsAsync(applicationDTO.AgencyId);
+            if (agency == null || agency.Applications == null)
+            {
+                return ServiceResult.Failure("Byrå eller ansökningar saknas");
+            }
+
+            var agentIds = agency?.Agents?.Select(e => e.Id).ToList() ?? [];
+            var isAllowed = await accountService.IsAllowed(user, agentIds);
+            if(!isAllowed)
+            {
+                return ServiceResult.Failure(new ServiceResultError { Code = StatusCodes.Status403Forbidden.ToString(), Description = "Ni saknar rättigheter att hantera mäklarbyrån." });
+            }
+
+            return applicationDTO.StatusType switch
+            {
+                StatusType.Approved => await HandleApprovedAsync(applicationDTO),
+                StatusType.Denied => await HandleDeniedAsync(applicationDTO),
+                _ => ServiceResult.Failure(new ServiceResultError { Code = StatusCodes.Status400BadRequest.ToString(), Description = "Ogiltig status på ansökan, ingen förändring utförd."})
+            };
+        }
+
+        private async Task<ServiceResult> HandleApprovedAsync(ApplicationDTO applicationDTO)
         {
             using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                var result = await ChangeApplicationStatusAsync(applicationDTO);
+                var result = await UpdateApplicationStatusAsync(applicationDTO);
                 if (!result.Success)
                 {
                     return result;
                 }
+
                 var agent = await agentRepository.GetByIdWithApiUser(applicationDTO.AgentId);
-                if(agent == null)
+                if (agent == null)
                 {
-                    return ServiceResult<bool>.Failure("Ingen mäklare funnen");
+                    return ServiceResult.Failure("Ingen mäklare funnen");
                 }
+
                 await SetAgency(applicationDTO.AgencyId, agent);
+
                 var identityResult = await ChangeUserRole(agent.ApiUser);
                 if (!identityResult.Succeeded)
                 {
-                    return ServiceResult<bool>.Failure(identityResult.Errors.Select(e => new ServiceResultError { Code = e.Code, Description = e.Description }));
+                    return ServiceResult.Failure(identityResult.Errors.Select(e => new ServiceResultError { Code = e.Code, Description = e.Description }));
                 }
 
                 await transaction.CommitAsync();
 
-                return ServiceResult<bool>.SuccessResult(true);
+                return ServiceResult.SuccessResult();
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                return ServiceResult<bool>.Failure(new ServiceResultError { Code = "Exception", Description = ex.Message });
+                return ServiceResult.Failure(new ServiceResultError { Code = StatusCodes.Status500InternalServerError.ToString(), Description = ex.Message });
             }
-            
         }
 
-        public async Task<ServiceResult<bool>> DenyApplication(ApplicationDTO applicationDTO)
+        private async Task<ServiceResult> HandleDeniedAsync(ApplicationDTO applicationDTO)
         {
-            await ChangeApplicationStatusAsync(applicationDTO);
-            return ServiceResult<bool>.SuccessResult(true);
+            return await UpdateApplicationStatusAsync(applicationDTO);
         }
-
-        public async Task<ServiceResult<bool>> HandleApplication(ApplicationDTO applicationDTO)
-        {
-            if(applicationDTO.StatusType == StatusType.Approved)
-            {
-                var result = ApproveApplication(applicationDTO);
-                return await result;
-            }
-            else if(applicationDTO.StatusType == StatusType.Denied)
-            {
-                var result = DenyApplication(applicationDTO);
-                return await result;
-            }
-            else
-            {
-                return ServiceResult<bool>.Failure("Något gick fel, ingen förändring utförd på status på ansökan.");
-            }
-        }
-
-        public async Task<ServiceResult<bool>> ChangeApplicationStatusAsync(ApplicationDTO applicationDTO)
+        private async Task<ServiceResult> UpdateApplicationStatusAsync(ApplicationDTO applicationDTO)
         {
             var agency = await agencyRepository.GetByIdWithAgentsAsync(applicationDTO.AgencyId);
-            if(agency == null || agency.Applications == null)
+            if(agency == null)
             {
-                return ServiceResult<bool>.Failure("Byrå eller ansökningar saknas");
+                return ServiceResult.Failure(new ServiceResultError { Code = StatusCodes.Status404NotFound.ToString(), Description = "Byrån hittades ej." });
             }
+
             var application = agency.Applications.FirstOrDefault(a => a.Id == applicationDTO.Id);
             if(application == null)
             {
-                return ServiceResult<bool>.Failure("Ansökningen hittades inte");
+                return ServiceResult.Failure(new ServiceResultError { Code = StatusCodes.Status404NotFound.ToString(), Description = "Ansökan hittades ej." });
             }
             application.StatusType = applicationDTO.StatusType;
             await agencyRepository.UpdateAsync(agency);
 
-            return ServiceResult<bool>.SuccessResult(true);
+            return ServiceResult.SuccessResult();
         }
 
-        public async Task<IdentityResult> ChangeUserRole(ApiUser apiUser)
+        private async Task<IdentityResult> ChangeUserRole(ApiUser apiUser)
         {
             var removeResult = await userManager.RemoveFromRoleAsync(apiUser, ApiRoles.User);
             if (!removeResult.Succeeded)
             {
                 return removeResult;
             }
+
             var addResult = await userManager.AddToRoleAsync(apiUser, ApiRoles.Agent);
             if (!addResult.Succeeded)
             {
                 return addResult;
             }
+
             return IdentityResult.Success;
         }
 
-        public async Task SetAgency(int agencyId, RealEstateAgent agent)
+        private async Task SetAgency(int agencyId, RealEstateAgent agent)
         {
             agent.AgencyId = agencyId;
             await agentRepository.UpdateAsync(agent);
         }
-
-        public async Task GenerateApplication(AccountDTO accountDTO, RealEstateAgent agent) //Return ServiceResult?
-        {
-            var application = new Application()
-            {
-                AgencyId = accountDTO.AgencyId,
-                AgentId = agent.Id
-            };
-            var agency = await agencyRepository.GetByIdWithAgentsAsync(application.AgencyId);
-            agency.Applications.Add(application);
-            await agencyRepository.UpdateAsync(agency);
-        }
-
     }
 }

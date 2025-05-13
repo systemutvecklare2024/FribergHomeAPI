@@ -20,21 +20,21 @@ namespace FribergHomeAPI.Services
         private readonly IRealEstateAgentRepository agentRepository;
         private readonly ApplicationDbContext dbContext;
         private readonly IConfiguration configuration;
-        private readonly IAgencyService agencyService;
+        private readonly IRealEstateAgencyRepository agencyRepository;
         private readonly IMapper mapper;
 
         public AccountService(UserManager<ApiUser> userManager,
             IRealEstateAgentRepository agentRepository,
             ApplicationDbContext applicationDbContext,
             IConfiguration configuration,
-            IAgencyService agencyService,
+            IRealEstateAgencyRepository agencyRepository,
             IMapper mapper)
         {
             this.userManager = userManager;
             this.agentRepository = agentRepository;
             this.dbContext = applicationDbContext;
             this.configuration = configuration;
-            this.agencyService = agencyService;
+            this.agencyRepository = agencyRepository;
             this.mapper = mapper;
         }
 
@@ -104,7 +104,12 @@ namespace FribergHomeAPI.Services
                     return ServiceResult<RealEstateAgent>.Failure("Lyckades inte skapa en Mäklare.");
                 }
 
-                await agencyService.GenerateApplication(dto, newAgent);
+                var success = await agencyRepository.AddApplication(newAgent.Id, dto.AgencyId);
+                if(!success)
+                {
+                    await transaction.RollbackAsync();
+                    return ServiceResult<RealEstateAgent>.Failure(new ServiceResultError { Code = "500", Description = "Unable to create agency application." });
+                }
 
                 await transaction.CommitAsync();
                 return ServiceResult<RealEstateAgent>.SuccessResult(agent);
@@ -131,7 +136,7 @@ namespace FribergHomeAPI.Services
             return agent.Id == agentId;
         }
 
-        public async Task<bool> OwnedBy(ClaimsPrincipal user, List<int> ids)
+        public async Task<bool> IsAllowed(ClaimsPrincipal user, List<int> ids)
         {
             foreach(var id in ids)
             {
@@ -175,7 +180,6 @@ namespace FribergHomeAPI.Services
             
             await dbContext.SaveChangesAsync();
         }
-
         private async Task<string> GenerateToken(ApiUser apiUser)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[Settings.Key]!));

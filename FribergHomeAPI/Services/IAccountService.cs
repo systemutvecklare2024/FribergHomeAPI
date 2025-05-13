@@ -13,5 +13,6 @@ namespace FribergHomeAPI.Services
         Task<ServiceResult<RealEstateAgent>> GetMyAgentAsync(ClaimsPrincipal user);
         Task UpdateAsync(UpdateAgentDTO dto, RealEstateAgent existingAgent);
         Task<bool> OwnedBy(ClaimsPrincipal user, int agentId);
+        Task<bool> IsAllowed(ClaimsPrincipal user, List<int> ids);
     }
 }
