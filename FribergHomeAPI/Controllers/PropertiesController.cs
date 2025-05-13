@@ -102,6 +102,7 @@ namespace FribergHome_API.Controllers
 			{
 				var pro = mapper.Map<Property>(property);
 				var agentId = await accountService.GetMyAgentAsync(User);
+
 				if (agentId == null) //If no agent, no adding properties right now.
 				{
 					return BadRequest(ModelState);
@@ -116,20 +117,19 @@ namespace FribergHome_API.Controllers
 				return BadRequest(ModelState);
 
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				return Problem("aaaaaaaaa");
+				return Problem(detail: ex.Message, statusCode: 500);
 			}
 		}
 
-		//Author: Glate, Fredrik
-		// PUT api/<PropertiesController>/5
-		[HttpPut("{id}")]
+        //Author: Glate, Fredrik
+        // PUT api/<PropertiesController>/5
+        [HttpPut("{id}")]
 		[Authorize(Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Put(int id, [FromBody] PropertyDTO dto)
 		{
-			var result = await propertyService.UpdatePropertyAsync(id, dto);
-			// TODO: We need to validate that the user is allowed to do this...
+			var result = await propertyService.UpdatePropertyAsync(User, id, dto);
 			if (!result.Success)
 			{
 				foreach (var error in result.Errors)
@@ -138,30 +138,24 @@ namespace FribergHome_API.Controllers
 				}
 				return BadRequest(ModelState);
 			}
-			return Ok(result.Success); //What to be returned to client? Just true for now.
+			return Ok(result.Success);
 		}
 
 		// Author: Christoffer
 		// DELETE api/<PropertiesController>/5
 		[HttpDelete("{id}")]
+		[Authorize( Roles = "Agent, SuperAgent")]
 		public async Task<IActionResult> Delete(int id)
         {
-			// TODO: We need to validate that the user is allowed to do this...
-			try
+			var res = await propertyService.DeleteAsync(User, id);
+			if(!res.Success)
 			{
-				var prop = await propertyRepo.GetAsync(id);
-				if (prop != null)
-				{
-					await propertyRepo.RemoveAsync(prop);
-                    return Ok();
-                }
-				
-				return NotFound(new { error = "Kunde ej hitta objektet" });
+				var errorCode = Convert.ToInt32(res?.Errors?.FirstOrDefault()?.Code ?? "400");
+
+                return StatusCode( errorCode, res?.Errors.FirstOrDefault());
 			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex);
-			}
+
+			return Ok();
         }
 
 		// Author: Christoffer

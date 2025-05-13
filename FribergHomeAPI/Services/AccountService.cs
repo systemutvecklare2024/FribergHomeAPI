@@ -117,6 +117,33 @@ namespace FribergHomeAPI.Services
             }
         }
 
+        public async Task<bool> OwnedBy(ClaimsPrincipal user, int agentId)
+        {
+            var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrWhiteSpace(userId)) return false;
+
+            var apiUser = await userManager.FindByEmailAsync(userId);
+            if (apiUser == null) return false;
+
+            var agent = await agentRepository.GetApiUserIdAsync(apiUser.Id);
+            if (agent == null) return false;
+
+            return agent.Id == agentId;
+        }
+
+        public async Task<bool> OwnedBy(ClaimsPrincipal user, List<int> ids)
+        {
+            foreach(var id in ids)
+            {
+                var res = await OwnedBy(user, id);
+                if (res)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         public async Task<ServiceResult<RealEstateAgent>> GetMyAgentAsync(ClaimsPrincipal user)
         {
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -141,15 +168,12 @@ namespace FribergHomeAPI.Services
         }
         public async Task UpdateAsync(UpdateAgentDTO dto, RealEstateAgent existingAgent)
         {
-            
 
             mapper.Map(dto, existingAgent);
 
             dbContext.Agents.Update(existingAgent);
             
             await dbContext.SaveChangesAsync();
-            
-
         }
 
         private async Task<string> GenerateToken(ApiUser apiUser)
