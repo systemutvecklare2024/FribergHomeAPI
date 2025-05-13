@@ -38,123 +38,6 @@ namespace FribergHomeAPI.Data.Seeding
 
             try
             {
-                //BengtRealtorzAB
-                var bengt = new Models.RealEstateAgent
-                {
-                    FirstName = "Bengt",
-                    LastName = "Bengtzon",
-                    Email = "Bengan@BengtRealtzorzAB.se",
-                    PhoneNumber = "112",
-                    ImageUrl = "https://randomuser.me/api/portraits/men/8.jpg",
-                    ApiUserId = "0c64a282-46e7-437d-b36c-60a7c6d71a68"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: bengt.ApiUserId,
-                    Email: bengt.Email,
-                    UserName: bengt.Email,
-                    FirstName: bengt.FirstName,
-                    LastName: bengt.LastName,
-                    Password: "Bengt123!"), ApiRoles.Agent, userManager);
-
-                var berit = new Models.RealEstateAgent
-                {
-                    FirstName = "Berit",
-                    LastName = "Bengtzon",
-                    Email = "Brittan@BengtRealtzorzAB.se",
-                    PhoneNumber = "112",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/7.jpg",
-                    ApiUserId = "6148f50d-a317-413d-99fc-0c3a3680eb62"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: berit.ApiUserId,
-                    Email: berit.Email,
-                    UserName: berit.Email,
-                    FirstName: berit.FirstName,
-                    LastName: berit.LastName,
-                    Password: "Berit123!"), ApiRoles.Agent, userManager);
-
-
-                ctx.Agencies.Add(new Models.RealEstateAgency
-                {
-                    Name = "BengtRealtorzAB",
-                    Presentation = "Vi säljer osv",
-                    LogoUrl = "https://picsum.photos/seed/property1/800/600",
-                    Agents = new[] {
-                        bengt,
-                        berit,
-                    }
-                });
-
-                //ChristRealtorsAB
-                var christer = new Models.RealEstateAgent
-                {
-                    FirstName = "Christer",
-                    LastName = "Christersson",
-                    Email = "christer@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/men/82.jpg",
-                    ApiUserId = "de9feeda-c5ad-43d0-83db-9dbf3b241369"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christer.ApiUserId,
-                    Email: christer.Email,
-                    UserName: christer.Email,
-                    FirstName: christer.FirstName,
-                    LastName: christer.LastName,
-                    Password: "Christer123!"), ApiRoles.Agent, userManager);
-
-                var christina = new Models.RealEstateAgent
-                {
-                    FirstName = "Christina",
-                    LastName = "Christersson",
-                    Email = "christina@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/24.jpg",
-                    ApiUserId = "6cc53b1a-c6ec-4d9b-a71c-00b8565d1971"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christina.ApiUserId,
-                    Email: christina.Email,
-                    UserName: christina.Email,
-                    FirstName: christina.FirstName,
-                    LastName: christina.LastName,
-                    Password: "Christina123!"), ApiRoles.SuperAgent, userManager);
-
-                var christin = new Models.RealEstateAgent
-                {
-                    FirstName = "Christin",
-                    LastName = "Christersson",
-                    Email = "christin@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/16.jpg",
-                    ApiUserId = "22e4b80d-a88a-428d-aef6-07f273b980dd"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christin.ApiUserId,
-                    Email: christin.Email,
-                    UserName: christin.Email,
-                    FirstName: christin.FirstName,
-                    LastName: christin.LastName,
-                    Password: "Christin123!"), ApiRoles.Agent, userManager);
-
-
-                ctx.Agencies.Add(new Models.RealEstateAgency
-                {
-                    Name = "ChristRealtors",
-                    Presentation = "Vi är christ. Vi dör för dina synder, och bostad.",
-                    LogoUrl = "https://godvine.com/pics/Kierra/GVA-JesusinHouse.jpg",
-                    Agents = new[] {
-                        christer,
-                        christina,
-                        christin,
-                    }
-                });
-
                 //Author: Tobias
                 //Boporten
                 var teodor = new Models.RealEstateAgent
@@ -362,59 +245,7 @@ namespace FribergHomeAPI.Data.Seeding
         {
             var list = new List<Property>
             {
-                new Property{
-                ListingPrice = 1000000,
-                LivingSpace = 1000,
-                SecondaryArea = 10,
-                LotSize = 1000,
-                Description = "Ett stort objekt, huserade tidigare hockeylag",
-                NumberOfRooms = 100,
-                MonthlyFee = 10000,
-                OperationalCostPerYear = 100000,
-                YearBuilt = 1970,
-                PropertyType = PropertyType.House,
-                Images = new List<PropertyImage>
-                {
-                    new PropertyImage { ImgURL = "https://images.ohmyhosting.se/RXjFakX2ag9Aj3gQ8StqoqopjOM=/3840x1546/smart/filters:quality(85)/https%3A%2F%2Fnaidenbygg.se%2Fwp-content%2Fuploads%2F2023%2F02%2Fcoop-arena-naiden-arena3.jpg"},
-                    new PropertyImage {ImgURL = "https://cdn1-photos.shl.se/photos/22/05/00de89423e81ec324e758e9626a26477/thumb_2560.jpg?ixlib=js-3.8.0&auto=format&fp-debug=0&fp-y=0.5&fp-x=0.5&crop=focalpoint&fit=crop&ar=16%3A9&w=927&s=9c4b708ae814e966dd71b61dc1bab5ba" }
-                },
-                Address = new Address
-                {
-                    Street = "Midgårdsvägen 4",
-                    PostalCode = "97334",
-                    City = "Luleå",
-                },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Berit")
-            },
-            new Property
-            {
-                ListingPrice = 200000,
-                LivingSpace = 200,
-                SecondaryArea = 20,
-                LotSize = 20,
-                Description = "Renoveringsobjekt. Gammalt crackhus. Perfekt för dig som vill sätta egen prägel och skapa ditt drömhem!",
-                NumberOfRooms = 2,
-                MonthlyFee = 2000,
-                OperationalCostPerYear = 20000,
-                YearBuilt = 1982,
-                PropertyType = PropertyType.TownHouse,
-                Images = new List<PropertyImage>
-                {
-                    new PropertyImage { ImgURL = "https://miro.medium.com/v2/resize:fit:720/format:webp/1*yUhE4CUSnTP2e-mC3zx-qA.png"},
-                    new PropertyImage {ImgURL = "https://i2-prod.cornwalllive.com/news/cornwall-news/article599640.ece/ALTERNATES/s1200e/1_Newquay.jpg" }
-                },
-                Address = new Address
-                {
-                    Street = "Muskotvägen 24",
-                    PostalCode = "18460",
-                    City = "Åkersberga",
-                },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Stockholm"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
-            },
-
-            //Emelie
+             //Emelie
             new Property
             {
                 ListingPrice = 2595000,
@@ -454,7 +285,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Väddö",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Norrtälje"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -494,7 +325,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Visby",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Gotland"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -537,7 +368,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Göteborg",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -580,7 +411,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Timmernabben",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Mönsterås"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -625,7 +456,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Halmstad",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Halmstad"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -663,7 +494,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Båstad",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Båstad"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
 
             },
 
@@ -697,7 +528,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Angered",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
 
@@ -742,7 +573,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Göteborg",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
 
@@ -787,7 +618,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Hisings Kärra",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
 
@@ -832,7 +663,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Helgered",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
 
@@ -883,40 +714,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Västra Frölunda",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
-
-            },
-
-            // Fredriks Property
-            new Property
-            {
-                ListingPrice = 2895000,
-                LivingSpace = 111,
-                SecondaryArea = 77,
-                LotSize = 1127,
-                Description = "Schysst Mexitegelvilla i liten håla",
-                NumberOfRooms = 5,
-                MonthlyFee = 0,
-                OperationalCostPerYear = 23376,
-                YearBuilt = 1971,
-                PropertyType = PropertyType.House,
-                Images = new List<PropertyImage>
-                {
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406010_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406011_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406013_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406015_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406016_1440x0.webp"}
-                },
-                Address = new Address
-                {
-                    Street = "Utsiktsvägen 16",
-                    PostalCode = "517 71",
-                    City = "Olsfors",
-                },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Bollebygd"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Berit")
-
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
             new Property
