@@ -7,7 +7,7 @@ using FribergHomeAPI.Constants;
 
 namespace FribergHomeAPI.Data.Seeding
 {
-    public class SeedData
+	public class SeedData
     {
         // Author: Christoffer
         public static async Task SeedAsync(ApplicationDbContext ctx, RoleManager<IdentityRole> roleManager, UserManager<ApiUser> userManager)
@@ -38,123 +38,6 @@ namespace FribergHomeAPI.Data.Seeding
 
             try
             {
-                //BengtRealtorzAB
-                var bengt = new Models.RealEstateAgent
-                {
-                    FirstName = "Bengt",
-                    LastName = "Bengtzon",
-                    Email = "Bengan@BengtRealtzorzAB.se",
-                    PhoneNumber = "112",
-                    ImageUrl = "https://randomuser.me/api/portraits/men/8.jpg",
-                    ApiUserId = "0c64a282-46e7-437d-b36c-60a7c6d71a68"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: bengt.ApiUserId,
-                    Email: bengt.Email,
-                    UserName: bengt.Email,
-                    FirstName: bengt.FirstName,
-                    LastName: bengt.LastName,
-                    Password: "Bengt123!"), ApiRoles.Agent, userManager);
-
-                var berit = new Models.RealEstateAgent
-                {
-                    FirstName = "Berit",
-                    LastName = "Bengtzon",
-                    Email = "Brittan@BengtRealtzorzAB.se",
-                    PhoneNumber = "112",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/7.jpg",
-                    ApiUserId = "6148f50d-a317-413d-99fc-0c3a3680eb62"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: berit.ApiUserId,
-                    Email: berit.Email,
-                    UserName: berit.Email,
-                    FirstName: berit.FirstName,
-                    LastName: berit.LastName,
-                    Password: "Berit123!"), ApiRoles.Agent, userManager);
-
-
-                ctx.Agencies.Add(new Models.RealEstateAgency
-                {
-                    Name = "BengtRealtorzAB",
-                    Presentation = "Vi säljer osv",
-                    LogoUrl = "https://picsum.photos/seed/property1/800/600",
-                    Agents = new[] {
-                        bengt,
-                        berit,
-                    }
-                });
-
-                //ChristRealtorsAB
-                var christer = new Models.RealEstateAgent
-                {
-                    FirstName = "Christer",
-                    LastName = "Christersson",
-                    Email = "christer@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/men/82.jpg",
-                    ApiUserId = "de9feeda-c5ad-43d0-83db-9dbf3b241369"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christer.ApiUserId,
-                    Email: christer.Email,
-                    UserName: christer.Email,
-                    FirstName: christer.FirstName,
-                    LastName: christer.LastName,
-                    Password: "Christer123!"), ApiRoles.Agent, userManager);
-
-                var christina = new Models.RealEstateAgent
-                {
-                    FirstName = "Christina",
-                    LastName = "Christersson",
-                    Email = "christina@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/24.jpg",
-                    ApiUserId = "6cc53b1a-c6ec-4d9b-a71c-00b8565d1971"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christina.ApiUserId,
-                    Email: christina.Email,
-                    UserName: christina.Email,
-                    FirstName: christina.FirstName,
-                    LastName: christina.LastName,
-                    Password: "Christina123!"), ApiRoles.SuperAgent, userManager);
-
-                var christin = new Models.RealEstateAgent
-                {
-                    FirstName = "Christin",
-                    LastName = "Christersson",
-                    Email = "christin@ChristRealtors.se",
-                    PhoneNumber = "911",
-                    ImageUrl = "https://randomuser.me/api/portraits/women/16.jpg",
-                    ApiUserId = "22e4b80d-a88a-428d-aef6-07f273b980dd"
-                };
-
-                await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
-                    Id: christin.ApiUserId,
-                    Email: christin.Email,
-                    UserName: christin.Email,
-                    FirstName: christin.FirstName,
-                    LastName: christin.LastName,
-                    Password: "Christin123!"), ApiRoles.Agent, userManager);
-
-
-                ctx.Agencies.Add(new Models.RealEstateAgency
-                {
-                    Name = "ChristRealtors",
-                    Presentation = "Vi är christ. Vi dör för dina synder, och bostad.",
-                    LogoUrl = "https://godvine.com/pics/Kierra/GVA-JesusinHouse.jpg",
-                    Agents = new[] {
-                        christer,
-                        christina,
-                        christin,
-                    }
-                });
-
                 //Author: Tobias
                 //Boporten
                 var teodor = new Models.RealEstateAgent
@@ -222,9 +105,106 @@ namespace FribergHomeAPI.Data.Seeding
                     sofie,
                     sara,
                 }
-                }
-            );
-                await ctx.SaveChangesAsync();
+                });
+				//Tobias
+                //SkandiaMäklarna Göteborg
+				var julia = new Models.RealEstateAgent
+				{
+					FirstName = "Julia",
+					LastName = "Hellman",
+					Email = "Julia@Skandiamaklarna.se",
+					PhoneNumber = "0763283869",
+					ImageUrl = "https://bilder.hemnet.se/images/broker_profile_large/c1/40/c140cc3631cf4a77b7f4da91a11317ea.jpg",
+					ApiUserId = "e45c2ab8-2085-4064-9da4-3786146ce186"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+								Id: julia.ApiUserId,
+								Email: julia.Email,
+								UserName: julia.Email,
+								FirstName: julia.FirstName,
+								LastName: julia.LastName,
+								Password: "Julia123!"), ApiRoles.Agent, userManager);
+
+				var malin = new Models.RealEstateAgent
+				{
+					FirstName = "Malin",
+					LastName = "Hoffström",
+					Email = "Malin@Skandiamaklarna.se",
+					PhoneNumber = "0704095540",
+					ImageUrl = "https://bilder.hemnet.se/images/broker_profile_large/94/84/94849113ae9965db565aea14e1831e1b.jpg",
+					ApiUserId = "f6d7c930-6dde-4750-a6c7-2bb7c88c51ce"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+								Id: malin.ApiUserId,
+								Email: malin.Email,
+								UserName: malin.Email,
+								FirstName: malin.FirstName,
+								LastName: malin.LastName,
+								Password: "Malin123!"), ApiRoles.SuperAgent, userManager);
+
+				ctx.Agencies.Add(new Models.RealEstateAgency
+				{
+					Name = "SkandiaMäklarna Göteborg",
+					Presentation = "Vi arbetar så hårt vi kan för att du ska känna dig trygg och bekväm från dag ett, och vi delar gärna med oss av våra kunskaper och erfarenheter för att underlätta för dig",
+					LogoUrl = "https://bilder.hemnet.se/images/broker_logo_2_2x/dd/7a/dd7a02fb5c0324de279ace72e14b873c.png",
+					Agents = new[] {
+					julia,
+					malin,
+					
+				    }
+				}
+                );
+				//Bjurfors Luleå
+				var elvira = new Models.RealEstateAgent
+				{
+					FirstName = "Elvira",
+					LastName = "Henriksson",
+					Email = "Elvira@Bjurfors.se",
+					PhoneNumber = "0763283869",
+					ImageUrl = "https://bilder.hemnet.se/images/broker_profile_large/bf/6c/bf6ce61c665e6156f995c9503fbcf0de.jpg",
+					ApiUserId = "ce6729b8-4deb-42ba-a4fa-e492aed8a945"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+								Id: elvira.ApiUserId,
+								Email: elvira.Email,
+								UserName: elvira.Email,
+								FirstName: elvira.FirstName,
+								LastName: elvira.LastName,
+								Password: "Elvira123!"), ApiRoles.Agent, userManager);
+
+				var therese = new Models.RealEstateAgent
+				{
+					FirstName = "Therese",
+					LastName = "Backman",
+					Email = "Therese@Bjurfors.se",
+					PhoneNumber = "0709807722",
+					ImageUrl = "https://bilder.hemnet.se/images/broker_profile_large/11/1c/111c6aa360e07339e6ad4b772364baac.jpg",
+					ApiUserId = "947e76db-8d20-4cf2-a1a8-8bafd47bcd29"
+				};
+
+				await IdentitySeeder.CreateUser(new IdentitySeeder.NewUser(
+								Id: therese.ApiUserId,
+								Email: therese.Email,
+								UserName: therese.Email,
+								FirstName: therese.FirstName,
+								LastName: therese.LastName,
+								Password: "Therese123!"), ApiRoles.SuperAgent, userManager);
+
+				ctx.Agencies.Add(new Models.RealEstateAgency
+				{
+					Name = "Bjurfors Luleå",
+					Presentation = "Välkommen ett steg upp",
+					LogoUrl = "https://bilder.hemnet.se/images/broker_logo_2/a7/97/a797d617963cb956b85e8a6bb4fb6079.png",
+					Agents = new[] {
+					elvira,
+					therese,
+				}
+				}
+                );
+				await ctx.SaveChangesAsync();
                 await transaction.CommitAsync();
 
             }
@@ -265,57 +245,7 @@ namespace FribergHomeAPI.Data.Seeding
         {
             var list = new List<Property>
             {
-                new Property{
-                ListingPrice = 1000000,
-                LivingSpace = 1000,
-                SecondaryArea = 10,
-                LotSize = 1000,
-                Description = "Ett stort objekt, huserade tidigare hockeylag",
-                NumberOfRooms = 100,
-                MonthlyFee = 10000,
-                OperationalCostPerYear = 100000,
-                YearBuilt = 1970,
-                PropertyType = PropertyType.House,
-                Images = new List<PropertyImage>
-                {
-                    new PropertyImage { ImgURL = "https://images.ohmyhosting.se/RXjFakX2ag9Aj3gQ8StqoqopjOM=/3840x1546/smart/filters:quality(85)/https%3A%2F%2Fnaidenbygg.se%2Fwp-content%2Fuploads%2F2023%2F02%2Fcoop-arena-naiden-arena3.jpg"},
-                    new PropertyImage {ImgURL = "https://cdn1-photos.shl.se/photos/22/05/00de89423e81ec324e758e9626a26477/thumb_2560.jpg?ixlib=js-3.8.0&auto=format&fp-debug=0&fp-y=0.5&fp-x=0.5&crop=focalpoint&fit=crop&ar=16%3A9&w=927&s=9c4b708ae814e966dd71b61dc1bab5ba" }
-                },
-                Address = new Address
-                {
-                    Street = "Midgårdsvägen 4",
-                    PostalCode = "97334",
-                    City = "Luleå",
-                },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Berit")
-            },
-            new Property
-            {
-                ListingPrice = 200000,
-                LivingSpace = 200,
-                SecondaryArea = 20,
-                LotSize = 20,
-                Description = "Renoveringsobjekt. Gammalt crackhus. Perfekt för dig som vill sätta egen prägel och skapa ditt drömhem!",
-                NumberOfRooms = 2,
-                MonthlyFee = 2000,
-                OperationalCostPerYear = 20000,
-                YearBuilt = 1982,
-                PropertyType = PropertyType.TownHouse,
-                Images = new List<PropertyImage>
-                {
-                    new PropertyImage { ImgURL = "https://miro.medium.com/v2/resize:fit:720/format:webp/1*yUhE4CUSnTP2e-mC3zx-qA.png"},
-                    new PropertyImage {ImgURL = "https://i2-prod.cornwalllive.com/news/cornwall-news/article599640.ece/ALTERNATES/s1200e/1_Newquay.jpg" }
-                },
-                Address = new Address
-                {
-                    Street = "Muskotvägen 24",
-                    PostalCode = "18460",
-                    City = "Åkersberga",
-                },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Stockholm"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
-            },
+             //Emelie
             new Property
             {
                 ListingPrice = 2595000,
@@ -355,7 +285,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Väddö",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Norrtälje"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -395,7 +325,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Visby",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Gotland"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -438,7 +368,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Göteborg",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -481,7 +411,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Timmernabben",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Mönsterås"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -526,7 +456,7 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Halmstad",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Halmstad"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
             },
             new Property
             {
@@ -564,41 +494,227 @@ namespace FribergHomeAPI.Data.Seeding
                     City = "Båstad",
                 },
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Båstad"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Bengt")
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Julia")
 
             },
-			
 
-            // Fredriks Property
             new Property
             {
-                ListingPrice = 2895000,
-                LivingSpace = 111,
-                SecondaryArea = 77,
-                LotSize = 1127,
-                Description = "Schysst Mexitegelvilla i liten håla",
-                NumberOfRooms = 5,
-                MonthlyFee = 0,
-                OperationalCostPerYear = 23376,
-                YearBuilt = 1971,
-                PropertyType = PropertyType.House,
+                ListingPrice = 1160000,
+                LivingSpace = 47,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "För dig som vill bo billigt i en stor etta ges nu möjlighet att förvärva denna kvadratsmarta bostad med modernt kök. Planlösningen är optimal med stort kök, rymlig hall och luftigt allrum. Allrummet ligger i gavel med fint ljusinsläpp och med möjlighet att skärma av rummet för att skapa ett separat sovrum. Bra förvaringsmöjligheter med fastbyggda garderober och källarförråd. Tack vare läget intill E45:an är det smidigt att ta sig vidare in till stan, till Hisingen eller norr ut.  Här bor du i en skuldfri förening med låg månadsavgift, låg parkeringsavgift (100 kr/mån), renoverat gym, bastu och stort förråd i källaren. Lägenheten har ett tillgängligt läge på andra våning med härlig vy från berget ner mot älven. \r\nOmrådet i Agnesberg präglas av vacker natur och passar utmärkt för er som uppskattar lugna gröna omgivningar men samtidigt vill ha nära in till city! Kommunikationsförbindelser via buss nås alldeles i anslutning till föreningen. Närmsta hållplats är Steken som servar området  med linje 173 (ca 20 min in till stan) samt linje 401 mot Angered centrum på bara några minuter. Angered centrum erbjuder stort utbud på matbutiker och övrig service. Härifrån kan vi även ta spårvagnar vidare till andra delar av stan.",
+                NumberOfRooms = 2,
+                MonthlyFee = 2142,
+                OperationalCostPerYear = 3696,
+                YearBuilt = 1965,
+                PropertyType = PropertyType.Condo,
                 Images = new List<PropertyImage>
                 {
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406010_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406011_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406013_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406015_1440x0.webp"},
-                    new PropertyImage { ImgURL = "https://bcdn.se/cache/46406016_1440x0.webp"}
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5e/3c/5e3ca433bb5a28d841ce55523969ae98.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bc/41/bc411ddc7ae1b8e32b0683c140caa412.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d8/3f/d83fa443d40fc2c5b797e50498a3e582.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/34/92/34928181ac8e56ac3c2db5b3067655de.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b3/f5/b3f5c8c670460f156368c474d85fb26d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/46/f546628585e0eab3aa2c88550e68064d.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/01/b401c14a30d2f7d0d23072f22a651564.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f0/11/f011550b645b13a073b7dc2a2f2d9f18.jpg"}
                 },
                 Address = new Address
                 {
-                    Street = "Utsiktsvägen 16",
-                    PostalCode = "517 71",
-                    City = "Olsfors",
+                    Street = "Steken 3C",
+                    PostalCode = "424 38",
+                    City = "Angered",
                 },
-                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Bollebygd"),
-                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Berit")
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
+            },
+
+            new Property
+            {
+                ListingPrice = 2565000,
+                LivingSpace = 59,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Stilren tvåa med inglasad balkong i soligt läge!\r\nVälkommen till denna fina tvårummare om ca 58,5 kvm – en bostad som kombinerar modern komfort med ett utmärkt läge. Här bor du på fjärde våningen med fint ljusinsläpp och många soltimmar. De ljusa golven och den genomtänkta planlösningen skapar en trivsam och luftig känsla, samtidigt som bostaden är lättmöblerad och anpassningsbar efter din personliga stil.\r\nKöket är praktiskt avskilt från vardagsrummet, vilket ger en tydlig rumsindelning och möjlighet till en lugn matlagningsmiljö. Intill köket finns en naturlig plats för matbordet, perfekt för trevliga middagsbjudningar. I vardagsrummet finns gott om plats för både soffgrupp och tillhörande möblemang. Härifrån når du även den rymliga inglasade balkongen i soligt läge – en perfekt plats för morgonkaffet, kvällens bok eller umgänge med vänner.\r\nSom boende i föreningen har du dessutom tillgång till en härlig gemensam takterrass – perfekt för att njuta av soliga dagar och vacker utsikt över närområdet. Du kan boka glashuset, inklusive pentry, för att bjuda vänner och familj på en extra trevlig kväll med god mat och härlig vy. \r\nLäget är svårslaget. Här bor du nära både matbutiker, caféer och annan service, samtidigt som du har utmärkta kommunikationer med kollektivtrafiken bara ett stenkast bort. Området är en knutpunkt i ständig utveckling, där stadspulsen möter ett avslappnat kvartersliv.\r\nVälkommen till Borstbindaregatan 1!",
+                NumberOfRooms = 4,
+                MonthlyFee = 4450,
+                OperationalCostPerYear = 6600,
+                YearBuilt = 2015,
+                PropertyType = PropertyType.Condo,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/1d/19/1d19ca836eaab75cd7b182734b48b526.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/98/74/9874c6b580131ce8e0d27a6346ef9a8a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/04/25/04254d2f2c65a7a0171c4f89a3fc5c35.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0a/4d/0a4d18d1610a5b64beb44f477188153f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c3/3d/c33d5712978e523b4c3e67724b8ebb63.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/19/fc/19fc7ca35f80ca9e0852eb350a29316c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/02/3f/023f6824a93d0bb65647839c2d227830.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4d/35/4d3568bda649f18daddc2ff352a7172e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/57/49/5749bec1156629d98d149c99cfa34630.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/a3/e0a370a43734b52a1e0adc3f8633adbb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/78/2b781ad5f65df5174514190dfa9f82bb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cb/38/cb389e352664fc48b60a6c3c31651c7f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bf/da/bfda01389817cb984a9eb7bb176056cb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d9/59/d959aab0e64faf0d77c7914d988917f7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f8/98/f8983b1e5dad82651c401f6dcd576452.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d0/64/d0649056a29a0b5a58f4b5b495fe8919.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2c/a4/2ca4bef843b73eb4d910a5afe99ea578.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e0/33/e03340ccd4d0ce09fd086ba6e4158a6b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Borstbindaregatan 1",
+                    PostalCode = "417 22",
+                    City = "Göteborg",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 5900000,
+                LivingSpace = 122,
+                SecondaryArea = 0,
+                LotSize = 824,
+                Description = "Här bor du omgiven av hästhagar, öppna landskap och rogivande skogspartier – perfekt för dig som söker lugnet men ändå vill ha närhet till stadens bekvämligheter.\r\nHuset är en stilren och nybyggd Smålandsvilla av modellen Fredriksdal, uppförd 2018. Bostaden erbjuder en öppen planlösning med generösa fönsterpartier som släpper in ljuset och skapar en harmonisk kontakt med utemiljön. Från vardagsrummet nås en stor altan i soligt söderläge – en perfekt plats för sommarens måltider, avkoppling och umgänge.\r\nHär finns tre rogivande sovrum, två helkaklade badrum, ett smakfullt kök och ett luftigt vardagsrum som bjuder in till både vardagsliv och fest.\r\nTrädgården är plan och lättskött, med gott om plats för både lek, odling och trädgårdsmöbler. Här kan du skapa din egen grönskande oas, med vackra perenner, fruktträd eller kanske en köksträdgård.\r\nTill fastigheten hör även en rymlig dubbel carport med tillhörande förråd – praktiskt för både förvaring och skydd för bilen.\r\nDessutom är fastigheten befriad från fastighetsavgift ända till 2033 – en extra ekonomisk fördel!\r\nHär bor du med ett lantligt läge, endast 15 minuter med bil från centrala Hisingen och sju minuter till Kärra centrum. På bekvämt avstånd finns även Albatross golfbana för den golfintresserade.\r\nEtt hem att trivas i – välkommen att uppleva det på plats!",
+                NumberOfRooms = 5,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 36835,
+                YearBuilt = 2018,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c0/c7/c0c7c025b596a3b292427662e91616eb.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/88/d9/88d9a17f125aa5bf293da897a55d9bd7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3e/12/3e12a683d1d3313fa86bce9ad69fb06c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/64/71/64717b5275594e644fa144586b664360.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/07/b407d2cc59bbc0ebb20bed2ff49b5d8e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e1/89/e189c0a717e548c42f0874c9647157b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/f9/40f9488ec67b27eeb1c614f6d1653f76.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/16/23/1623c5d8d56a8fbb46e3a880c208eb32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/18/4a/184a9320af57323110ff815eeb0017ea.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/33/b5/33b5e91b12283ff484061484f5a3e6ae.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9f/df/9fdfc8d41923464027345deb5e39db74.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/71/8d71fe890d92560f7c15ad5cae1d52c7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/05/1f/051f8fe0fc708c330e68f80338a948a0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/62/88/628855a485003ccf22e8762fb24f06b5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/8e/458e269145c6180c717cc1f79f0743c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9e/1d/9e1df75e36d13a9150f1c1c1d731e2ac.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/20/d1/20d127ebf69ff9ba341e2a6cb9d55ebf.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/da/4f/da4f0d551225b411d419b3cccdff6da4.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Böneredslyckan 7",
+                    PostalCode = "425 38",
+                    City = "Hisings Kärra",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 5995000,
+                LivingSpace = 123,
+                SecondaryArea = 37,
+                LotSize = 713,
+                Description = "På en lugn återvändsgata, belägen på en fridfull hörntomt, finner ni denna genomgående moderna och högkvalitativa enplansvilla. Här kombineras stilren design med praktisk funktion, vilket skapar ett hem som både är inbjudande och lätt att trivas i.\r\nHuset har genomgått en omfattande renovering mellan 2018 och 2022 och erbjuder en välplanerad planlösning med fem sovrum, varav två rymligare master bedrooms. Utöver detta finns ett stilrent badrum, en praktisk gästtoalett, en rymlig tvättstuga samt ett garage med förrådsutrymme.\r\nKöket och vardagsrummet ligger i en öppen planlösning, vilket skapar en luftig och social atmosfär. De stora fönsterpartierna släpper in ett vackert ljusinsläpp som speglar sig genom hela bostaden och förstärker känslan av rymd. Det helkaklade badrummet är utrustat med både badkar och dusch, vilket ger en kombination av komfort och elegans.\r\nHär bor ni i ett barnvänligt område där naturen finns precis runt hörnet. Mysiga promenadstigar, en lekplats och grönskande omgivningar skapar en trivsam och lugn boendemiljö. Samtidigt finns smidiga kommunikationsmöjligheter med både bil och buss, vilket gör det enkelt att ta sig in till centrala Göteborg eller Backaplan.",
+                NumberOfRooms = 6,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 37008,
+                YearBuilt = 1966,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2f/ba/2fba962c1271e4e6ed1a3e8f9ee945d5.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/fc/2bfc86448ccc40ac6eed95aaabc5a72e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3a/46/3a4635406c6ed0efaad6e5eebf0c73d0.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fb/13/fb1313921aad61886ecc4b581df9da55.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bd/6f/bd6f1114d9320f90c9f5622d9b9ec750.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/96/3e/963e42057b87c182d54ba198a19d98cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/45/a6/45a65aa3f32b9c7ebbf0ae6c137f866f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f5/51/f551fa5f9a26efcf4e5f5483acf2c31b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/12/40125e28e3e943768cb4f24928187a32.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/af/d6/afd66392150c3ecf0928006bdc34dc8f.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/90/8f/908fdd918347c4513db102b2310ce8ec.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8d/24/8d24644731cae0ae3c66c8b5295ed586.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f6/c8/f6c8935598c2a9b7fa35a8e05bce9454.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5d/8e/5d8e3df80fc8d62b706cd06b7639b58b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2e/69/2e699ec194a9cd5e77c53967ad45bd1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/df/5adfa029de7b610e7328df8c04649c3e.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/70/9c/709c17d97d0d4881ef1c05c89caf86f9.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a2/4e/a24e4a04a53418becf9cd8643c310931.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Forsbäcksvägen 12",
+                    PostalCode = "417 29",
+                    City = "Helgered",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
+
+            },
+
+            new Property
+            {
+                ListingPrice = 22000000,
+                LivingSpace = 262,
+                SecondaryArea = 146,
+                LotSize = 1062,
+                Description = "Uppe i den höga villans glasade penthousevåning lyfter sig havspanoramat och öppnar den helt fria horisonten. Vyerna är milsvida och långt mer än 180 grader över hav, öar och inlopp. Vågorna slår mot Långedrags klippor och kajer cirka 300 meter nerför klippsluttningen. I solnedgången är atmosfären häruppe närmast förtätad och den höga utsiktsplatsen fortsätter ut på takterrassen inramad av räcken i marin stil.\r\nPenthousevåningens spiraltrappa i ek och borstat stål leder ner till mellanplanets stora allrum där glaspartierna vetter i tre olika väderstreck. Havsutsikten kommer igen och utanför finns en lång terrassbalkong. Den blonda ekparketten sträcker ut och förbinder till två sovrum, en walk-in-closet samt ett nyskapat och oerhört sobert badrum. Härifrån leder den raka balktrappan i ek och stål rakt ner till entréplanets mycket stora sällskapsytor. De ligger i öppen planlösning med kök, matsalsdel och vardagsrumsdel. En formren öppen spis är den självklar fokuspunkten. Känslan av stora och ljusa rumsvolymer är påtaglig och ytterst mot havet finns ett glasat uterum. Även på detta plan är havsutsikten fri tack vare det höga läget. Glaspartier i flera väderstreck släpper in kaskader av ljus. Trestavsparketten i ek öppnar ytorna och fortsätter in i det stora köket med central köksö, avskalad design och utgång till terrasser och uteplatser i olika etage. På detta plan finns även sovrum, badrum och tvättstuga. Med egen entré från uppfarten finns en nyskapad gäst- eller uthyrningslägenhet i sluttningsplanet. Den är komplett med badrum, kök, allrum, sovavdelning och walk-in-closet. Den stora villan har även ett stort garage och ansenliga förrådsytor i källarplanet. Närheten till hamn, hav och skärgård är en del av livet i dessa trivsamma kvarter, med båt och vattensport eller kvällspromenader längs kustlinjen. Samtidigt bor du inbäddad av grönska. Det höga och havsnära läget kombinerar känslan av att bo avskilt och exklusivt med all tänkbar service och bra skolor i närområdet. Den stora stadens citykärna känns långt borta men, efter knappa femton minuter i bilen kan du parkera på Avenyn.\r\n",
+                NumberOfRooms = 7,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 43575,
+                YearBuilt = 2004,
+                PropertyType = PropertyType.House,
+                Images = new List<PropertyImage>
+                {
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/66/f4/66f442df8a9afee29d5b20d5298ecf1a.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/dd/97/dd9797c533c5884e370fdd17a10f72ef.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fa/1e/fa1e2eb9e296a1c841bf28c815e5ee34.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/69/09/6909055cfd5519d2667195db23346375.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/51/1f/511f886687f735a23e6db22c68012aa1.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c6/98/c698aaacd920c4ec103ce04b1a0f29c8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b7/9f/b79feaa094c0098d5a9bec8e3311771c.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c5/a6/c5a62bcf6d20f65eb6e2c13b0e093c88.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a4/45/a445cf135cfbc4e3721b777e24dca4bd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9c/79/9c798fe9ae601b837bc08b777ce6893b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/84/de/84de3e9f38b791609d3dc2076b02653b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ec/59/ec591aa6409a61049e7a3c98e4eeea1b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b2/c7/b2c7f52a8be5a67ea8241c5d7ca94545.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/db/18/db18c8c8adfa1b51fea227c52afed620.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4b/01/4b01d84db0512a13ff352f8ffa6c9114.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e4/0e/e40e1d492aecc30dc8797e145af0f8cd.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b4/87/b48783e1a531c36136f3b168404109b7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e6/87/e687d648b2381fc3b4cbdb05646d5568.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a8/1b/a81b6b671c5c420cf8bcb76035c5bc70.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d4/47/d447e4cb962ed1bf9a15aa262f2c37a7.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ee/ab/eeab29b55bc7edc4cc3eb4c61c2bca67.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/93/7f/937fc1d639a352ac1b06e8fbf56935f8.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/24/d4/24d45b9eae965fe41d27c0e4583a236b.jpg"},
+                    new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/41/05/41056f94cb5feb299dcd26fed2f24a5b.jpg"}
+
+                },
+                Address = new Address
+                {
+                    Street = "Väbelgatan 3",
+                    PostalCode = "426 76",
+                    City = "Västra Frölunda",
+                },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Göteborg"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Malin")
 
             },
             new Property
@@ -607,7 +723,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 51,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Charmig tvåa i på första våningen – med närhet till både natur och centrum!",
+                Description = "Charmig tvåa i på första våningen – med närhet till både natur och centrum! Välkommen till Centralgatan 17F – en trivsam tvåa om 51 smart planerade kvadratmeter i omtyckta Brf Holmsundshus! Här bor du bekvämt i markplan med ett lugnt läge och fina omgivningar. Perfekt för dig som söker ett lättskött boende med direkt närhet till både service, kommunikationer och grönområden. Lägenheten erbjuder en ljus och inbjudande planlösning där kök och vardagsrum ligger i fil med fint ljusinsläpp. Sovrummet är rymligt nog för både dubbelsäng och förvaring, och ett badrummet som har allt du behöver. Här finns gott om förvaringsmöjligheter – både i lägenheten och via tillhörande förråd. Brf Holmsundshus är en välskött och stabil förening med god ekonomi, vilket ger trygghet för dig som köpare. I månadsavgiften ingår det mesta du behöver för ett bekvämt boende. Läget på Centralgatan är svårslaget – du har mataffär, busshållplats och vackra promenadstråk längs vattnet bara några minuter bort. Det här är ett hem att trivas i – lika perfekt för förstagångsköparen som för den som vill bo lättillgängligt och bekymmersfritt!",
                 NumberOfRooms = 2,
                 MonthlyFee = 3092,
                 OperationalCostPerYear = 19510,
@@ -646,7 +762,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 44,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna välplanerade och rymliga 1:a om 43,5 kvm på populära Mariehem! Här får du en bostad med smart planlösning, gott om förvaring och modern bekvämlighet.",
+                Description = "Välkommen till denna välplanerade och rymliga 1:a om 43,5 kvm på populära Mariehem! Här får du en bostad med smart planlösning, gott om förvaring och modern bekvämlighet. Det luftiga allrummet ger plats för både soffhörna och sovdel, medan det separata köket har bra arbetsytor och förvaring – perfekt för dig som gillar att laga mat. Badrummet är fräscht och utrustat med dusch och egen tvättmaskin, vilket ger en bekväm vardag utan att behöva nyttja gemensam tvättstuga. Lägenheten ligger i Brf Storspoven, en stabil förening som genomför stora uppgraderingar med fasadrenovering, ventilation och solceller – insatser som både förbättrar boendemiljön och energieffektiviteten. Här finns även möjlighet att hyra garage- eller parkeringsplats. Läget är utmärkt med närhet till grönområden, mataffärer och goda kommunikationer till centrum. Ett perfekt boende för den som söker en första bostad, studentlägenhet eller en bekväm övernattningslägenhet i ett lugnt och trevligt område.",
                 NumberOfRooms = 1,
                 MonthlyFee = 3958,
                 OperationalCostPerYear = 32069,
@@ -686,7 +802,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 36,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Porfyrvägen 3A – en trivsam och välplanerad etta med närhet till både natur och stad!",
+                Description = "Välkommen till Porfyrvägen 3A – en trivsam och välplanerad etta med närhet till både natur och stad! På omtyckta Gimonäs finner du denna ljusa och stilrena bostad om ett rum och kök, belägen i den välskötta föreningen Brf Cykeln. Här bor du i ett lugnt och trivsamt område med närhet till älven, grönområden, fina cykelvägar samt goda kommunikationer som snabbt tar dig in till centrala Umeå och universitetet. Lägenheten är smart planerad med en välkomnande hall, fräscht kök med plats för matgrupp, ett rymligt allrum med goda möbleringsmöjligheter samt ett helkaklat badrum. Tack vare fönster i bra läge får bostaden ett fint ljusinsläpp som förstärker känslan av rymd. Här finns gott om plats för både vardagsliv och studiero. Brf Cykeln är en stabil förening med god ekonomi och flera gemensamma bekvämligheter såsom tvättstuga, förråd och cykelförvaring. På Gimonäs bor du nära både natur och service – perfekt för dig som vill ha det bästa av två världar. En perfekt förstaboende, studentlägenhet eller övernattningslägenhet.",
                 NumberOfRooms = 1,
                 MonthlyFee = 2843,
                 OperationalCostPerYear = 37500,
@@ -727,7 +843,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 40,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen längst upp i huset och denna kvadratsmarta lägenhet på populära Tomtebo.",
+                Description = "Välkommen längst upp i huset och denna kvadratsmarta lägenhet på populära Tomtebo. Här får du ett hem med sociala ytor och öppen planlösning mellan kök och vardagsrum, ett stilrent kök som är utrustat med all den maskinella utrustning du kan tänkas behöva. Badrummet är helkaklat och full-utrustat med egna tvättmöjligheter och golvvärme. God förvaring med skjutgarderob samt extra garderober. Sovalkov som inrymmer dubbelsäng på 180 cm. Bo dessutom i en trevlig och välskött förening på Tomtebo. Området präglas av sina gröna omgivningar och bra kommunikationer. Bussen som stannar strax i närheten tar er till såväl till universitetsområdet som centrala stan inom kort.  Här bor ni dessutom ett stenkast från omtyckta Nydalasjön.",
                 NumberOfRooms = 1,
                 MonthlyFee = 4250,
                 OperationalCostPerYear = 31250,
@@ -768,7 +884,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 44,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Skolgatan 9B – ett drömboende som väntar på dig i Brf Skräddaren 4! Denna charmiga lägenhet i gårdshuset erbjuder en perfekt kombination av stil, komfort och harmoni.",
+                Description = "Välkommen till Skolgatan 9B – ett drömboende som väntar på dig i Brf Skräddaren 4! Denna charmiga lägenhet i gårdshuset erbjuder en perfekt kombination av stil, komfort och harmoni. Med 2 rum och kök breder sig det stilfulla hemmet ut över 44 kvadratmeter. Lägenheten erbjuder en mysig och välkomnande atmosfär med balans mellan gammalt och nytt. Huset är ursprungligen från 1920-talet, men hela lägenheten totalrenoverades 2016 med moderna ytskikt. Ljusa och luftiga ytor skapar en harmonisk känsla där du genast kan känna dig hemma. Brf Skräddaren 4 har ett perfekt läge nära Umeås centrumkärna. Här har du närhet till allt du behöver – allt från grönskande parker, till trendiga caféer och bekväma kommunikationer. Varför välja mellan stadslivets puls och lugnet i hemmet när du kan ha båda? Föreningen har en mysig gemensam innergård, omsluten av häckar. På innergården finns också ett stort körsbärsträd och pallkragar med möjlighet att odla i. Tvättstuga finns mellan garage och gårdshus. Bostaden har ett genomgående ljust ytskikt, vitpigmenterat ekgolv och vackra spröjsade fönster. Lägenheten har fantastiska detaljer och smarta lösningar som ger dig allt du behöver för att leva bekvämt och njuta av varje ögonblick. Här möts du av fina hus i ett vackert område, med stadens puls som granne och bekvämt gångavstånd till både centrum och natursköna promenadstråk längs älven. Direkt bussförbindelse samt cykel- och gångvägar till universitet. Så varför vänta? Ta chansen att bli en del av gemenskapen på Skolgatan 9B och upptäck allt som Brf Skräddaren 4 har att erbjuda. Denna lägenhet har ett lägre andelstal pga annan uppvärmning.",
                 NumberOfRooms = 2,
                 MonthlyFee = 3442,
                 OperationalCostPerYear = 9756,
@@ -809,7 +925,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 39,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Här har du möjlighet att förvärva en ljus och välplanerad etta på 39,5 kvadratmeter i den populära bostadsrättsföreningen Skidstaven 1.",
+                Description = "Här har du möjlighet att förvärva en ljus och välplanerad etta på 39,5 kvadratmeter i den populära bostadsrättsföreningen Skidstaven 1. Belägen på attraktiva Berghem, erbjuder denna bostad en fantastisk kombination av komfort, bekvämlighet och närhet till allt du behöver. Denna etta bjuder på ett rymligt och inbjudande vardagsrum med gott om plats för både sovdel och sällskapsytor. De stora fönstren släpper in rikligt med dagsljus vilket skapar en ljus och öppen atmosfär. Köket är smart utformat med bra arbetsytor och förvaringsmöjligheter, perfekt för den matlagningsintresserade. Badrummet är fräscht och funktionellt, utrustat med badkar och förvaringsskåp. Berghem är känt för sin trevliga och lugna atmosfär med närhet till natur och rekreationsområden. Här bor du med gångavstånd till Umeå universitet, Norrlands universitetssjukhus och stadens centrum, vilket gör detta till ett utmärkt val för både studenter och yrkesverksamma. Goda kommunikationsmöjligheter och närhet till service såsom mataffärer, gym och restauranger gör vardagen enkel och bekväm. Brf Skidstaven 1 är en omtyckt förening som erbjuder sina medlemmar fina gemensamhetsutrymmen och god ekonomi. Här finns bland annat tvättstuga, cykelrum och förråd, vilket bidrar till en bekväm boendemiljö.",
                 NumberOfRooms = 1,
                 MonthlyFee = 2292,
                 OperationalCostPerYear = 0,
@@ -850,7 +966,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 70,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Kvarnvägen 8B – en ljus och välplanerad tvårummare med balkong!",
+                Description = "Välkommen till Kvarnvägen 8B – en ljus och välplanerad tvårummare med balkong! I Brf Skäppan 34 finns nu en genomtänkt lägenhet om 70 kvm tillgänglig. Bostaden ligger högst upp i huset på våning 3, och hiss finns. Lägenheten har en öppen och funktionell planlösning där vardagsrummet leder ut till en balkong med utsikt mot centrala Umeå. Här finns möjlighet att njuta av morgonkaffet eller en stunds avkoppling på kvällen. Köket är välbehållet och erbjuder gott om både arbetsyta och förvaring, vilket underlättar både vardagsmatlagning och middagsbjudningar. Sovrummet är rymligt och har plats för en dubbelsäng. Intill finns en praktisk klädkammare som ger bra förvaringsmöjligheter. Läget är bekvämt med närhet till centrum, universitetet, restauranger och promenadstråk längs Umeälven. En bostad med hiss och en genomtänkt planlösning för ett smidigt boende.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4709,
                 OperationalCostPerYear = 0,
@@ -891,7 +1007,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 78,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Tråggränd 42B – ett hemtrevligt och insynsskyddat boende med genomtänkt planlösning, belägen i en populär förening på lugna och barnvänliga Ersboda.",
+                Description = "Ljus och välplanerad trea med balkong i lugnt område! Välkommen till Tråggränd 42B – ett hemtrevligt och insynsskyddat boende med genomtänkt planlösning, belägen i en populär förening på lugna och barnvänliga Ersboda. Här bor du i ett trivsamt bostadsområde med närhet till både natur, service och goda kommunikationer. Bostaden är belägen en trappa upp och bjuder på 79,5 välplanerade kvadratmeter fördelade över tre rum och kök. Här finns två rogivande sovrum med god förvaring, ett ljust och luftigt vardagsrum med stora fönster samt ett kök med matplats intill fönsterparti. Planlösningen ger bra flöde mellan rummen och gott om plats för både vardagsliv och gäster. Från köket nås den generösa balkongen i bra solläge – en perfekt plats att njuta av kaffe eller middag större delen av året. Badrummet är praktiskt placerat och utrustat med badkar. I hallen och sovrummen finns flera garderober som ger bra förvaringsmöjligheter. Brf Tråget är en välskött förening med låg månadsavgift, fina innergårdar och god gemenskap. Här bor du med cykelavstånd till centrala Umeå, nära till Ersboda handelsområde, skolor, förskolor och fina grönområden.",
                 NumberOfRooms = 3,
                 MonthlyFee = 4336,
                 OperationalCostPerYear = 3492,
@@ -932,7 +1048,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 54,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Kålhagsvägen 29A erbjuder ett modernt och bekvämt boende i ett naturnära och populärt område.",
+                Description = "Kålhagsvägen 29A erbjuder ett modernt och bekvämt boende i ett naturnära och populärt område. Lägenheten är belägen i Brf Lav Alfa, en välskött förening med byggår 2020 där både fastighet och utemiljö håller hög standard. Här bor du i ett lugnt kvarter med närhet till det mesta – perfekt för både studenter, yrkesverksamma och den som bara vill bo bekvämt. Bostaden är en välplanerad tvåa om 54 kvm med genomtänkta materialval, ljusa ytskikt och smarta förvaringslösningar. Planlösningen är spegelvänd jämfört med liknande lägenheter i huset, vilket ger en egen karaktär till hemmet. Den rymliga balkongen i västerläge bjuder på soliga eftermiddagar och utsikt mot grönska. Läget är optimalt med gångavstånd till Umeå universitet, Norrlands universitetssjukhus, IKSU sportcenter och flera matbutiker. Endast ett par hundra meter bort ligger Nydalasjön – ett omtyckt rekreationsområde med badplats, motionsspår och vacker natur året om. Goda bussförbindelser tar dig snabbt in till centrum. Brf Lav Alfa är en stabil bostadsrättsförening med låga driftskostnader och moderna bekvämligheter. Här bor du med det bästa av två världar – nära naturen, men med stadens puls inom räckhåll.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4790,
                 OperationalCostPerYear = 0,
@@ -973,7 +1089,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 79,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till Hermelinvägen 113 – en smakfullt renoverad trea om 79 kvm med genomtänkta materialval, öppen planlösning och ett av föreningens bästa lägen!",
+                Description = "Stilren och välplanerad trea i populära Brf Hartassen där allt inkl huhållsel ingår i månadsavgiften. Välkommen till Hermelinvägen 113 – en smakfullt renoverad trea om 79 kvm med genomtänkta materialval, öppen planlösning och ett av föreningens bästa lägen! Här bor du utan hus framför, med fri utsikt mot den grönskande innergården, samtidigt som du har närhet till parkeringarna. Denna bostad erbjuder en harmonisk kombination av stil och funktionalitet med ett modernt kök, smakfullt badrum och ljusa, rymliga rum. Lägenheten ligger i Brf Hartassen, en välskött och stabil förening med gedigen underhållsplan, låga avgifter och utmärkta faciliteter. Lägenheten erbjuder: Rymligt förråd i lägenheten. Modernt kök – stilren inredning med ljusa skåpluckor, svart beslag och betongmönstrad bänkskiva. Här finns gott om förvaring och arbetsytor, samt en praktisk bardel som inbjuder till sociala måltider. Rymligt vardagsrum – ett ljust och inbjudande rum med plats för både matgrupp och soffhörna. Två sovrum – det större rymmer en dubbelsäng och förvaring, medan det andra passar utmärkt som barnrum, kontor eller gästrum. Stilrent badrum – lyxig känsla med glasväggar, stilren kommod, dusch och kombinerad tvätt och torktumlare. Lugnt läge – bostaden ligger insynsskyddad, omgiven av föreningens fina innergårdar.",
                 NumberOfRooms = 3,
                 MonthlyFee = 4238,
                 OperationalCostPerYear = 0,
@@ -1014,7 +1130,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 99,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna trivsamma markplanslägenhet på hela 99 kvm i hjärtat av Tomtebo! ",
+                Description = "Välkommen till denna trivsamma markplanslägenhet på hela 99 kvm i hjärtat av Tomtebo! Här erbjuds ett bekvämt och funktionellt boende med fyra rum och en social planlösning där köket står i centrum. Köket bjuder in till matlagning och umgänge, perfekt för både vardagsmiddagar och festliga tillfällen. Eftersom det finns uteplatser på både fram och baksida så kan ni njuta av solen både på morgon och kväll. Bostaden bjuder på två uteplatser vilket gör att man både kan fånga morgon och kvällssolen. På baksidan finns också körsbärsträd, vinbärsbuskar och hallon samt en rymlig altan. Lägenheten har tre sovrum, varav ett med en stor klädkammare som ger gott om förvaring. Här får du både komfort och praktiska lösningar för en smidig vardag. Badrummet är funktionellt med tvättmaskin, och dessutom finns en separat toalett som underlättar morgonrutinerna. Den välskötta bostadsrättsföreningen erbjuder många bekvämligheter för sina boende, såsom ett gym, en avkopplande bastu, hobbyrum, samlingslokal samt en övernattningslägenhet för gäster. För den som har bil finns gott om gästparkeringar, vilket gör det smidigt att ta emot besök. Området är populärt och lugnt, med närhet till både natur och stadens puls. Här bor du med bekväma kommunikationer och fina grönområden som inbjuder till härliga promenader och friluftsliv. Bara ett stenkast bort ligger Nydalasjön. Ett hem som kombinerar funktion, komfort och en trivsam atmosfär – perfekt för dig som söker ett harmoniskt boende!",
                 NumberOfRooms = 4,
                 MonthlyFee = 6949,
                 OperationalCostPerYear = 0,
@@ -1055,7 +1171,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 53,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Varmt välkomna till Hissjövägen 44! Ett säkert kort bland Umeås föreningar. Här hittar du ett välskött hem med bekvämt avstånd till stadskärnan och gröna strövområden.",
+                Description = "Varmt välkomna till Hissjövägen 44! Ett säkert kort bland Umeås föreningar. Här hittar du ett välskött hem med bekvämt avstånd till stadskärnan och gröna strövområden. Denna trerummare på 53,4 kvadratmeter, belägen på våning två, erbjuder allt du behöver för en bekväm livsstil. Njut av en trivsam balkong med eftermiddags- och kvällssol, perfekt för avkoppling efter en lång dag. Interiört möts du av en välkomnande hall, ett badrum med tvättmaskin och ett fullutrustat kök i öppen planlösning mot sällskapsrummet. De två sovrummen har en sober färgsättning och erbjuder goda förvaringsmöjligheter.  Det finns också ett tillhörande förråd på vinden för extra förvaring. BRF Kruthornet är en välskött förening med stabil ekonomi, vilket bidrar till en låg månadsavgift och gör detta till ett långsiktigt smart val. Läget är fantastiskt – du har både natur och stad inom räckhåll, med goda kommunikationer som tar dig till både shopping, restauranger och service på kort tid. På bara 15 minuter med kollektivtrafik når du universitetet – en perfekt lösning för den pendlande studenten eller arbetande. Här finns alla förutsättningar för att trivas riktigt bra! Välkommen att boka din visning!",
                 NumberOfRooms = 3,
                 MonthlyFee = 3624,
                 OperationalCostPerYear = 0,
@@ -1095,7 +1211,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 27,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna kvadratsmarta etta på Teg! Denna ljusa och fräscha bostad erbjuder en smart planlösning med en mysig sovalkov.",
+                Description = "Välkommen till denna kvadratsmarta etta på Teg! Denna ljusa och fräscha bostad erbjuder en smart planlösning med en mysig sovalkov. Här finns gott om plats för både matbord, soffa och tv-möbel, vilket gör det enkelt att skapa en trivsam och funktionell hemmiljö. Badrummet är utrustat med dusch och tvättmaskin för extra bekvämlighet. Lägenheten säljs delvis möblerad. Lägenheten har ett utmärkt läge med närhet till centrum, vilket ger dig tillgång till allt du behöver inom gångavstånd. Perfekt för dig som söker ett praktiskt och stilrent boende! Behöver du ta dig till universitetet så går bussen precis utanför!",
                 NumberOfRooms = 1,
                 MonthlyFee = 2032,
                 OperationalCostPerYear = 0,
@@ -1135,7 +1251,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 69,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna rymliga tvåa på 69,5 kvm belägen på Kemigränd 14 i en stabil förening. Här möts du av ett fint renoverat kök och ett badrum med tvättmaskin för extra bekvämlighet.",
+                Description = "Charmig tvåa med perfekt läge! Välkommen till denna rymliga tvåa på 69,5 kvm belägen på Kemigränd 14 i en stabil förening. Här möts du av ett fint renoverat kök och ett badrum med tvättmaskin för extra bekvämlighet. Den öppna planlösningen mellan vardagsrum och matplats skapar en inbjudande atmosfär, balkongen erbjuder en plats för avkoppling. Lägenheten ligger nära universitetet, NUS, busshållplats, mataffärer och restauranger, vilket gör den idealisk för både studenter och yrkesverksamma. Föreningen har en mysig innergård och erbjuder flera bekvämligheter såsom kvarterslokal, gästrum, odlingslotter, tvättstugor och hobbylokaler. Här finns allt du behöver för ett bekvämt och trivsamt boende.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4424,
                 OperationalCostPerYear = 0,
@@ -1176,7 +1292,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 119,
                 SecondaryArea = 0,
                 LotSize = 226,
-                Description = "Välkommen till detta fantastiska radhus i ett populärt område på Tomtebo, bara ett stenkast från Nydalasjön! Detta hem erbjuder hela 119 kvm av välplanerad yta, byggt 2008, med fyra rymliga sovrum och två helkaklade badrum.",
+                Description = "Välkommen till detta fantastiska radhus i ett populärt område på Tomtebo, bara ett stenkast från Nydalasjön! Detta hem erbjuder hela 119 kvm av välplanerad yta, byggt 2008, med fyra rymliga sovrum och två helkaklade badrum. Huset har genomgående ljusa ytskikt och parkettgolv som löper vidare genom hela bostaden. På nedre plan finns golvvärme som ger en behaglig och jämn temperatur året runt. Den separata tvättstugan gör vardagen enklare, och de två uteplatserna ger möjlighet till både avkoppling och sociala aktiviteter utomhus. På morgonen kan ni njuta av solen på framsidan, medan baksidan erbjuder härlig kvällssol. Eftersom baksidan vetter mot skogen, är det både lugnt och mysigt. Till huset tillhör också en praktisk carport och förråd. Bostaden ligger i en samfällighet där bland annat internet och renhållning ingår. I samfälligheten finns också ett rum som man kan nyttja för att till exempel valla skidorna i.  Området är mysigt och har närhet till både skog och Nydalasjön, vilket skapar en naturnära och harmonisk miljö. En bit bort finns också den populära äventyrslekparken.  Dessutom ligger skola och förskolor nära, och det finns bra bussförbindelser som gör det enkelt att ta sig till och från centrum. Perfekt för familjen som söker ett bekvämt och trivsamt boende!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 49268,
@@ -1217,7 +1333,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 69,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna trivsamma tvåa på 69,5 kvm! Här finner du en inglasad balkong som förlänger sommaren och ger extra utrymme att njuta av. ",
+                Description = "Välkommen till denna trivsamma tvåa på 69,5 kvm! Här finner du en inglasad balkong som förlänger sommaren och ger extra utrymme att njuta av. Lägenheten har ett helkaklat badrum med tvättmaskin, vilket gör vardagen bekväm och praktisk. Köket är utrustat med en matplats där du kan njuta av dina måltider, och det rymliga vardagsrummet erbjuder gott om plats för både avkoppling och umgänge. Sovrummet har gott om förvaring, vilket gör det enkelt att hålla ordning. Föreningens gemensamma utrymmen inkluderar allt från bastu och relaxavdelning till övernattningsrum, samlingslokal och en fullt utrustad tvättstuga. Lägenheten ligger i närhet till Mariehems centrum, där du har tillgång till gym, mataffärer och andra bekvämligheter. Dessutom finns det bra busskommunikationer som gör det enkelt att ta sig runt. Både universitet och NUS ligger på bekvämt avstånd.",
                 NumberOfRooms = 2,
                 MonthlyFee = 6000,
                 OperationalCostPerYear = 0,
@@ -1258,7 +1374,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 126,
                 SecondaryArea = 48,
                 LotSize = 738,
-                Description = "",
+                Description = "Välkommen till denna trevliga enplansvilla på gaveln, belägen i det natursköna och eftertraktade Holmsund. Här erbjuds ett hem med genomtänkta och praktiska lösningar, perfekt för hela familjen. Villan har tre sovrum och två badrum, vilket ger gott om utrymme och bekvämlighet i vardagen. De två sällskapsrummen skapar möjligheter för både avkoppling och socialt umgänge. Det vidbyggda garaget och carporten ger smidig parkering och extra förvaringsutrymme. Utanför möts du av en mysig tomt där du kan njuta av lugnet och naturen i denna vackra omgivning. Ett hem som kombinerar funktionalitet, charm och ett fantastiskt läge – varmt välkommen!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 32173,
@@ -1299,7 +1415,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 76,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Söker du något utöver det vanliga? Då är du varmt välkommen till denna fantastiska trea med industriell stil och moderna inslag!",
+                Description = "Söker du något utöver det vanliga? Då är du varmt välkommen till denna fantastiska trea med industriell stil och moderna inslag! En lägenhet som verkligen sticker ut i mängden. Det sociala köket ligger i öppen planlösning med vardagsrummet och gör att släkt och vänner kan samsas när middagen tillagas. Med genomgående enstavsparkett och omsorgsfullt valda detaljer är detta verkligen en lägenhet att trivas i! En tvåa på pappret, men så mycket mer i verkligheten. Industriväggen i vardagsrummet utgör ytterligare ett rum med flera olika användningsmöjligheter. Här finner du också ett helkaklat badrum med golvvärme som ger en lyxig känsla varje morgon. De platsbyggda garderoberna i sovrummet erbjuder gott om förvaring och den extra gästtoaletten är perfekt för besökare. Njut av soliga dagar på den inglasade balkongen i söderläge som också har infravärme för lite kallare dagar. Se till att boka in er på visning och ta chansen att bo i en av Umeås bästa föreningar. Vad sägs om låg månadsavgift, gym, övernattningsrum och bastu? Att du dessutom har närhet till affärer, gym, universitet och sjukhus är ju bara en bonus! Intresserad av skidåkning? Bakom husen finns Mariehemsängarna för längdskidåkning och Bräntbacken om du föredrar utförsåkning.",
                 NumberOfRooms = 3,
                 MonthlyFee = 3578,
                 OperationalCostPerYear = 0,
@@ -1381,7 +1497,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 80,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till denna välplanerade 3:a i en populär förening på Ersboda!",
+                Description = "Välkommen till denna välplanerade 3:a i en populär förening på Ersboda! Här finner du ett renoverat kök med köksö, perfekt för matlagning och sociala tillställningar. De rymliga sovrummen har praktiska klädkammare, och badrummet är utrustat med tvättmaskin som underlättar vardagen. Vardagsrummet har en utgång till balkongen, där du kan njuta av en kopp kaffe när solen tittar fram. Föreningen erbjuder faciliteter såsom en stor samlingslokal, bastu, tvättstugor, hobbyrum, grillplats samt en uthyrningslägenhet för besökare. Här finns också lekplats på innergården. På Mjölkvägen 82 bor du nära naturen, skolor, förskolor och butiker – allt för en bekväm och trivsam vardag. Dessutom finns busshållsplats ett stenkast bort som gör det enkelt att ta sig runt stan!",
                 NumberOfRooms = 3,
                 MonthlyFee = 6392,
                 OperationalCostPerYear = 0,
@@ -1422,7 +1538,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 157,
                 SecondaryArea = 0,
                 LotSize = 1206,
-                Description = "Varmt välkommen till Avaliden 39 och detta magiska hem i naturnära läge.",
+                Description = "Varmt välkommen till Avaliden 39 och detta magiska hem i naturnära läge. Här bor du i ett välplanerat hus där varje kvadratmeter är fylld av möjligheter. Det fantastiska köket bjuder på generösa arbetsytor, gott om förvaring och en smart layout som gör matlagningen både inspirerande och social. De stora fönstren släpper in ett härligt ljus och skapar en luftig och inbjudande känsla i hela hemmet. Från köket når du den soliga altanen och tomten – en självklar plats för morgonkaffet, barnens lek och grillkvällar med familj och vänner. Med fem generösa sovrum finns gott om plats för familjen att växa, för gäster att stanna över – eller för att inreda det där hemmakontoret, hobbyrummet eller den kreativa studion du alltid drömt om. Två badrum underlättar morgonrutinerna och gör vardagen smidigare. Här bor du i en naturskön oas, omgiven av rofyllda skogar, glittrande sjöar och vidsträckta landskap, samtidigt som du har nära till all nödvändig service. Bara 3 km bort ligger Tavelsjö, där du hittar både förskola, skola och matbutik. Området är känt för sitt aktiva föreningsliv, fina vandrings- och cykelleder samt den populära skridskobanan på Tavelsjön under vinterhalvåret. Med endast 30 minuter till centrala Umeå erbjuder Tavelsjö den perfekta balansen mellan lugnet i naturen och stadens alla bekvämligheter. Ett boende att växa i – och längta hem till. Boka din visning redan idag!",
                 NumberOfRooms = 6,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 23208,
@@ -1463,7 +1579,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 53,
                 SecondaryArea = 40,
                 LotSize = 2269,
-                Description = "Magiskt läge vid havet – insynsskyddad oas med panoramautsikt.",
+                Description = "Magiskt läge vid havet – insynsskyddad oas med panoramautsikt. Välkommen till Sillviken 77 – ett riktigt smultronställe med vidsträckt havsutsikt, sol från morgon till kväll och total avskildhet. På den lummiga och lättskötta tomten finns en charmig huvudstuga med nyare kök, uterum, vintervatten och fiber, samt två fräscha gäststugor – samtliga byggnader är i mycket gott skick med moderna ytskikt. Här njuter du av morgonkaffet i soluppgången, kvällsdopp direkt från tomten och närhet till både båtplats och badmöjlighet. En plats att trivas på – året om.",
                 NumberOfRooms = 2,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 13184,
@@ -1504,7 +1620,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 62,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till ett hem som sätter ribban för lyxigt boende! Här bor du i en modern oas byggd 2021, där hissen smidigt tar dig direkt från markplan upp till din egen fristad.",
+                Description = "Välkommen till ett hem som sätter ribban för lyxigt boende! Här bor du i en modern oas byggd 2021, där hissen smidigt tar dig direkt från markplan upp till din egen fristad. På sjunde våningen möts du av en en bostad med en ljus och genomtänkt planlösning samt eleganta materialval. Kronan på verket är den stora, inglasade balkongen med en hänförande utsikt över Umeälven – din alldeles egna front row-plats till naturens skådespel. Balkongen badar i sol större delen av dagen och bjuder på magiska kvällar, perfekta för både avkoppling och sociala stunder. Utanför dörren väntar dessutom en vacker strandpromenad längs älvkanten som tar dig hela vägen in till stadens puls. Lägg därtill möjligheten att hyra ett gästrum på markplan, närhet till natur, skolor, universitet och city samt bra bussförbindelser – och du har ett boende som är lika praktiskt som förtrollande. Och när stadens puls kallar? Hoppa på cykeln – på bara fem minuter är du mitt i hjärtat av Umeå. Varmt välkommen att boka din visning och upptäck en bostad utöver det vanliga!",
                 NumberOfRooms = 2,
                 MonthlyFee = 4929,
                 OperationalCostPerYear = 3192,
@@ -1545,7 +1661,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 120,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till en stor och ljus 5:a i perfekt gavelläge på populära Mariehem! Separat uthyrningsrum ger lägre boendekostnad!",
+                Description = "Välkommen till en stor och ljus 5:a i perfekt gavelläge på populära Mariehem! Separat uthyrningsrum ger lägre boendekostnad! Denna ljusa gavellägenhet med fönster i tre väderstreck bjuder på ett fantastiskt ljusinsläpp och en luftig känsla genom hela bostaden. Här bor du bekvämt med tre väl tilltagna sovrum, perfekt för familjen eller dig som vill ha utrymme för hemmakontor, gästrum eller kreativa projekt. Lägenheten har renoverat och helkaklat badrum samt helkaklad WC. Som en extra bonus finns en uthyrningsdel med egen ingång och WC. Denna del kan enkelt stängas igen om ni önskar hyra ut, vilket gör hemmet extra flexibelt – oavsett om du vill skapa ett fjärde sovrum eller ha en separat del för gäster, tonårsbarn eller uthyrning. Ett hem som verkligen växer med dig och dina behov. På Mariehemsvägen bor du med en perfekt balans mellan natur och stadens alla bekvämligheter. Här har du grönområden, Norrlands universitetssjukhus, universitetet, skolor och butiker bara ett stenkast bort. Dessutom finns goda kommunikationer som snabbt tar dig till centrala Umeå, vilket gör vardagen både enkel och bekväm. I föreningen finns uppskattade gemensamhetsutrymmen såsom bastu och relax, övernattningslägenhet, samlingslokal och en fullt utrustad tvättstuga. Föreningen har genomfört omfattande renoveringar med SmartFront, vilket resulterat i en avsevärt förbättrad energiprestanda och en mer hälsosam inomhusmiljö. Detta har lett till att energideklarationen uppgraderats från E till B – en förbättring som även möjliggör att ansöka om så kallade gröna bolån. Med andra ord: ett modernt och hållbart boende med både ekonomiska och miljömässiga fördelar. Det här är ett hem som anpassar sig efter din livsstil och dina behov – med genomtänkta lösningar, gott om utrymme och en trivsam atmosfär. Välkommen att boka din visning och upplev det på plats!",
                 NumberOfRooms = 5,
                 MonthlyFee = 7914,
                 OperationalCostPerYear = 0,
@@ -1586,7 +1702,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 87,
                 SecondaryArea = 0,
                 LotSize = 1900,
-                Description = "Varmt välkomna till denna rymliga stuga med åretrunt standard. Stora härliga ytor perfekt för umgänge för familj och vänner men ändå gott om sovrum för övernattande gäster.",
+                Description = "Varmt välkomna till denna rymliga stuga med åretrunt standard. Stora härliga ytor perfekt för umgänge för familj och vänner men ändå gott om sovrum för övernattande gäster. Stugan har två mysiga kaminer som ger härlig värme. Stort inglasat uterum med stora inredningsmöjligheter. På gården finns  gäststuga även den inredd med mysig kamin. Här har ni huset som ni aldrig behöver oroa er för förvaringen igen.  Det finns stort garage med carport  och gott om förrådsytor samt växthus och fristående uterum. Stor härlig tomt med gräsytor och buskar och fina planteringar. Här bor ni med gångavstånd till havet samt tillgång till båtplats!",
                 NumberOfRooms = 3,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 23203,
@@ -1626,7 +1742,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 100,
                 SecondaryArea = 0,
                 LotSize = 1429,
-                Description = "",
+                Description = "Välkommen till detta hemtrevliga och funktionella boende! Detta välplanerade hem om 100 kvm bjuder på stora, öppna sociala ytor i kök och vardagsrum – perfekta för både vardag och umgänge. Här finner du två mysiga sovrum och ett ljust badrum. För extra värme och mys under kyliga dagar kan du samlas kring inte bara en, utan två kaminer som sprider en ombonad och inbjudande atmosfär genom hela bostaden. Utöver det inbjudande interiören erbjuder bostaden en rymlig gård, perfekt för avkoppling eller odling. Här finns gott om utrymme för att skapa din egen oas, både för lugna stunder och som plats för grönskande projekt. Detta hem ger verkligen möjlighet till en härlig livsstil, både inomhus och utomhus. Varmt välkommen att boka en visning och upptäck alla fördelar med detta charmiga boende!",
                 NumberOfRooms = 3,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 24320,
@@ -1666,7 +1782,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 155,
                 SecondaryArea = 0,
                 LotSize = 2955,
-                Description = "Högt i tak, ljus i överflöd och havet runt hörnet – det här är inte bara ett hus, det är ett livsstilsboende. Med generösa ytor, en öppen planlösning och en stämningsfull kamin i hjärtat av vardagsrummet bjuder detta hem in till både stilla vardagar och stora middagar.",
+                Description = "Högt i tak, ljus i överflöd och havet runt hörnet – det här är inte bara ett hus, det är ett livsstilsboende. Med generösa ytor, en öppen planlösning och en stämningsfull kamin i hjärtat av vardagsrummet bjuder detta hem in till både stilla vardagar och stora middagar. Här är varje rum skapat för att kännas – inte bara fungera. Det moderna köket med svarta luckor, stenskivor och ett lyxigt walk-in-skafferi är en dröm för både kocken och värden. Matplatsen omges av fönster i tre väderstreck och badar i dagsljus, medan altanen utanför suddar ut gränsen mellan inne och ute. Möjlighet till flera sovrum fördelade över två plan, walk-in closet, bastu, badkar, tvättstuga, extra WC och smart förvaring gör att både vardagslogistik och livsnjutning får plats. Välkommen till Täftefjärden – ett stenkast från havet med ett område som förenar naturnära livskvalitet med en trygg och levande vardag. Med del i brygga, fin utsikt mot vattnet och en lummig tomt med växthus, vedeldad bastu och plats för både lek och lugn, får du ett hem där naturen alltid är nära – utan att kompromissa med komfort. Här bor du med direkt närhet till Täftefjärden, en välkänd plats för sitt fantastiska fiskevatten. Under sommarhalvåret fylls fjärden av kajaker, SUP-brädor och badande besökare – och när isen lägger sig blir området ett vinterparadis för skridskoåkning, snöskoter och längdskidor. Bara några minuter bort ligger en trivsam badplats vid den gamla barnkolonin, och för den som vill hitta sitt eget smultronställe väntar den mer avskilda stranden Fäbosand, cirka 2 km längre ut. För den friluftsintresserade finns fina promenadstigar i skogen, och hjortronmyrarna lockar till sensommarutflykter – endast några hundra meter från tomten. Äventyret fortsätter mot Laxögern där den populära vandringsleden ut till Tavasten erbjuder fantastisk utsikt och vacker kustnatur. När hungern gör sig påmind ligger den populära restaurangen Kvarken Fisk bara en kort biltur bort – känd för sina färska skaldjur, fiskrätter och vackra läge vid vattnet. Perfekt för både vardagslyx och sommarutflykter. Samtidigt är Täftefjärden inte bara ett fritidsområde – här bor människor året runt. Grannskapet är levande med barnfamiljer och skolskjuts som stannar i området, vilket gör det till en plats som fungerar lika bra för helgmys som för vardagsliv.",
                 NumberOfRooms = 4,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 26215,
@@ -1706,7 +1822,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 66,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "Välkommen till 66,5 välplanerade kvadratmeter som inrymmer allt du behöver - för ett boende över lång tid!",
+                Description = "Välkommen till 66,5 välplanerade kvadratmeter som inrymmer allt du behöver - för ett boende över lång tid! Ett stort vardagsrum med tillgång till härlig balkong i vinkel med magisk utsikt. Köket erbjuder gott om plats för både förvaring och middagssällskap. Lägg där till ett stort sovrum, ett delvis kaklat badrum, rymligt förråd samt en stor klädkammare. Hela lägenheten är ljus och trivsam med en mycket bra planlösning som tar till vara varje kvadratmeter på ett bra sätt. Den stora balkongen bjuder in till mysiga frukostar och sena kvällar med sol från morgon till kväll. Här kan du både tjuvstarta och förlänga sommaren! På Kuratorvägen 48 bor du i ett lugnt och framförallt trivsamt område med närhet till både friluftsområden, matvarubutiker, NUS, Universitetet, IKSU samt med bra kommunikationsmöjligheter med buss till centrum och tåg från Umeå Östra station.",
                 NumberOfRooms = 2,
                 MonthlyFee = 4551,
                 OperationalCostPerYear = 2796,
@@ -1746,7 +1862,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 252,
                 SecondaryArea = 162,
                 LotSize = 1143,
-                Description = "Välkommen till en anrik och vacker fastighet som bjuder på något utöver det vanliga.",
+                Description = "Välkommen till en anrik och vacker fastighet som bjuder på något utöver det vanliga. Här möts du av en fantastisk atmosfär med generös takhöjd, stora fönster och klassiska detaljer som andas 1800-tal – perfekt för den stora eller växande familjen, eller för dig som drömmer om att kombinera boende med uthyrning. Huset är idag inrett som två separata lägenheter – perfekt för dig som vill hyra ut den ena delen, ha ett generationsboende eller driva verksamhet hemifrån. För den som önskar går det enkelt att återförena våningsplanen och skapa ett enhetligt och mycket rymligt hem. Bergvärme och modern fönsterteknik ger ekonomisk trygghet i form av låga uppvärmningskostnader. På övervåningen hittar du tre rejäla sovrum, ett badrum, ett kök samt ett luftigt vardagsrum med fönster i tre väderstreck - perfekt för att släppa in både ljus och och liv. Dessutom finns här ett charmigt inrett vindsrum som kan bli precis vad du behöver: ett extra sovrum, ett hemmakontor eller kanske ett mysigt krypin för kreativt skapande. Bottenvåningen rymmer två sovrum, kök, matsal, vardagsrum, ett badrum samt en extra wc - praktiskt och bekvämt för både vardag och gäster. De generösa sällskapsytorna på båda våningsplanen inbjuder till allt från lugna kvällar i soffan till festliga middagar med nära och kära. Här finns gott om plats för stora matbord, mjuka soffgrupper och socialt umgänge i alla former. Källaren är både praktisk och rymlig, med tvättstuga, matkällare och gott om förvaringsutrymmen. I gårdshuset återfinns ett rymligt dubbelgarage  med plats för både bil och ytterligare förvaring. Som en extra bonus finns en fristående uthyrningslägenhet i gårdshuset – perfekt som gästhus, kontor, ateljé eller extra inkomstkälla. Låga driftkostnader tack vare effektiv bergvärme ger både komfort och god ekonomi. Denna charmiga fastighet är vackert beläget i den äldre delen av Täfteå, på en fin tomt med underbar utsikt över grönska och öppna landskap. Här bor du med närhet till både ICA, skola/förskola och den idylliska småbåtshamnen – och med busshållplatsen bara ett stenkast bort är det enkelt att ta sig in till stan.",
                 NumberOfRooms = 9,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 52071,
@@ -1786,7 +1902,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 60,
                 SecondaryArea = 0,
                 LotSize = 0,
-                Description = "I ett omtyckt område, bekvämt belägen på första våningen, hittar ni denna mycket trivsamma och helrenoverade tvåa.",
+                Description = "I ett omtyckt område, bekvämt belägen på första våningen, hittar ni denna mycket trivsamma och helrenoverade tvåa. Bostaden är utrustad med flera eftertraktade kvaliteter, som en inglasad balkong i söderläge, ett renoverat och välutrustat kök samt ett fräscht badrum med egen tvättmaskin. Här erbjuds också genomgående fina ytskikt, ekparkett och ett härligt ljusinsläpp. Ett väl tilltaget sovrum samt ett vardagsrum som rymmer både soffgrupp och middagsbord ger bostaden en luftig och funktionell känsla. Brf Biologigränd är en välskött bostadsrättsförening där medlemmarna trivs med de stora, luftiga innergårdarna som erbjuder gemensamma grill-, lek- och sittplatser. Föreningen har dessutom fina faciliteter såsom gym, biljardrum, pingis, bastu, fritidslokal, gästrum, kompostering och en gästlägenhet. Med låg belåning och förmånligt kollektivt avtal för TV och bredband hålls boendekostnaderna låga. Läget på Biologigränd 37 är suveränt för er som uppskattar närheten till både natur och all nödvändig service. I Ålidhems centrum finns en välsorterad Ica, apotek, hälsocentral samt ett flertal restauranger. Här bor ni också nära Universitetet, NUS och IKSU. Busshållplats ligger på kort gångavstånd och för er med barn finns flera förskolor och skolor inom bekvämt avstånd.",
                 NumberOfRooms = 2,
                 MonthlyFee = 3914,
                 OperationalCostPerYear = 0,
@@ -1826,7 +1942,7 @@ namespace FribergHomeAPI.Data.Seeding
                 LivingSpace = 125,
                 SecondaryArea = 58,
                 LotSize = 468,
-                Description = "",
+                Description = "Välkommen till ett ljust och rymligt hem med en genomtänkt planlösning som kombinerar stora, bekväma sovrum med öppna, inbjudande sociala ytor – perfekt för både avkoppling och umgänge. Det välutrustade köket erbjuder generösa arbetsytor och gott om förvaring, vilket gör matlagningen till en ren glädje – oavsett om det handlar om vardagsmiddagar eller festliga tillställningar. Intill köket ligger det stora och ljusa vardagsrummet, med fantastiskt ljusinsläpp och gott om plats för både soffgrupp och matbord. Härifrån har du dessutom direkt utgång till en härlig altan samt ett trivsamt inglasat uterum – perfekta platser för att njuta av både lugna morgnar och ljumma sommarkvällar. Bostaden rymmer fyra rymliga sovrum och två fräscha badrum, vilket ger gott om plats för både familjen och gäster. Sovrummen är flexibla och kan enkelt anpassas efter dina behov – som barnrum, hemmakontor eller gästrum. De två badrummen underlättar vardagen och gör morgonrutinerna smidigare för hela familjen. Huset erbjuder även mycket bra förvaring. Snickargatan 10 är beläget i ett lugnt och barnvänligt område med närhet till lekparker, förskola och skola. Här bor du dessutom nära älven och vackra naturområden med fina promenad- och motionsstråk – perfekt för dig som uppskattar friluftsliv och naturens lugn. Med goda bussförbindelser och välutbyggda cykelvägar tar du dig enkelt runt i Umeå, oavsett om du ska till centrum eller andra delar av staden. Varmt välkommen att boka en visning – upplev själv allt detta trivsamma hem har att erbjuda dig och din familj!",
                 NumberOfRooms = 5,
                 MonthlyFee = 0,
                 OperationalCostPerYear = 39962,
@@ -1860,9 +1976,415 @@ namespace FribergHomeAPI.Data.Seeding
                 Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Umeå"),
                 RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Sara")
             },
+            new Property
+            {
+                ListingPrice = 1645000,
+                LivingSpace = 55,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Varmt välkommen till Bergviken och denna prydliga 2:a belägen på våning 2 i Brf Resedan. Du välkomnas av en praktisk hall med grått klinkergolv med behaglig golvvärme, här finns hatthylla och inbyggda garderober samt  gott om utrymme för byrå eller ytterligare garderober. I anslutning till hallen finns bostadens trivsamma sovrum som inrymmer dubbelsäng med sängbord samt god förvaring i form av garderober. Fint laminatgolv som återfinns i alla rum med undantag från hallen. Vidare från hallen nås både bostadens badrum och kök. Badrummet är smakfullt med grå våtrumsmatta och tapet samt har en toppmatad tvättmaskin. Lägenhetens kök är ljust och trevligt med gott om förvaring i lådor och skåp. Utrustat med kombinerad kyl och frys, integrerad diskmaskin, ugn, spishäll samt inbyggd mikrovågsugn. Fin plats för matgrupp invid stort fönster. Till sist har bostaden ett rymligt vardagsrum med gott om möjligheter för möblering. I detta rum ryms det både soffa och annat möblemang om så önskas. Här ligger samma fina laminatgolv som i övriga lägenheten och väggarna är tapetserade. Via vardagsrummet nås den rymliga inglasade balkongen med härlig förmiddagssol. Förråd samt matkällare finns att disponera i källaren. Bostadsrättsföreningen Resedan äger och förvaltar fastigheterna Resedan 7 och 8 i Luleå kommun. På fastigheterna har det uppförts fyra bostadshus med 78 bostadsrättslägenheter. Tvättstuga finns i källaren på Majvägen. Trivsam innergård med lekplats. Bergviken är ett populärt område med goda bussförbindelser till både centrum och LTU. Fina promenadstråk runt knuten och närhet till matbutiker samt café.",
+                NumberOfRooms = 2,
+                MonthlyFee = 2463,
+                OperationalCostPerYear = 10104,
+                YearBuilt = 1961,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/34/93/3493d5b44d3e2756781074570959ddce.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4a/64/4a645aab66f2729a510d787811004004.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/74/fa/74faf4c2134140aa885d1174bffa9459.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/26/5d/265d46f0889ff88ab3bd4078923fd97a.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ad/19/ad19e0037f27f7b8f3e7fe768ffa440a.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b7/68/b768bba65eb49e9af89f603b5eb4890a.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ad/1f/ad1fbf1e07d53ae15593f10034e68ee6.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/96/a2/96a2815f23a71c34a8c1112f7898c2e6.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a0/67/a067a47461afbf5a4052b73f1115939d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/10/cc/10cca6fd243b74226b91a26589094f12.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e6/96/e6963e497f9ac82e870a69be415067b2.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/47/7a/477a3e486f1dd7b0e1de4b4aa969b1c3.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/de/ac/deacaf2b30ee990d08a2afedf187072a.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Lövgatan 5",
+                PostalCode = "973 31",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Elvira")
+            },
+            new Property
+            {
+                ListingPrice = 2695000,
+                LivingSpace = 88,
+                SecondaryArea = 88,
+                LotSize = 1174,
+                Description = "I början av Antnäs finner du denna 1-plansvilla med källare belägen på stor tomt som angränsar mot grönskande ängar. På tomten finns en förrådsbyggnad samt ett nybyggt garage som värms upp med luftvärmepump och har laddning för elbil. Väl inne i huset finns en trivsam hall med plats för avhängning som sedan leder vidare till köket som går i öppen planlösning till vardagsrummet. Köket har träluckor och är fullt utrustad med kombinerad kyl/frys, diskmaskin, spis samt ugn. Matplats ryms invid fönster. Via halvglasad dörr nås altanen med tak ovan. Vidare i huset finns vardagsrummet som har stora fönster som bidrar med gott om ljus till rummet. Här ryms soffa och annat nättare möblemang. Bostaden har i nära anslutning till varann tre sovrum som ligger i fil, i varierande storlekar. Till sist på entréplan finns badrummet, i anslutning till hallen, som renoverats 2016 med våtrumsmatta i neurala kulörer. Här finns både dusch och badkar. I källarplan finns ett stort allrum, som kan nyttjas efter behov, därefter finns mycket plats för förvaring, ett pannrum, matkällare samt en stor tvättstuga/wc. Uppvärmning via bergvärme och vattenburen golvvärme på entréplan. Villan har bland annat genomgått stora renoveringar som dränering, takbyte, installerat solpaneler på taket samt inkommande servis vatten/avlopp är bytt. Nya rör är även dragna i huset tillsammans med vattenfelsbrytare. Fiber finns indraget. Antnäs är en populär by med sporthall, skola (F-6), förskolor, elljusspår, matbutik, bensinstation och möbelaffär. Byn har även ett rikt föreningsliv. Närhet till slalombacke och motorbana i Måttsund. Villan är besiktad via Anticimex och kommer av säljaren försäkras mot dolda fel.",
+                NumberOfRooms = 4,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 37209,
+                YearBuilt = 1963,
+                PropertyType = PropertyType.House,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/1a/07/1a07d92ea35087d04221c0f8519208a3.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5b/c0/5bc0796017dfcc7cfbac23ee34e60625.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/48/dc/48dc21b4b59f614bba577b1a8c3af7e5.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fb/7b/fb7b730a652e3dc799c6f941a842f10d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/99/6c/996c2473029f316a44cd492bb071c652.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/1e/24/1e24e2dcf439531145f5b5b7a22fc972.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8f/74/8f740699adbf86d7f5340235f40f5d85.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ae/fb/aefb1768fece0c35d711ced3cb0d2abb.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4a/5f/4a5f7516fb99ad4382cef4e64008028d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/72/a7/72a7f2103c8d0f748dfb66e4e49b9759.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a9/2c/a92ce4249f75dfad93cb87ddc68091a6.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/91/00/9100d79d4f44f7107a7dd4adab4f91e5.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3f/6e/3f6e30cf9333a8a330b5303ebd4638e3.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c5/28/c528563cc2117cab9ab5cbe1ec87bb96.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/73/24/7324c1be1d1582985b121a1b2836d861.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/30/5a/305a2a53bf3de52d89d47ab29cb1eac9.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Sörbyvägen 27",
+                PostalCode = "975 92",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Elvira")
+            },
+            new Property
+            {
+                ListingPrice = 1395000,
+                LivingSpace = 72,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Välkommen till denna trivsamma 3:a med insynsskyddat och fritt läge på våning 3! Bostaden är i genomgående fint skick med ett smakfullt kök med stilrena köksluckor samt full maskinell utrustning, prydligt badrum och snygga enhetliga golv i grå laminat. Lägenheten består av 70,5 välplanerade kvadratmeter fördelade på ett modernt kök med vita köksluckor och mörk bänkskiva. Här finns gott om förvaring via både över- och underskåp samt en trevlig angränsande matplats med utrymme för ca 4 personer. Rymligt och lättmöblerat vardagsrum med gott om plats för både soffa och annat möblemang samt fint ljusinsläpp via fönster längs med ena väggen. Från vardagsrummet nås också den härliga och väl tilltagna inglasade balkongen i fint solläge och vy över innergården. Bostaden har två stycken ljusa och fina sovrum som båda med enkelhet inrymmer en dubbelsäng samt garderober. Prydligt och tidlöst badrum med stilrena val av kakel. Behaglig golvvärme. Brf Ränseln är en stor och välskött HSB-förening med bra avgifter och som gjort ett flertal större renoveringar på senare tid där fönster- och balkongbyte nyligen slutförts. Föreningen erbjuder en samlingslokal som medlemmar får hyra och det finns även en fräsch bastu med relax. Föreningen har även flertalet gemensamma tvättstugor varav två är utrustade med grovtvättmaskiner. Lägenheten disponerar idag ett källarförråd samt en s.k. matkällare som båda finns lättillgängligt belägna i husets källare. Gå gärna in på föreningens hemsida www.hsb.se/norr/brf/ranseln för mer information om föreningens fina utrymmen. Som boende i Brf Ränseln bor du på nära avstånd till butik, bensinstation, restauranger, vårdcentral, tandläkare och med goda bussförbindelser med bland annat en direktlinje till universitet.",
+                NumberOfRooms = 3,
+                MonthlyFee = 4352,
+                OperationalCostPerYear = 3396,
+                YearBuilt = 1952,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/c4/be/c4bed2a478dc7b40eec5bfe05cb470af.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a5/56/a556054081ae47e8eda4316847c27574.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/58/67/58676063ab046467e3960a09642380ae.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4f/b3/4fb372b12ae4f2d86c8c1cb159d5ac61.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/64/cb/64cb0c13492bfcfb90c99a50e9d290f6.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/66/ae/66ae4666bca70d85f049db601c58b580.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/95/21/952170e576db3e151671f68113472ea0.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f2/18/f218f56351ef1bc2bec3c5b7c7386c50.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5f/0f/5f0f55b6b2638eeb7dd625597279666f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f4/6a/f46a9924a709c94bc842de05b719bfb2.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/7d/1b/7d1b690aa6a665c4777fbbc046fa7a3f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/21/74/2174618668e61bae20084c791909e2e9.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a7/26/a7262b5db2ad4ee2a66c9c4208c763f2.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d9/cf/d9cfb114a77ff63d96d517f95e802874.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/ff/5e/ff5e3670f746d77d01ee816bb832f2e4.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/a7/29/a7292ea48a06c4fada1d4897353326b6.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Hällbruksgatan 13",
+                PostalCode = "974 35",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Elvira")
+            },
+            new Property
+            {
+                ListingPrice = 3350000,
+                LivingSpace = 128,
+                SecondaryArea = 48,
+                LotSize = 17000,
+                Description = "Mitt emellan Luleå och Boden på landet men närhet till centrum, finns denna fina fastighet på nästan 2 hektar med ett fantastiskt läge som har en fin utsikt över fjärd och ängar. Här bor du privat men med ett behagligt avstånd till grannarna. På fastigheten står ett fint bostadshus från Myresjöhus och en tillhörande industrihall på 140kvm med dubbla industriportar och billyft. På gården finns även en timrad  och vedledad bastu & en lekstuga. Gården är lummig med bärbuskar och stora gräsytor. Fastigheten har stor utvecklingspotential och kan vara lämplig för tex. kontor/företagsverksamhet eller liknande. Du välkomnas av en grusad uppfart med fin altan på framsidan i fint solläge. Väl inne i huset möts du av en luftig hall som sen möter de stora och sociala ytorna mellan kök och vardagsrum. Allt ramas in av en stor köksö som både erbjuder sittplatser och en möjlighet för smidigare matlagning. Köket är ljust renoverat från 2019 och fullt utrustat med dubbla ugnar, fullstor kyl och frys (2025), diskmaksin, spishäll och integrerad Thermex takfläkt. Ecophone akustiktak i hela kök/hall. Här invid ryms både större matgrupp och soffa- utan att det känns trångt. Via altandörr når altanen på baksidan med tak ovan, som du kan avnjuta den fina vyn över ängar och Persöfjärden. Huset har 4 sovrum i bra storlek, 3 finns i ena delen av huset, och så även ett badrum med matta och tapet samt en extra WC. Vidare i den andra delen av huset finns groventré, tvättstuga, plats för kontor/ extra förvaring och det sista, och mest avgränsade sovrummet. Stora delar av husets belysning kan enkelt styras via plejd. Uppvärmning är via jordvärme och fiber är indraget. Stora delar av huset är försett med vattenburen golvvärme. (undantaget från badrum, tvättstuga och förråd) Huset är besiktigat av Anticimex och kommer av säljaren försäkras mot dolda fel. Ängesbyn erbjuder fantastiska friluftsmöjligheter med skog, natur, skidspår, fiske, klättring, cykling, motionsspår, ängar och skoterled just utanför huset. Fastighetens tomt sträcker sig ända ner till Persöfjärden där du hittar byns båthamn. Nere vid båthamnen finns även en gemensam vedeldad bastu som får nyttjas av byborna. Lekpark finns centralt vid byahuset. I Ängesbyn finns byahus, föreningsliv, hockeyplan & gym. I grannbyn Persön finns skola (F-6) och förskola samt bensinstation som säljer livsmedel.",
+                NumberOfRooms = 6,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 99189,
+                YearBuilt = 1984,
+                PropertyType = PropertyType.House,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5c/35/5c3551f591d53f57e0c8505e7b0e6282.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/54/cd/54cde36ff2bee64312d70dab98c36af4.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/48/d4/48d48a9f59d9c2dc4393aeeb39c3dd1d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4a/82/4a82532b55cd4da0b8d80d5117c4aa3f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a8/6b/a86b84697bad5f41d70ffb2257e54b20.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/dc/3f/dc3f8a90b61b50623432736e04cff21f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/05/da/05daf78bc7c67257bf6c2655b4261f5d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/9b/e2/9be2c271b5345f9e4e92c51be1f64425.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/37/d9/37d9ecb82e0eda9d7a1b2e5b8c8cbaee.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0c/db/0cdb948a21dbf50b98cc7983e4f58285.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/60/df/60dff9dcd4c60aff22a6692e4fba9c57.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/31/b8/31b8866ab01bd312a3af93d3c03ae547.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/4c/7f/4c7f9152dc4984ac9cbcbaeebd729937.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f0/21/f021d4b9a1993dd3f92a1e11de26e80f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/6b/b5/6bb55aad8cbad891e284b7292fe792b8.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cf/0d/cf0dc1b1566c478de3228edbcc21d385.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Buskvägen 4",
+                PostalCode = "975 98",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Elvira")
+            },
+            new Property
+            {
+                ListingPrice = 3995000,
+                LivingSpace = 141,
+                SecondaryArea = 50,
+                LotSize = 905,
+                Description = "På fin adress på omtyckta Notviken finns nu denna trivsamma enplansvilla i mycket fint skick! Du välkomnas av en ljus och praktisk hall som sammankopplar huset och garaget till ett. Här ligger ett klinkergolv som löper enhetligt in i köket och sen vidare i korridoren mot husets sovrum. Köket är ljust och ramas in med en fin köksö. Luckorna är beige och matchas ihop med en snygg bänkskiva i sten. Köket går i halvöppen planlösning mot vardagsrummet som inrymmer både soffa och matbord om så önskas. Från vardagsrummet nås husets inglasade uterum som sedan sammakopplas med den trädäckade altanen. I anslutning till köket finns husets tvättstuga. Vidare i andra delen av huset finns husets 3 sovrum samt ett litet extra utrymme som funkar perfekt för hemmakontor eller extra förvaring. Rummen är i varierande storlekar och rymmer antigen dubbelsäng, eller enkel med annat önskat möblemang. Två av tre sovrum har inbyggda garderober. I anslutning här finns ett fint helkaklat badrum med bastu och dusch samt en extra WC med klinkergolv. Allt går i neutrala färger vilket ger huset ett mycket fint intryck. Från hallen nås även husets garage med tillhörande utrymme framför som kan användas som extra förvaring eller till exempel extra sovplats för gäster. Huset värms upp via fjärrvärme, har 3-glasfönster och nuvarande ägare har nyligen bytt tak. Rymlig uppfart med fin plattsättning,  garage med eldriven port och plats för en bil. Elbilsladdare och fiber. Området ligger fördelaktigt till i vår stad med gång och cykelavstånd till både Centrum och Storhedens handelsområde. Närhet till fantastiska promenadstråk runt Notvikens strandpromenad och Gammelstadsvikens Naturreservat samt gångavstånd till gym och närhet till Mjölkuddens centrum där bla livsmedelsbutik och restauranger. Även skola och förskola finns nära intill och likaså grönytor och lekplats där barnen kan leka. Cykelavstånd till LTU och småbåtshamn med strand. Villan kommer förbesiktgas via Anticimex samt kommer dolda fel-försäkras av säljarna.",
+                NumberOfRooms = 5,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 56762,
+                YearBuilt = 1966,
+                PropertyType = PropertyType.House,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/34/5a/345a54f37de1e9cbd18ec4c568593fb5.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cb/ba/cbbac36c1de9879ef3ee5a7241633319.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5d/6d/5d6d47bf8b640dbba0729b5ac1b69be2.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fd/5f/fd5ffa915c77f70c7d380824975a8dba.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ba/85/ba85404c68f9709865e1ad3e78e3089b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/8e/16/8e16f74d3121d8b73981292146ae3076.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/47/74/47749558dd0a007ffd6c5c409ddd8356.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/46/81/4681cc414b1c824fc2f317d741fb86e2.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ef/1e/ef1e74a3f53dd7034db14fcd9a15ddec.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d2/7c/d27c8447a68c66fef5440afb4d8a15be.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2d/e5/2de50794fc74eb3e45db385e6d3c3405.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/8d/b8/8db826fd35590da445c6093d15eff9de.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/de/ec/deec5dcf51adadd649a84c7c65896aad.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a0/7a/a07af24750b022a6d0ab5c921889207a.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b8/c7/b8c73030040aabc4692dc3ae51609bf4.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/85/77/85771194386be3c4679ee2054a5f8c20.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Yxgränd 2",
+                PostalCode = "973 42",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Elvira")
+            },
+            new Property
+            {
+                ListingPrice = 1795000,
+                LivingSpace = 72,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Välkommen till denna ljusa och moderna gavellägenhet på populära Bergviken! Bostaden är bekvämt belägen en trappa och består av 71,5 välplanerade kvadratmeter fördelade på modernt inrett kök med gott om förvaring tack vare både över- och underskåp samt bra med utrymme för en angränsande matplats invid fönsterparti som ger ett trevligt ljusinsläpp. Rymligt och lättmöblerat vardagsrum med plats för både soffa och annat möblemang. Två fina sovrum, båda i bra storlek samt slutligen ett snyggt badrum med mikrocement. Brf Snöklockan är en HSB-förening med bra avgifter och fina gemensamma utrymmen såsom tvättstuga, grovtvättstuga, fin bastu med relax samt hobbyrum. Föreningen har både garage samt p-platser med motorvärmare som fördelas enligt separat kö. I källaren finns två lägenhetsförråd varav ett mindre s.k matkällarförråd. Bergviken är ett ständigt populärt område med närhet till både Luleå centrum och Luleå Tekniska Universitet. Närhet till matbutik. Goda bussförbindelser till både centrum och LTU.",
+                NumberOfRooms = 3,
+                MonthlyFee = 4135,
+                OperationalCostPerYear = 3096,
+                YearBuilt = 1961,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5c/b7/5cb76fabbb53987b7ca333d91da26471.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/6d/27/6d27945a0b8d52e1c9eae03c23ef7298.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/00/07/00072a1b3ca8253490e8077b20808ac7.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d5/59/d55917709ccd8cc1c3bd72868bedf400.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0d/d5/0dd55a12292af6e2dbbf00c95f23dd7b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e9/84/e98448c739131b7cc4fa633b7e0978f1.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ee/60/ee603fb9c419b14e6ca0ae1cd68e0289.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ab/52/ab52669bcf9fefdab1b75752ba46c63b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/0c/e8/0ce8c971e6c494ab3a3323f016ecce09.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e5/64/e564c77aff6fb0f91bf01a9fdc1b1bc0.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/91/62/9162fde3b5215a216e49be0f4b66654c.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d5/81/d5813527a96308a352080fc7ac9fad58.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/39/0e/390e7607a957d5e39b647589543efc60.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/07/26/072620c87ac8e8cb8df4f884e34bc05b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/7a/98/7a985219d8d52adb08bd3d8a98b09d78.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4b/28/4b282074eba5c8305431a4299da4d32e.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Sjögatan 5B",
+                PostalCode = "973 31",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Therese")
+            },
+            new Property
+            {
+                ListingPrice = 2895000,
+                LivingSpace = 86,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Välkommen till denna unika och pampiga sekelskifteslägenhet som är genomgående i huset vilket ger ett rikligt ljusinsläpp från de stora höga fönsterna i två väderstreck. En rad fina sekelskiftesdetaljer finns bevarade såsom takrosetter, vackra trägolv, djupa fönsterbänkar, en dekorativ kakelugn och framför allt en känsla av rymd med den väl tilltagna takhöjden om ca 2,9 meter. Bostaden består av 86 kvm fördelade på 3 rum varav 1 sovrum, med härliga öppna sällskapsytor med både matsal och vardagsrum. Klassiskt och fint kök med vita köksluckor med överskåp som når hela vägen upp till tak, vilket ger gott om förvaring och förhöjer känslan av den generösa takhöjden. Intill köket finns ett utrymme som i dagsläget nyttjas som kontor och vidare möts man av matsalen där du har utrymme för en större matgrupp för ca 6 personer. Utöver det finns ett helkaklat badrum med tvättmaskin. Från lägenheten nås även en mysig balkong med fint solläge, utöver det har man tillgång till föreningens takterass med en gemensam yta som delas av föreningens medlemmar där utemöbler finns att nyttja. BRF Sparven 12 är en trivsam förening i en mycket vacker fastighet. På källarplan finns föreningens tvättstuga där även lägenhetens tillhörande förråd finns. Cykelförvaring finns både på entréplan och i källaren. Här har du chansen att förvärva ett mycket attraktivt boende med ett lugnt men centralt läge med direkt närhet till Luleå centrum med dess restauranger och stadens utbud av butiker. Här har du även närhet till fina promenadstråk samt varvets matvaruhandel!",
+                NumberOfRooms = 3,
+                MonthlyFee = 4739,
+                OperationalCostPerYear = 3036,
+                YearBuilt = 1897,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/39/cd/39cdda38718eb55e794ea5bac658a237.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/71/39/713914d6924dad1fd33228a218689466.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/04/8f/048f301c6e7aae8c9926065d051c07c7.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/07/0e/070e845fc84d9cad2a47602821cacaab.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3d/ef/3def5773db2d9200d98c0b336ad88c8e.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/8d/4a/8d4a5c5787ed9b79b89be7cc6af78626.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/67/a1/67a13b00f300d40f19019f383bd4c155.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2c/5b/2c5bc0b86a21ffcf0b1058774895db65.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/05/4d/054dab8d18fc9aa558f99c01679cb4e3.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cd/eb/cdeb2a566b052d5d497dbf8a8090cefc.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/11/bc/11bc560917f8667e4a67768e3722eb94.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/92/5a92304eab5f51fcf00e0aafb44e8b57.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b3/80/b38082c3e2eed1a9648c5cce689bfc27.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/5c/c3/5cc374b740f0ac654ac98c1b6b07aeea.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/04/61/046115d29f13c2f6e367d884dc36c10b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/60/6b/606bcd3f111a1d718945d0349df1b712.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Köpmangatan 16",
+                PostalCode = "972 38",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Therese")
+            },
+            new Property
+            {
+                ListingPrice = 1395000,
+                LivingSpace = 67,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Välkommen till denna ljusa och välplanerade 2:a om 67 kvm, belägen högst upp i huset med ett fritt och insynsskyddat läge. Köket har fått en uppfräschning och erbjuder gott om arbetsyta och förvaring, samt en rymlig matplats som rymmer ett större matbord. Vardagsrummet känns luftigt och har direkt utgång till den inglasade balkongen som ligger i ett härligt solläge, med fin utsikt över föreningens innergård. Lägenheten är genomgående i huset, vilket ger ett fint ljusinsläpp från fönster åt två håll. Sovrummet är rymligt och rymmer enkelt en dubbelsäng, dessutom finns det god förvaring i form av garderober både i sovrummet och i hallen. Badrummet är utrustat med våtrumsmatta på golvet och ljus våtrumstapet, och har renoverats vid föreningens stambyte i början av 00-talet. Brf Kallkällan är en stor och eftertraktad HSB-förening som hållit ett gediget underhåll av fastigheterna. Under de senaste åren har man bland annat bytt samtliga lägenhetsdörrar, låtit utföra renovering av fasaderna och fönsterbyte m.m. Tillhörande lägenhetsförråd finns lättillgängligt i husets källare där även gemensamma tvättstugan finns. Inom föreningen finns också gemensamma utrymmen såsom övernattningsrum, bastu och samlingslokal. Föreningen ligger i området Kallkällan som är ett trevligt och populärt område med närhet till både universitetet och centrum. Denna lägenhet ligger nära parkeringar och p-hus samt kort avstånd till områdets matbutik.",
+                NumberOfRooms = 2,
+                MonthlyFee = 3467,
+                OperationalCostPerYear = 2604,
+                YearBuilt = 1966,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/e1/bc/e1bcf40b0945d58cfbc87a2b188eb482.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ce/77/ce7785790eda2ab3846474a7cc147cc6.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ae/8e/ae8ea0edaf2c43383b73f856915783c3.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/47/48/47480848d858a526b5106293c3cdb21e.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/69/ea/69eab157cbb3d3afbc271c2c86fd2ccf.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/19/86/1986b2d9264780d147eb98bfd59bf378.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/92/f5/92f5ef1fdcdcfd62ce2da8f009789563.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/12/d8/12d847e554552531d5ffa351a8a83b1b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/bc/1a/bc1a804a05ecc90baf3841ccf2b9d83d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/eb/21/eb21174a6b0285d86c55df505d9cbd3c.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/40/ea/40eac77cbc471ee01be50696ff7935ca.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/36/b8/36b8d9a8eb76fb079aec5ff7ca9a2457.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/01/8b/018bae75306f116b6659754ae1ab0551.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b0/af/b0af6053e77c7000903ec58a0c2f251f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b7/0b/b70bc589e90fc8fc66940a36dfd1a2a4.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Lingonstigen 10",
+                PostalCode = "973 32",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Therese")
+            },
+            new Property
+            {
+                ListingPrice = 3995000,
+                LivingSpace = 170,
+                SecondaryArea = 0,
+                LotSize = 1475,
+                Description = "Välkommen till denna fina möjlighet att förvärva ett nybyggt hus med moderna val och en välgenomtänkt planlösning i barnvänliga och gemytliga Kallax! Mycket trivsam och luftig planlösning med plats för den stora familjen med totalt 6 rum varav 5 sovrum. Här erbjuds förutom gott om sovrum även ljusa och väl tilltagna sociala ytor med ett mycket välplanerat kök med stora bänkytor och ett mycket praktiskt skafferi. Invid köket finns utrymme för ett rymligt matbord och vidare i de öppna sociala ytorna finns vardagsrumsdelen där du rymmer en större soffa. Fräscht badrum med fina val av kakel och klinker. Bra planerad klädvårdsavdelning med praktisk groventre. Två av bostadens sovrum återfinns på entréplanet, medan de andra tre sovrummen ligger avskilt till på övre plan tillsammans med ett ljust allrum och ett förberett utrymme för badrum. Det större sovrummet på övre plan har tillgång till en klädkammare. Här möts du av ett nyckelfärdigt hus om 170 kvm där bara de sista detaljerna finns kvar att färdigställa men där det stora projektet redan är klart så man kan flytta in och börja bo direkt och förädla vidare under tiden. För mer information kontakta ansvarig mäklare.",
+                NumberOfRooms = 6,
+                MonthlyFee = 0,
+                OperationalCostPerYear = 21129,
+                YearBuilt = 2023,
+                PropertyType = PropertyType.House,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/43/d8/43d8bb37b795603b06a2445fa09c4801.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f7/4d/f74df9020c51128818a4156dd83d352f.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/79/2a/792a034df71686369c01bdafbf7298d0.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a9/9f/a99f451fc1e3657416c76be2243376b5.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/92/54/92545446d5201a396d608f382a0ac000.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2b/c2/2bc2b4c9e4ca1bf236ac700782a3a6fe.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/b1/22/b122df09014970f34825573b0539a186.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/18/fe/18fed3f4fab083af7bf1453e7983f4c8.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/50/df/50df303ec4330657fbc6672b3b9d3c14.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/13/62/1362cb97170960df067966119ad08475.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ff/66/ff668936e3e5cf32fc5da2e58ae1f675.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/3c/bc/3cbcd52f6b601a55f9dfbdb52b1c07b6.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/62/8c/628ca3cdeabf1e54151bae65d615b790.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/93/52/9352ed67bd10d1edb899b670fe2c24a1.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/a7/10/a7102e451f1fa274419f1e15d4c1e649.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/16/5a160bb66c97dd0858cb22492ad501cd.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Jaktviksvägen 42",
+                PostalCode = "975 95",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Therese")
+            },
+            new Property
+            {
+                ListingPrice = 1345000,
+                LivingSpace = 71,
+                SecondaryArea = 0,
+                LotSize = 0,
+                Description = "Välkommen till en unik möjlighet att förvärva denna charmiga, ljusa och rymliga 2:a om 71 kvm. Här möts du av känslan av att bo i hus med direkt ingång i markplan samt stor terass i sydöstlig riktning utan insyn sommartid med gräsmatta, lummiga häggar och syrener. Lägenheten har fina golv och behagliga nyanser på väggarna tillsammans med charmiga detaljer såsom två dekorativa kakelugnar. Stilrent badrum med kakel och klinker med behaglig golvvärme samt tvättmaskin med torkfunktion. Bra planerat kök med vita luckor och en trivsam matplats invid fönster med utrymme för matbord upp till ca 4-6 personer. Mycket tilltaget sovrum med gott om förvaringsmöjligheter via garderober och klädkammare nära intill. Ljust och trivsamt vardagsrum med stora fönster som ger bra med ljusinsläpp till bostaden. Brf Svartöstaden 1 i Luleå är en större förening (114 lägenheter) belägen i en väldigt fin och gemytlig miljö med närhet till båthamn, sandstränder och fina promenadstråk längs vattnet. Just denna lägenhet ligger i en av föreningens äldre byggnader och består av 5 lägenheter. Här finns en mysig och avskild innergård samt en länga av motorvärmarplatser. Tillhörande förråd finns i husets källare. Inom  föreningen finns även bastu/relax och tvättstugor som får nyttjas av föreningens medlemmar tillsammans med busshållsplats alldeles intill!",
+                NumberOfRooms = 2,
+                MonthlyFee = 5830,
+                OperationalCostPerYear = 6684,
+                YearBuilt = 1929,
+                PropertyType = PropertyType.Condo,
+            Images = new List<PropertyImage>
+            {
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/4c/a9/4ca9523379b4aa49269ce35ab4748752.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ea/b8/eab823773ddee9199f844b1607ce85ba.jpg"},
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/cb/e8/cbe8ef16cfaf6aac2965df9235c28b46.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/5a/be/5abeec5117659410dc3a2ba323100dd5.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fb/46/fb464ff2bf7ddf2e4caf1a05ea34fc8b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d8/9c/d89c302baf335c50221eb291fc7b2b1b.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/fa/90/fa90d2e66812e42431ca5760cd5bf18c.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/d7/a4/d7a4b995db361bba575c47fc54d11fe1.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/ce/09/ce090bcd9cd4345c8a5a1558a28995c0.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/e9/6a/e96a92a7f240878f13e0763f56984ffb.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/2c/5c/2c5cd29adce271d2ddd6077523104fcd.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_portrait_cut/61/45/61457c26aa4cf1b4cc03a795619f36f1.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/f3/ae/f3ae6ac8cdd6f75bc3bdf3f32340e59f.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/db/2a/db2a18af2ab8cef9004b3e73062e9b1d.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/56/52/5652e31cf412e00e39c3604fb47ac7a9.jpg" },
+                new PropertyImage { ImgURL = "https://bilder.hemnet.se/images/itemgallery_cut/68/fb/68fbbbd414619524f2a83e91c32a46a9.jpg" },
+
+            },
+            Address = new Address
+            {
+                Street = "Laxgatan 29A",
+                PostalCode = "974 37",
+                City = "Luleå",
+            },
+                Muncipality = await ctx.Muncipalities.FirstAsync(m => m.Name == "Luleå"),
+                RealEstateAgent = await ctx.Agents.FirstAsync(b => b.FirstName == "Therese")
+            },
             };
-            ctx.Properties.AddRange(list);
-            await ctx.SaveChangesAsync();
-        }
+			ctx.Properties.AddRange(list);
+			await ctx.SaveChangesAsync();
+		}
     }
 }
