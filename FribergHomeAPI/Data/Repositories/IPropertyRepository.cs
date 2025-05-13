@@ -8,7 +8,7 @@ namespace FribergHomeAPI.Data.Repositories
     {
         Task<ICollection<Property>?> FindPropertyInMuncipality(Muncipality muncipality);
 		Task<ICollection<Property>?> GetByMuncipalityId(int muncipalityId);
-		Task<Property?> GetWithAddressAndImages(int id);
+		Task<Property?> GetWithAddressImagesAndMuncipality(int id);
         Task<Property?> GetWithAddressAsync(int id);
         Task<IEnumerable<Property>?> GetLatestAsync(int id);
 

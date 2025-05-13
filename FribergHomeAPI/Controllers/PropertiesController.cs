@@ -168,7 +168,7 @@ namespace FribergHome_API.Controllers
 		[HttpGet("{id}/details")]
 		public async Task<IActionResult> GetAll(int id)
 		{
-			var property = await propertyRepo.GetWithAddressAndImages(id);
+			var property = await propertyRepo.GetWithAddressImagesAndMuncipality(id);
 
 			var DTO = mapper.Map<PropertyDTO>(property);
 

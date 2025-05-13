@@ -31,7 +31,9 @@ namespace FribergHomeAPI.DTOs
 		public string PostalCode { get; set; }
 		public int MuncipalityId { get; set; }
 
-		public List<PropertyImageDTO> ImageUrls { get; set; }
+        public MuncipalityDTO? MuncipalityDTO { get; set; }
+
+        public List<PropertyImageDTO> ImageUrls { get; set; }
 
 		public int RealEstateAgentId { get; set; } //Fredrik
 

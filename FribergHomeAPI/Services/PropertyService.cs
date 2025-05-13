@@ -18,7 +18,7 @@ namespace FribergHomeAPI.Services
 		}
 		public async Task<ServiceResult<PropertyDTO>> UpdatePropertyAsync(int id, PropertyDTO dto)
 		{
-			var existingProperty = await _propertyRepository.GetWithAddressAndImages(id);
+			var existingProperty = await _propertyRepository.GetWithAddressImagesAndMuncipality(id);
 
 			if (existingProperty == null)
 			{

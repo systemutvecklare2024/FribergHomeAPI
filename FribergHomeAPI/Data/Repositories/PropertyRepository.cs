@@ -93,11 +93,12 @@ namespace FribergHomeAPI.Data.Repositories
 						 .ToListAsync();
 		}
 
-        public async Task<Property?> GetWithAddressAndImages(int id)
+        public async Task<Property?> GetWithAddressImagesAndMuncipality(int id)
         {
             return await DbContext.Set<Property>()
                 .Include(p => p.Address)
                 .Include(p => p.Images)
+				.Include(p => p.Muncipality)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
