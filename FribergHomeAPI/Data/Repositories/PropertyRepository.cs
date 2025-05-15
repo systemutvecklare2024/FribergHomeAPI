@@ -46,7 +46,7 @@ namespace FribergHomeAPI.Data.Repositories
 						.Include(p => p.Address)
 						.Include(p => p.Images)
 						.Include(p => p.RealEstateAgent)
-						.OrderBy(p => p.Id)
+						.OrderByDescending(p => p.Id)
 						.ToListAsync();
 		}
 		// Fredrik
